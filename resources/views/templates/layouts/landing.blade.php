@@ -5,7 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>MyPOS V1</title>
+    <title>MyPOS V1 | Portal</title>
+    <link rel="icon" href="{{ asset('storage\container\logo_app_white.png') }}" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Manrope&amp;display=swap">
     <link rel="stylesheet" href="css/styles.min.css">
@@ -26,7 +27,6 @@
     <section class="d-xl-flex position-relative py-4 py-xl-5">
         @yield('container')
     </section>
-
     <style>
         #btn-back-to-top {
             position: fixed;

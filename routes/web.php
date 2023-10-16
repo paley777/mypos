@@ -21,3 +21,4 @@ Route::post('/', [LandingController::class, 'authenticate']);
 
 //Dashboard
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
+Route::post('/logout', [DashboardController::class, 'logout'])->middleware('auth');
