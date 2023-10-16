@@ -14,4 +14,18 @@ class DashboardController extends Controller
             return view('dashboard.superadmin.index');
         }
     }
+    //logout
+    /**
+     * Handle an logout attempt.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/');
+    }
 }
