@@ -16,8 +16,8 @@ class BarangController extends Controller
      */
     public function index()
     {
-        return view('dashboard.regisbarang.index', [
-            'active' => 'regisbarang',
+        return view('dashboard.regis.regisbarang.index', [
+            'active' => 'registrasi',
             'breadcrumb' => 'regisbarang',
             'barangs' => Barang::orderBy('nama_barang', 'desc')
                 ->filter(request(['search']))
@@ -30,8 +30,8 @@ class BarangController extends Controller
      */
     public function create()
     {
-        return view('dashboard.regisbarang.create', [
-            'active' => 'regisbarang',
+        return view('dashboard.regis.regisbarang.create', [
+            'active' => 'registrasi',
             'breadcrumb' => 'create_regisbarang',
         ]);
     }
@@ -66,8 +66,8 @@ class BarangController extends Controller
      */
     public function edit(Barang $regis_barang)
     {
-        return view('dashboard.regisbarang.edit', [
-            'active' => 'regisbarang',
+        return view('dashboard.regis.regisbarang.edit', [
+            'active' => 'registrasi',
             'barang' => $regis_barang,
             'breadcrumb' => 'edit_regisbarang',
         ]);

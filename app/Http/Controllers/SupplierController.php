@@ -15,8 +15,8 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        return view('dashboard.regissupplier.index', [
-            'active' => 'regissupplier',
+        return view('dashboard.regis.regissupplier.index', [
+            'active' => 'registrasi',
             'breadcrumb' => 'regissupplier',
             'suppliers' => Supplier::orderBy('nama', 'desc')
                 ->filter(request(['search']))
@@ -29,8 +29,8 @@ class SupplierController extends Controller
      */
     public function create()
     {
-        return view('dashboard.regissupplier.create', [
-            'active' => 'regissupplier',
+        return view('dashboard.regis.regissupplier.create', [
+            'active' => 'registrasi',
             'breadcrumb' => 'create_regissupplier',
         ]);
     }
@@ -59,8 +59,8 @@ class SupplierController extends Controller
      */
     public function edit(Supplier $regis_supplier)
     {
-        return view('dashboard.regissupplier.edit', [
-            'active' => 'regissupplier',
+        return view('dashboard.regis.regissupplier.edit', [
+            'active' => 'registrasi',
             'breadcrumb' => 'edit_regissupplier',
             'supplier' => $regis_supplier,
         ]);
