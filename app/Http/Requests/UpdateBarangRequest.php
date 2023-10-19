@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class StoreBarangMasukRequest extends FormRequest
+class UpdateBarangRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,11 +23,9 @@ class StoreBarangMasukRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nama_supplier' => 'required',
-            'nama_barang' => 'required',
-            'jumlah_beli' => 'required',
-            'harga_beli_satuan' => 'required',
-            'harga_beli_total' => 'required',
+            'nama_barang' => 'required|unique:barangs,nama_barang,' . $this->regis_barang->id . ',id',
+            'satuan' => 'required',
+            'harga_jual' => 'required',
         ];
     }
 }
