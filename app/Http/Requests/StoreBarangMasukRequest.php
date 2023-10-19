@@ -23,6 +23,7 @@ class StoreBarangMasukRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'nama_penerima' => 'required',
             'nama_supplier' => 'required',
             'nama_barang' => 'required',
             'jumlah_beli' => 'required',

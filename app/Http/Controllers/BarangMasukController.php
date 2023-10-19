@@ -47,6 +47,7 @@ class BarangMasukController extends Controller
         $validated = $request->validated();
         $barang = Barang::where('nama_barang', $validated['nama_barang'])->first();
         BarangMasuk::create([
+            'nama_penerima' => $validated['nama_penerima'],
             'nama_supplier' => $validated['nama_supplier'],
             'nama_barang' => $validated['nama_barang'],
             'satuan' => $barang->satuan,
@@ -92,6 +93,7 @@ class BarangMasukController extends Controller
         $validated = $request->validated();
         $barang = Barang::where('nama_barang', $validated['nama_barang'])->first();
         BarangMasuk::where('id', $barang_masuk['id'])->update([
+            'nama_penerima' => $validated['nama_penerima'],
             'nama_supplier' => $validated['nama_supplier'],
             'nama_barang' => $validated['nama_barang'],
             'satuan' => $barang->satuan,

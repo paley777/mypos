@@ -57,6 +57,8 @@
                                         <thead>
                                             <tr>
                                                 <th class="cell">No.</th>
+                                                <th class="cell">Waktu Masuk</th>
+                                                <th class="cell">Penerima</th>
                                                 <th class="cell">Nama Supplier</th>
                                                 <th class="cell">Nama Barang</th>
                                                 <th class="cell">Satuan</th>
@@ -70,6 +72,8 @@
                                             @foreach ($barangmasuks as $key => $barangmasuk)
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $barangmasuk->created_at->isoFormat('dddd, D MMMM Y'); }}</td>
+                                                    <td>{{ $barangmasuk->nama_penerima }}</td>
                                                     <td>{{ $barangmasuk->nama_supplier }}</td>
                                                     <td>{{ $barangmasuk->nama_barang }}</td>
                                                     <td>{{ $barangmasuk->satuan }}</td>
