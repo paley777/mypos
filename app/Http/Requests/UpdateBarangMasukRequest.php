@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UpdateBarangMasukRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class UpdateBarangMasukRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Auth::check();
     }
 
     /**
@@ -22,7 +23,11 @@ class UpdateBarangMasukRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nama_supplier' => 'required',
+            'nama_barang' => 'required',
+            'jumlah_beli' => 'required',
+            'harga_beli_satuan' => 'required',
+            'harga_beli_total' => 'required',
         ];
     }
 }

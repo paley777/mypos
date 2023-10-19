@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 
-class BarangMasuk extends Model
+class StokBarang extends Model
 {
     use HasFactory;
     /**
@@ -40,5 +40,13 @@ class BarangMasuk extends Model
             return $query->where('nama_barang', 'like', '%' . $search . '%');
         });
     }
-    
+   
+    public function tambahStok($tambah)
+    {
+        $this->increment('stok', $tambah);
+    }
+    public function kurangStok($kurang)
+    {
+        $this->decrement('stok', $kurang);
+    }
 }

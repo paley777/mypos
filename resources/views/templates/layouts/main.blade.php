@@ -2,17 +2,13 @@
 <html data-bs-theme="light" lang="en" style="font-size: 13px;font-family: Manrope, sans-serif;">
 
 <head>
-    <title>MyPOS V1 | Dashboard</title>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>MyPOS V1 | Dashboard</title>
     <link rel="icon" href="{{ asset('storage\container\logo_app_white.png') }}" />
-
     <!-- App CSS -->
-    <link id="theme-style" rel="stylesheet" href="assets/css/portal.css">
-
+    <link id="theme-style" rel="stylesheet" href="{{ URL::asset('assets/css/portal.css') }}">
 </head>
 
 <body class="app" style="font-family: Manrope, sans-serif;">
@@ -31,7 +27,6 @@
     <!-- Back to top button -->
     <button type="button" class="btn btn-light btn-floating btn-lg" id="btn-back-to-top">
         <?xml version="1.0" encoding="utf-8"?>
-
         <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
         <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g id="Arrow / Arrow_Up_SM">
@@ -43,8 +38,7 @@
     <script>
         //Get the button
         let mybutton = document.getElementById("btn-back-to-top");
-
-        // When the user scrolls down 20px from the top of the document, show the button
+        //When the user scrolls down 20px from the top of the document, show the button
         window.onscroll = function() {
             scrollFunction();
         };
@@ -68,17 +62,12 @@
         }
     </script>
     <!-- Javascript -->
-    <script src="assets/plugins/popper.min.js"></script>
-    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-
-    <!-- Charts JS -->
-    <script src="assets/plugins/chart.js/chart.min.js"></script>
-    <script src="assets/js/index-charts.js"></script>
-
-    <!-- Page Specific JS -->
-    <script src="assets/js/app.js"></script>
-    <!-- FontAwesome JS-->
-    <script defer src="assets/plugins/fontawesome/js/all.min.js"></script>
+    <script src="{{ URL::asset('assets/plugins/popper.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/chart.js/chart.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/js/index-charts.js') }}"></script>
+    <script src="{{ URL::asset('assets/js/app.js') }}"></script>
+    <script defer src="{{ URL::asset('assets/plugins/fontawesome/js/all.min.js') }}"></script>
 </body>
 
 </html>

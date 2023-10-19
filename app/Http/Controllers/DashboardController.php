@@ -11,7 +11,10 @@ class DashboardController extends Controller
     public function index()
     {
         if (Auth::user()->role == 'Super Administrator') {
-            return view('dashboard.superadmin.index');
+            return view('dashboard.role.index_sa', [
+                'active' => 'beranda',
+                'breadcrumb' => 'beranda',
+            ]);
         }
     }
     //logout

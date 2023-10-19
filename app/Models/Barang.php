@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 
-class BarangMasuk extends Model
+class Barang extends Model
 {
     use HasFactory;
     /**
@@ -40,5 +40,4 @@ class BarangMasuk extends Model
             return $query->where('nama_barang', 'like', '%' . $search . '%');
         });
     }
-    
 }

@@ -3,16 +3,15 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
-class StoreBarangMasukRequest extends FormRequest
+class StoreStokBarangRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return Auth::check();
+        return false;
     }
 
     /**
@@ -23,11 +22,7 @@ class StoreBarangMasukRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nama_supplier' => 'required',
-            'nama_barang' => 'required',
-            'jumlah_beli' => 'required',
-            'harga_beli_satuan' => 'required',
-            'harga_beli_total' => 'required',
+            //
         ];
     }
 }

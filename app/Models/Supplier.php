@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 
-class BarangMasuk extends Model
+class Supplier extends Model
 {
     use HasFactory;
     /**
@@ -37,8 +37,7 @@ class BarangMasuk extends Model
     public function scopeFilter($query, array $filters)
     {
         $query->when($filters['search'] ?? false, function ($query, $search) {
-            return $query->where('nama_barang', 'like', '%' . $search . '%');
+            return $query->where('nama', 'like', '%' . $search . '%');
         });
     }
-    
 }

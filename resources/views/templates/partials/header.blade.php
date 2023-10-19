@@ -12,12 +12,99 @@
                                     stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path>
                             </svg>
                         </a>
-                    </div><!--//col-->
+                        @if ($breadcrumb == 'beranda')
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb responsive-small">
+                                    <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
+                                </ol>
+                            </nav>
+                        @elseif ($breadcrumb == 'regisbarang')
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb responsive-small">
+                                    <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
+                                    <li class="breadcrumb-item">Registrasi Barang</li>
+                                </ol>
+                            </nav>
+                        @elseif ($breadcrumb == 'create_regisbarang')
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb responsive-small">
+                                    <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
+                                    <li class="breadcrumb-item"><a href="/dashboard/regis-barang">Registrasi Barang</a>
+                                    </li>
+                                    <li class="breadcrumb-item">Tambah Barang Baru</li>
+                                </ol>
+                            </nav>
+                        @elseif ($breadcrumb == 'edit_regisbarang')
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb responsive-small">
+                                    <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
+                                    <li class="breadcrumb-item"><a href="/dashboard/regis-barang">Registrasi Barang</a>
+                                    </li>
+                                    <li class="breadcrumb-item">Ubah Barang</li>
+                                </ol>
+                            </nav>
+                        @elseif ($breadcrumb == 'stokbarang')
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb responsive-small">
+                                    <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
+                                    <li class="breadcrumb-item">Stok Barang</li>
+                                </ol>
+                            </nav>
+                        @elseif ($breadcrumb == 'regissupplier')
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb responsive-small">
+                                    <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
+                                    <li class="breadcrumb-item">Registrasi Supplier</li>
+                                </ol>
+                            </nav>
+                        @elseif ($breadcrumb == 'create_regissupplier')
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb responsive-small">
+                                    <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
+                                    <li class="breadcrumb-item"><a href="/dashboard/regis-supplier">Registrasi
+                                            Supplier</a></li>
+                                    <li class="breadcrumb-item">Tambah Supplier Baru</li>
+                                </ol>
+                            </nav>
+                        @elseif ($breadcrumb == 'edit_regissupplier')
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb responsive-small">
+                                    <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
+                                    <li class="breadcrumb-item"><a href="/dashboard/regis-supplier">Registrasi
+                                            Supplier</a></li>
+                                    <li class="breadcrumb-item">Ubah Supplier</li>
+                                </ol>
+                            </nav>
+                        @elseif ($breadcrumb == 'barangmasuk')
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb responsive-small">
+                                    <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
+                                    <li class="breadcrumb-item">Barang Masuk</li>
+                                </ol>
+                            </nav>
+                        @elseif ($breadcrumb == 'create_barangmasuk')
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb responsive-small">
+                                    <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
+                                    <li class="breadcrumb-item"><a href="/dashboard/barang-masuk">Barang Masuk</a></li>
+                                    <li class="breadcrumb-item">Barang Masuk Baru</li>
+                                </ol>
+                            </nav>
+                        @elseif ($breadcrumb == 'edit_barangmasuk')
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb responsive-small">
+                                    <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
+                                    <li class="breadcrumb-item"><a href="/dashboard/barang-masuk">Barang Masuk</a></li>
+                                    <li class="breadcrumb-item">Ubah Barang Masuk</li>
+                                </ol>
+                            </nav>
+                        @endif
+                    </div>
                     <div class="app-utilities col-auto">
                         <div class="app-utility-item  app-user-dropdown dropdown">
-                            <a class="dropdown-toggle justify-content-center" id="user-dropdown-toggle"
+                            <a class="dropdown-toggle justify-content-center  p-2" id="user-dropdown-toggle"
                                 data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
-                                <svg width="32px" height="32px" viewBox="0 0 20 20" version="1.1"
+                                <svg width="24px" height="24px" viewBox="0 0 20 20" version="1.1"
                                     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                     fill="#000000">
                                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -38,7 +125,7 @@
                                             </g>
                                         </g>
                                     </g>
-                                </svg>{{ auth()->user()->nama }}</a>
+                                </svg></a>
                             <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
                                 <li><a class="dropdown-item" href="/my-profile">Akun Saya</a></li>
                                 <li>
@@ -63,16 +150,15 @@
             <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
             <div class="app-branding">
                 <a class="app-logo" href="index.html"><img class="logo-icon me-2"
-                        src="{{ asset('storage\container\logo_app.png') }}" alt="logo"><span class="logo-text">MyPOS
+                        src="{{ asset('storage\container\logo_app.png') }}" alt="logo"><span
+                        class="logo-text">MyPOS
                         V1</span></a>
-
             </div><!--//app-branding-->
-
             <nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1">
                 <ul class="app-menu list-unstyled accordion" id="menu-accordion">
                     <li class="nav-item">
                         <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-                        <a class="nav-link active" href="/dashboard">
+                        <a class="nav-link {{ $active === 'beranda' ? 'active' : '' }}" href="/dashboard">
                             <span class="nav-icon">
                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-house-door"
                                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -85,10 +171,49 @@
                             <span class="nav-link-text">Beranda</span>
                         </a><!--//nav-link-->
                     </li><!--//nav-item-->
+                    <li class="nav-item">
+                        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+                        <a class="nav-link {{ $active === 'regisbarang' ? 'active' : '' }}"
+                            href="/dashboard/regis-barang">
+                            <span class="nav-icon">
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-card-list"
+                                    fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
+                                    <path fill-rule="evenodd"
+                                        d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5z" />
+                                    <circle cx="3.5" cy="5.5" r=".5" />
+                                    <circle cx="3.5" cy="8" r=".5" />
+                                    <circle cx="3.5" cy="10.5" r=".5" />
+                                </svg>
+                            </span>
+                            <span class="nav-link-text">Registrasi Barang</span>
+                        </a><!--//nav-link-->
+                    </li><!--//nav-item-->
+                    <li class="nav-item">
+                        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+                        <a class="nav-link {{ $active === 'regissupplier' ? 'active' : '' }}"
+                            href="/dashboard/regis-supplier">
+                            <span class="nav-icon">
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-card-list"
+                                    fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
+                                    <path fill-rule="evenodd"
+                                        d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5z" />
+                                    <circle cx="3.5" cy="5.5" r=".5" />
+                                    <circle cx="3.5" cy="8" r=".5" />
+                                    <circle cx="3.5" cy="10.5" r=".5" />
+                                </svg>
+                            </span>
+                            <span class="nav-link-text">Registrasi Supplier</span>
+                        </a><!--//nav-link-->
+                    </li><!--//nav-item-->
                     <li class="nav-item has-submenu">
                         <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-                        <a class="nav-link submenu-toggle" href="#" data-bs-toggle="collapse"
-                            data-bs-target="#submenu-1" aria-expanded="false" aria-controls="submenu-1">
+                        <a class="nav-link {{ $active === 'arusbarang' ? 'active' : '' }} submenu-toggle"
+                            href="#" data-bs-toggle="collapse" data-bs-target="#submenu-1"
+                            aria-expanded="false" aria-controls="submenu-1">
                             <span class="nav-icon">
                                 <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-card-list"
@@ -113,9 +238,11 @@
                         </a><!--//nav-link-->
                         <div id="submenu-1" class="collapse submenu submenu-1" data-bs-parent="#menu-accordion">
                             <ul class="submenu-list list-unstyled">
-                                <li class="submenu-item"><a class="submenu-link" href="notifications.html">Barang
+                                <li class="submenu-item"><a class="submenu-link"
+                                        href="/dashboard/barang-masuk">Barang
                                         Masuk</a></li>
-                                <li class="submenu-item"><a class="submenu-link" href="account.html">Stok Barang</a>
+                                <li class="submenu-item"><a class="submenu-link" href="/dashboard/stok-barang">Stok
+                                        Barang</a>
                                 </li>
                                 <li class="submenu-item"><a class="submenu-link" href="account.html">Barang
                                         Keluar</a>
