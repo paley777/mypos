@@ -7,6 +7,7 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\BarangMasukController;
 use App\Http\Controllers\BarangKeluarController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\StokBarangController;
 
 /*
@@ -32,3 +33,4 @@ Route::resource('/dashboard/regis-supplier', SupplierController::class)->middlew
 Route::resource('/dashboard/stok-barang', StokBarangController::class)->middleware('auth');
 Route::resource('/dashboard/barang-masuk', BarangMasukController::class)->middleware('auth');
 Route::resource('/dashboard/barang-keluar', BarangKeluarController::class)->middleware('auth');
+Route::resource('/dashboard/regis-pelanggan', PelangganController::class)->middleware('auth');
