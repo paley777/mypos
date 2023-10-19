@@ -50,23 +50,33 @@
                         <form class="row g-2" method="post" action="/dashboard/barang-masuk/{{ $barangmasuk->id }}">
                             @method('put')
                             @csrf
-                            <div class="col-md-6 position-relative">
+                            <div class="col-md-4 position-relative">
+                                <label for="validationCustom01" class="form-label ">Nama Penerima<span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="nama_penerima"
+                                    placeholder="Isi Nama Penerima" value="{{ $barangmasuk->nama_penerima }}" readonly required>
+                            </div>
+                            <div class="col-md-4 position-relative">
                                 <label for="validationCustom01" class="form-label ">Nama Supplier<span
                                         class="text-danger">*</span></label>
                                 <select class="form-select" name="nama_supplier" required>
                                     <option value="">Pilih Supplier</option>
                                     @foreach ($suppliers as $supplier)
-                                        <option value="{{ $supplier->nama }}" {{ $supplier->nama == $barangmasuk->nama_supplier ? 'selected' : '' }}>{{ $supplier->nama }}</option>
+                                        <option value="{{ $supplier->nama }}"
+                                            {{ $supplier->nama == $barangmasuk->nama_supplier ? 'selected' : '' }}>
+                                            {{ $supplier->nama }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-md-6 position-relative">
+                            <div class="col-md-4 position-relative">
                                 <label for="validationCustom01" class="form-label ">Nama Barang<span
                                         class="text-danger">*</span></label>
                                 <select class="form-select" name="nama_barang" required>
                                     <option value="">Pilih Barang</option>
                                     @foreach ($barangs as $barang)
-                                        <option value="{{ $barang->nama_barang }}" {{ $barang->nama_barang == $barangmasuk->nama_barang ? 'selected' : '' }}>{{ $barang->nama_barang }} |
+                                        <option value="{{ $barang->nama_barang }}"
+                                            {{ $barang->nama_barang == $barangmasuk->nama_barang ? 'selected' : '' }}>
+                                            {{ $barang->nama_barang }} |
                                             {{ $barang->satuan }}</option>
                                     @endforeach
                                 </select>
@@ -75,26 +85,30 @@
                                 <label for="validationCustom01" class="form-label">Jumlah Beli<span
                                         class="text-danger">*</span></label>
                                 <input type="number" onkeypress="return event.charCode >= 48" id="inp2" min="1"
-                                    class="form-control" name="jumlah_beli" placeholder="Isi Jumlah Beli" value="{{ old('jumlah_beli', $barangmasuk->jumlah_beli) }}" required>
+                                    class="form-control" name="jumlah_beli" placeholder="Isi Jumlah Beli"
+                                    value="{{ old('jumlah_beli', $barangmasuk->jumlah_beli) }}" required>
                             </div>
                             <div class="col-md-3 position-relative">
                                 <label for="validationCustom01" class="form-label">Harga Beli Satuan<span
                                         class="text-danger">*</span></label>
                                 <input type="number" onkeypress="return event.charCode >= 48" id="inp" min="1"
-                                    class="form-control" value="{{ old('harga_beli_satuan', $barangmasuk->harga_beli_satuan) }}"  name="harga_beli_satuan" placeholder="Isi Harga Beli Satuan"
-                                    required>
+                                    class="form-control"
+                                    value="{{ old('harga_beli_satuan', $barangmasuk->harga_beli_satuan) }}"
+                                    name="harga_beli_satuan" placeholder="Isi Harga Beli Satuan" required>
                             </div>
                             <div class="col-md-4 position-relative justify-content-center">
                                 <label for="validationCustom01" class="form-label">Jumlah Beli x Harga Beli Satuan = Harga
                                     Beli Total<span class="text-danger">*</span></label>
-                                <button class="btn app-btn-primary" type="button" onclick="hitungTotal()">Hitung Total</button>
+                                <button class="btn app-btn-primary" type="button" onclick="hitungTotal()">Hitung
+                                    Total</button>
                             </div>
                             <div class="col-md-3 position-relative">
                                 <label for="validationCustom01" class="form-label">Harga Beli Total<span
                                         class="text-danger">*</span></label>
                                 <input type="number" onkeypress="return event.charCode >= 48" id="inp1" min="1"
-                                    class="form-control" name="harga_beli_total" value="{{ old('harga_beli_total', $barangmasuk->harga_beli_total) }}"  placeholder="Isi Harga Beli Total"
-                                    required>
+                                    class="form-control" name="harga_beli_total"
+                                    value="{{ old('harga_beli_total', $barangmasuk->harga_beli_total) }}"
+                                    placeholder="Isi Harga Beli Total" required>
                             </div>
                             <p>
                                 (Wajib terisi untuk kolom dengan tanda "<span class="text-danger">*</span>").

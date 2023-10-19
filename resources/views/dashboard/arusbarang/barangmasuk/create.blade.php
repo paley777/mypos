@@ -49,7 +49,13 @@
                     <div class="app-card-body p-4">
                         <form class="row g-2" method="post" action="/dashboard/barang-masuk">
                             @csrf
-                            <div class="col-md-6 position-relative">
+                            <div class="col-md-4 position-relative">
+                                <label for="validationCustom01" class="form-label ">Nama Penerima<span
+                                        class="text-danger">*</span></label>
+                                <input type="text" 
+                                    class="form-control" name="nama_penerima" placeholder="Isi Nama Penerima" value="{{ Auth::user()->nama }}" readonly required>
+                            </div>
+                            <div class="col-md-4 position-relative">
                                 <label for="validationCustom01" class="form-label ">Nama Supplier<span
                                         class="text-danger">*</span></label>
                                 <select class="form-select" name="nama_supplier" required>
@@ -59,7 +65,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-md-6 position-relative">
+                            <div class="col-md-4 position-relative">
                                 <label for="validationCustom01" class="form-label ">Nama Barang<span
                                         class="text-danger">*</span></label>
                                 <select class="form-select" name="nama_barang" required>
@@ -86,7 +92,8 @@
                             <div class="col-md-4 position-relative justify-content-center">
                                 <label for="validationCustom01" class="form-label">Jumlah Beli x Harga Beli Satuan = Harga
                                     Beli Total<span class="text-danger">*</span></label>
-                                <button class="btn app-btn-primary" type="button" onclick="hitungTotal()">Hitung Total</button>
+                                <button class="btn app-btn-primary" type="button" onclick="hitungTotal()">Hitung
+                                    Total</button>
                             </div>
                             <div class="col-md-3 position-relative">
                                 <label for="validationCustom01" class="form-label">Harga Beli Total<span

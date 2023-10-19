@@ -5,6 +5,7 @@ use App\Http\Controllers\LandingController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\BarangMasukController;
+use App\Http\Controllers\BarangKeluarController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\StokBarangController;
 
@@ -30,3 +31,4 @@ Route::resource('/dashboard/regis-barang', BarangController::class)->middleware(
 Route::resource('/dashboard/regis-supplier', SupplierController::class)->middleware('auth');
 Route::resource('/dashboard/stok-barang', StokBarangController::class)->middleware('auth');
 Route::resource('/dashboard/barang-masuk', BarangMasukController::class)->middleware('auth');
+Route::resource('/dashboard/barang-keluar', BarangKeluarController::class)->middleware('auth');

@@ -12,6 +12,7 @@ return new class extends Migration {
     {
         Schema::create('barang_masuks', function (Blueprint $table) {
             $table->id();
+            $table->string('nama_penerima');
             $table->string('nama_supplier');
             $table->string('nama_barang');
             $table->string('satuan');

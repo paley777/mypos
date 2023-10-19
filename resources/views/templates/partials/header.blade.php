@@ -98,6 +98,13 @@
                                     <li class="breadcrumb-item">Ubah Barang Masuk</li>
                                 </ol>
                             </nav>
+                        @elseif ($breadcrumb == 'barangkeluar')
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb responsive-small">
+                                    <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
+                                    <li class="breadcrumb-item">Barang Keluar</li>
+                                </ol>
+                            </nav>
                         @endif
                     </div>
                     <div class="app-utilities col-auto">
@@ -244,7 +251,8 @@
                                 <li class="submenu-item"><a class="submenu-link" href="/dashboard/stok-barang">Stok
                                         Barang</a>
                                 </li>
-                                <li class="submenu-item"><a class="submenu-link" href="account.html">Barang
+                                <li class="submenu-item"><a class="submenu-link"
+                                        href="/dashboard/barang-keluar">Barang
                                         Keluar</a>
                                 </li>
                             </ul>
