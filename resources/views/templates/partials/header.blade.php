@@ -116,7 +116,8 @@
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb responsive-small">
                                     <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
-                                    <li class="breadcrumb-item"><a href="/dashboard/regis-pelanggan">Registrasi Pelanggan</a></li>
+                                    <li class="breadcrumb-item"><a href="/dashboard/regis-pelanggan">Registrasi
+                                            Pelanggan</a></li>
                                     <li class="breadcrumb-item">Tambah Pelanggan Baru</li>
                                 </ol>
                             </nav>
@@ -124,8 +125,23 @@
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb responsive-small">
                                     <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
-                                    <li class="breadcrumb-item"><a href="/dashboard/regis-pelanggan">Registrasi Pelanggan</a></li>
+                                    <li class="breadcrumb-item"><a href="/dashboard/regis-pelanggan">Registrasi
+                                            Pelanggan</a></li>
                                     <li class="breadcrumb-item">Ubah Pelanggan</li>
+                                </ol>
+                        @elseif ($breadcrumb == 'edit_stokbarang')
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb responsive-small">
+                                    <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
+                                    <li class="breadcrumb-item"><a href="/dashboard/stok-barang">Stok Barang</a></li>
+                                    <li class="breadcrumb-item">Ubah Stok</li>
+                                </ol>
+                            </nav>
+                        @elseif ($breadcrumb == 'kasir')
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb responsive-small">
+                                    <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
+                                    <li class="breadcrumb-item">Kasir</li>
                                 </ol>
                             </nav>
                         @endif
@@ -232,7 +248,8 @@
                             <ul class="submenu-list list-unstyled">
                                 <li class="submenu-item"><a class="submenu-link"
                                         href="/dashboard/regis-barang">Registrasi Barang</a></li>
-                                <li class="submenu-item"><a class="submenu-link" href="/dashboard/regis-supplier">Registrasi Supplier</a>
+                                <li class="submenu-item"><a class="submenu-link"
+                                        href="/dashboard/regis-supplier">Registrasi Supplier</a>
                                 </li>
                                 <li class="submenu-item"><a class="submenu-link"
                                         href="/dashboard/regis-pelanggan">Registrasi Pelanggan</a>
@@ -284,7 +301,7 @@
                     </li><!--//nav-item-->
                     <li class="nav-item">
                         <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-                        <a class="nav-link" href="docs.html">
+                        <a class="nav-link {{ $active === 'kasir' ? 'active' : '' }}" href="/dashboard/cashier">
                             <span class="nav-icon">
                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-code-square"
                                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">

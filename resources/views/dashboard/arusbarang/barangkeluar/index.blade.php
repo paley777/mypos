@@ -30,31 +30,20 @@
                                                 <th class="cell">No.</th>
                                                 <th class="cell">Waktu Keluar</th>
                                                 <th class="cell">Kode Invoice</th>
-                                                <th class="cell">Petugas</th>
-                                                <th class="cell">Pelanggan</th>
                                                 <th class="cell">Nama Barang</th>
                                                 <th class="cell">Satuan</th>
                                                 <th class="cell">Jumlah Jual</th>
-                                                <th class="cell">Harga Jual Satuan</th>
-                                                <th class="cell">Disc (%)</th>
-                                                <th class="cell">Disc (Rp.)</th>
-                                                <th class="cell">Total</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach ($barangkeluars as $key => $barangkeluar)
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
-                                                    <td>{{ $barangkeluar->created_at->isoFormat('dddd, D MMMM Y'); }}</td>
+                                                    <td>{{ $barangkeluar->created_at->isoFormat('dddd, D MMMM Y') }}</td>
                                                     <td>{{ $barangkeluar->kode_inv }}</td>
-                                                    <td>{{ $barangkeluar->nama_petugas }}</td>
-                                                    <td>{{ $barangkeluar->nama_pelanggan }}</td>
                                                     <td>{{ $barangkeluar->nama_barang }}</td>
                                                     <td>{{ $barangkeluar->satuan }}</td>
-                                                    <td>@currency($barangkeluar->harga_jual_satuan)</td>
-                                                    <td>{{ $barangkeluar->diskon_persen }}</td>
-                                                    <td>{{ $barangkeluar->diskon_rupiah }}</td>
-                                                    <td>{{ $barangkeluar->harga_jual_total }}</td>
+                                                    <td>{{ $barangkeluar->jumlah_keluar }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

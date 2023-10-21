@@ -9,6 +9,7 @@ use App\Http\Controllers\BarangKeluarController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\StokBarangController;
+use App\Http\Controllers\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,3 +35,5 @@ Route::resource('/dashboard/stok-barang', StokBarangController::class)->middlewa
 Route::resource('/dashboard/barang-masuk', BarangMasukController::class)->middleware('auth');
 Route::resource('/dashboard/barang-keluar', BarangKeluarController::class)->middleware('auth');
 Route::resource('/dashboard/regis-pelanggan', PelangganController::class)->middleware('auth');
+Route::get('/dashboard/cashier', [TransactionController::class, 'index']);
+Route::post('/dashboard/cashier', [TransactionController::class, 'store']);

@@ -49,17 +49,26 @@ class StokBarangController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(StokBarang $stokBarang)
+    public function edit(StokBarang $stok_barang)
     {
-        //
+        return view('dashboard.arusbarang.stokbarang.edit', [
+            'active' => 'arusbarang',
+            'breadcrumb' => 'edit_stokbarang',
+            'stokbarang' => $stok_barang,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateStokBarangRequest $request, StokBarang $stokBarang)
+    public function update(UpdateStokBarangRequest $request, StokBarang $stok_barang)
     {
-        //
+        $validated = $request->validated();
+        StokBarang::where('id', $stok_barang['id'])->update([
+          
+            'stok' => $validated['stok'],
+        ]);
+        return redirect('/dashboard/stok-barang')->with('success', 'Stok telah diubah!');
     }
 
     /**

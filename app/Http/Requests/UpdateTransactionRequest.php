@@ -3,16 +3,15 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
-class UpdateStokBarangRequest extends FormRequest
+class UpdateTransactionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return Auth::check();
+        return false;
     }
 
     /**
@@ -23,8 +22,7 @@ class UpdateStokBarangRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nama_barang' => 'required',
-            'stok' => 'required',
+            //
         ];
     }
 }
