@@ -101,7 +101,7 @@
                                                 <th class="cell">Satuan</th>
                                                 <th class="cell">Stok</th>
                                                 <th class="cell">Harga Jual</th>
-                                             
+
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -112,14 +112,14 @@
                                                     <td>{{ $stokbarang->satuan }}</td>
                                                     <td>{{ $stokbarang->stok }}</td>
                                                     <td>@currency($stokbarang->harga_jual)</td>
-                                                    
+
                                                 </tr>
                                             @endforeach
                                         </tbody>
                                     </table>
                                 </div><!--//table-responsive-->
                                 @endif
-                              
+
                             </div><!--//app-card-body-->
                         </div><!--//app-card-->
                     </div><!--//tab-pane-->

@@ -150,7 +150,7 @@
                                                 <th class="cell">Jumlah Beli</th>
                                                 <th class="cell">Harga Beli Satuan</th>
                                                 <th class="cell">Harga Beli Total</th>
-                                              
+
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -165,14 +165,14 @@
                                                     <td>{{ $barangmasuk->jumlah_beli }}</td>
                                                     <td>@currency($barangmasuk->harga_beli_satuan)</td>
                                                     <td>@currency($barangmasuk->harga_beli_total)</td>
-                                                   
+
                                                 </tr>
                                             @endforeach
                                         </tbody>
                                     </table>
                                 </div><!--//table-responsive-->
                                 @endif
-                               
+
                             </div><!--//app-card-body-->
                         </div><!--//app-card-->
                     </div><!--//tab-pane-->

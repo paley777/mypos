@@ -260,7 +260,7 @@
                         </a><!--//nav-link-->
                         <div id="submenu-3" class="collapse submenu submenu-1" data-bs-parent="#menu-accordion">
                             <ul class="submenu-list list-unstyled">
-                               
+
                                 <li class="submenu-item"><a class="submenu-link"
                                         href="/dashboard/regis-pelanggan">Registrasi Pelanggan</a>
                                 </li>
@@ -296,11 +296,11 @@
                         </a><!--//nav-link-->
                         <div id="submenu-1" class="collapse submenu submenu-1" data-bs-parent="#menu-accordion">
                             <ul class="submenu-list list-unstyled">
-                                
+
                                 <li class="submenu-item"><a class="submenu-link" href="/dashboard/stok-barang">Stok
                                         Barang</a>
                                 </li>
-                               
+
                             </ul>
                         </div>
                     </li><!--//nav-item-->
@@ -337,7 +337,7 @@
                             <span class="nav-link-text">Invoice</span>
                         </a><!--//nav-link-->
                     </li><!--//nav-item-->
-                
+
                 </ul><!--//app-menu-->
             </nav><!--//app-nav-->
             <div class="app-sidepanel-footer">
