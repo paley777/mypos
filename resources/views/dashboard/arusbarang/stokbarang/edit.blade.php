@@ -7,7 +7,7 @@
             <div class="container-xl">
                 <div class="row g-3 mb-4 align-items-center justify-content-between">
                     <div class="col-auto">
-                        <h1 class="app-page-title mb-0">Barang Masuk</h1>
+                        <h1 class="app-page-title mb-0">Stok Barang</h1>
                     </div>
                     @if ($errors->any())
                         <div class="alert alert-danger">
@@ -35,70 +35,33 @@
                             </div><!--//col-->
                             <div class="col-12 col-lg-auto text-center text-lg-start">
                                 <div class="notification-type mb-2"><span class="badge bg-primary">Olah Data</span></div>
-                                <h4 class="notification-title mb-1">Formulir Barang Masuk Baru</h4>
+                                <h4 class="notification-title mb-1">Formulir Ubah Stok Barang</h4>
+
                                 <ul class="notification-meta list-inline mb-0">
-                                    <li class="list-inline-item">Create</li>
+                                    <li class="list-inline-item">Update</li>
                                     <li class="list-inline-item">|</li>
                                     <li class="list-inline-item">System</li>
                                 </ul>
+
                             </div><!--//col-->
                         </div><!--//row-->
                     </div><!--//app-card-header-->
                     <div class="app-card-body p-4">
-                        <form class="row g-2" method="post" action="/dashboard/barang-masuk">
+                        <form class="row g-2" method="post" action="/dashboard/stok-barang/{{ $stokbarang->id }}">
+                            @method('put')
                             @csrf
-                            <div class="col-md-4 position-relative">
-                                <label for="validationCustom01" class="form-label ">Nama Penerima<span
-                                        class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="nama_penerima"
-                                    placeholder="Isi Nama Penerima" value="{{ Auth::user()->nama }}" readonly required>
-                            </div>
-                            <div class="col-md-4 position-relative">
-                                <label for="validationCustom01" class="form-label ">Nama Supplier<span
-                                        class="text-danger">*</span></label>
-                                <select class="form-select" name="nama_supplier" required>
-                                    <option value="">Pilih Supplier</option>
-                                    @foreach ($suppliers as $supplier)
-                                        <option value="{{ $supplier->nama }}">{{ $supplier->nama }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
                             <div class="col-md-4 position-relative">
                                 <label for="validationCustom01" class="form-label ">Nama Barang<span
                                         class="text-danger">*</span></label>
-                                <select class="form-select" name="nama_barang" required>
-                                    <option value="">Pilih Barang</option>
-                                    @foreach ($barangs as $barang)
-                                        <option value="{{ $barang->nama_barang }}">{{ $barang->nama_barang }} |
-                                            {{ $barang->satuan }}</option>
-                                    @endforeach
-                                </select>
+                                <input type="text" class="form-control" name="nama_barang"
+                                    placeholder="Isi Nama Barang" value="{{ $stokbarang->nama_barang }}" readonly required>
                             </div>
                             <div class="col-md-2 position-relative">
-                                <label for="validationCustom01" class="form-label">Jumlah Beli<span
+                                <label for="validationCustom01" class="form-label">Stok<span
                                         class="text-danger">*</span></label>
                                 <input type="number" onkeypress="return event.charCode >= 48" id="inp2" min="1"
-                                    class="form-control" name="jumlah_beli" placeholder="Isi Jumlah Beli" required>
-                            </div>
-                            <div class="col-md-3 position-relative">
-                                <label for="validationCustom01" class="form-label">Harga Beli Satuan<span
-                                        class="text-danger">*</span></label>
-                                <input type="number" onkeypress="return event.charCode >= 48" id="inp" min="1"
-                                    class="form-control" name="harga_beli_satuan" placeholder="Isi Harga Beli Satuan"
-                                    required>
-                            </div>
-                            <div class="col-md-4 position-relative justify-content-center">
-                                <label for="validationCustom01" class="form-label">Jumlah Beli x Harga Beli Satuan = Harga
-                                    Beli Total<span class="text-danger">*</span></label>
-                                <button class="btn app-btn-primary" type="button" onclick="hitungTotal()">Hitung
-                                    Total</button>
-                            </div>
-                            <div class="col-md-3 position-relative">
-                                <label for="validationCustom01" class="form-label">Harga Beli Total<span
-                                        class="text-danger">*</span></label>
-                                <input type="number" onkeypress="return event.charCode >= 48" id="inp1" min="1"
-                                    class="form-control" name="harga_beli_total" placeholder="Isi Harga Beli Total"
-                                    required>
+                                    class="form-control" name="stok" placeholder="Isi Stok"
+                                    value="{{ old('stok', $stokbarang->stok) }}" required>
                             </div>
                             <p>
                                 (Wajib terisi untuk kolom dengan tanda "<span class="text-danger">*</span>").
@@ -112,8 +75,7 @@
                                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                                 <g id="SVGRepo_iconCarrier">
                                     <path d="M20 4L3 9.31372L10.5 13.5M20 4L14.5 21L10.5 13.5M20 4L10.5 13.5"
-                                        stroke="#ffffff" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round">
+                                        stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     </path>
                                 </g>
                             </svg> Simpan Data

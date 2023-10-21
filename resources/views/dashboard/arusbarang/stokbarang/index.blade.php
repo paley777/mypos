@@ -17,7 +17,21 @@
                             </div><!--//row-->
                         </div><!--//table-utilities-->
                     </div><!--//col-auto-->
-
+                    @if (session()->has('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>{{ session('success') }}</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                 </div><!--//row-->
                 <div class="tab-content" id="orders-table-tab-content">
                     <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
@@ -32,6 +46,7 @@
                                                 <th class="cell">Satuan</th>
                                                 <th class="cell">Stok</th>
                                                 <th class="cell">Harga Jual</th>
+                                                <th class="cell">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -42,6 +57,34 @@
                                                     <td>{{ $stokbarang->satuan }}</td>
                                                     <td>{{ $stokbarang->stok }}</td>
                                                     <td>@currency($stokbarang->harga_jual)</td>
+                                                    <td> <a href="/dashboard/stok-barang/{{ $stokbarang->id }}/edit"
+                                                            class="btn btn-sm btn-warning"><svg width="16px"
+                                                                height="16px" viewBox="0 0 24 24"
+                                                                xmlns="http://www.w3.org/2000/svg" fill="#000000">
+                                                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                                    stroke-linejoin="round"></g>
+                                                                <g id="SVGRepo_iconCarrier">
+                                                                    <title></title>
+                                                                    <g id="Complete">
+                                                                        <g id="edit">
+                                                                            <g>
+                                                                                <path
+                                                                                    d="M20,16v4a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V6A2,2,0,0,1,4,4H8"
+                                                                                    fill="none" stroke="#000000"
+                                                                                    stroke-linecap="round"
+                                                                                    stroke-linejoin="round"
+                                                                                    stroke-width="2"></path>
+                                                                                <polygon fill="none"
+                                                                                    points="12.5 15.8 22 6.2 17.8 2 8.3 11.5 8 16 12.5 15.8"
+                                                                                    stroke="#000000" stroke-linecap="round"
+                                                                                    stroke-linejoin="round"
+                                                                                    stroke-width="2"></polygon>
+                                                                            </g>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                                            </svg> Ubah</a></td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
