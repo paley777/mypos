@@ -11,10 +11,10 @@ use App\Models\Order;
 
 class ReportController extends Controller
 {
-     /**
-     * Display a listing of the resource.
-     */
-     public function barang_masuk()
+    /**
+    * Display a listing of the resource.
+    */
+    public function barang_masuk()
     {
         return view('dashboard.report.barangmasuk', [
             'active' => 'laporan',
@@ -24,10 +24,10 @@ class ReportController extends Controller
                 ->get(),
         ]);
     }
-     /**
-     * Display a listing of the resource.
-     */
-     public function barang_keluar()
+    /**
+    * Display a listing of the resource.
+    */
+    public function barang_keluar()
     {
         return view('dashboard.report.barangkeluar', [
             'active' => 'laporan',
@@ -37,10 +37,10 @@ class ReportController extends Controller
                 ->get(),
         ]);
     }
-     /**
-     * Display a listing of the resource.
-     */
-     public function stok_barang()
+    /**
+    * Display a listing of the resource.
+    */
+    public function stok_barang()
     {
         return view('dashboard.report.stokbarang', [
             'active' => 'laporan',
@@ -50,10 +50,10 @@ class ReportController extends Controller
                 ->get(),
         ]);
     }
-     /**
-     * Display a listing of the resource.
-     */
-     public function invoice()
+    /**
+    * Display a listing of the resource.
+    */
+    public function invoice()
     {
         return view('dashboard.report.invoice', [
             'active' => 'laporan',
@@ -61,10 +61,10 @@ class ReportController extends Controller
             'transactions' => Transaction::get(),
         ]);
     }
-     /**
-     * Display a listing of the resource.
-     */
-     public function order()
+    /**
+    * Display a listing of the resource.
+    */
+    public function order()
     {
         return view('dashboard.report.order', [
             'active' => 'laporan',
