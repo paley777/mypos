@@ -14,12 +14,12 @@
                         <div class="page-utilities">
                             <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
                                 <div class="col-auto">
-                                   
+
                                 </div>
                             </div><!--//row-->
                         </div><!--//table-utilities-->
                     </div><!--//col-auto-->
-                   
+
                 </div><!--//row-->
                 <div class="tab-content" id="orders-table-tab-content">
                     <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
@@ -38,7 +38,7 @@
                                                 <th class="cell">Jumlah Beli</th>
                                                 <th class="cell">Harga Beli Satuan</th>
                                                 <th class="cell">Harga Beli Total</th>
-                                                
+
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -53,7 +53,7 @@
                                                     <td>{{ $barangmasuk->jumlah_beli }}</td>
                                                     <td>@currency($barangmasuk->harga_beli_satuan)</td>
                                                     <td>@currency($barangmasuk->harga_beli_total)</td>
-                                                   
+
                                                 </tr>
                                             @endforeach
                                         </tbody>

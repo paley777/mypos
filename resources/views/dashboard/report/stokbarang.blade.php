@@ -59,7 +59,7 @@
                                                     <td>{{ $stokbarang->stok }}</td>
                                                     <td>@currency($stokbarang->harga_jual)</td>
 
-                                                   
+
                                                 </tr>
                                             @endforeach
                                         </tbody>

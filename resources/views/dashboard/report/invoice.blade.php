@@ -51,7 +51,7 @@
                                                 <th class="cell">Jatuh Tempo</th>
                                                 <th class="cell">Keterangan</th>
                                                 <th class="cell">Total</th>
-                                              
+
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -66,7 +66,7 @@
                                                     <td>{{ $transaction->jatuh_tempo }}</td>
                                                     <td>{{ $transaction->keterangan }}</td>
                                                     <td>@currency($transaction->total)</td>
-                                                  
+
                                                 </tr>
                                             @endforeach
                                         </tbody>
