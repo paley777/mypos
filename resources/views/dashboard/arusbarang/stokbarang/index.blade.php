@@ -37,6 +37,7 @@
                     <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
                         <div class="app-card app-card-orders-table shadow-sm mb-5">
                             <div class="app-card-body">
+                                @if (Auth::user()->role == 'Super Administrator')
                                 <div class="table-responsive p-4">
                                     <table id="example" class="table app-table-hover mb-0 text-left">
                                         <thead>
@@ -90,6 +91,35 @@
                                         </tbody>
                                     </table>
                                 </div><!--//table-responsive-->
+                                @else
+                                <div class="table-responsive p-4">
+                                    <table id="example" class="table app-table-hover mb-0 text-left">
+                                        <thead>
+                                            <tr>
+                                                <th class="cell">No.</th>
+                                                <th class="cell">Nama Barang</th>
+                                                <th class="cell">Satuan</th>
+                                                <th class="cell">Stok</th>
+                                                <th class="cell">Harga Jual</th>
+                                             
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($stokbarangs as $key => $stokbarang)
+                                                <tr>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $stokbarang->nama_barang }}</td>
+                                                    <td>{{ $stokbarang->satuan }}</td>
+                                                    <td>{{ $stokbarang->stok }}</td>
+                                                    <td>@currency($stokbarang->harga_jual)</td>
+                                                    
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div><!--//table-responsive-->
+                                @endif
+                              
                             </div><!--//app-card-body-->
                         </div><!--//app-card-->
                     </div><!--//tab-pane-->

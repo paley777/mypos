@@ -49,3 +49,5 @@ Route::get('/dashboard/report/barang-keluar', [ReportController::class, 'barang_
 Route::get('/dashboard/report/stok-barang', [ReportController::class, 'stok_barang']);
 Route::get('/dashboard/report/invoice', [ReportController::class, 'invoice']);
 Route::get('/dashboard/report/order', [ReportController::class, 'order']);
+Route::get('/dashboard/my-profile', [DashboardController::class, 'my_profile']);
+Route::get('/dashboard/about', [DashboardController::class, 'about']);

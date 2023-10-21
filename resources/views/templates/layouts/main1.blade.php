@@ -13,14 +13,7 @@
 
 <body class="app" style="font-family: Manrope, sans-serif;">
     <section>
-        @if (Auth::user()->role == 'Super Administrator')
-            @include('templates.partials.header')
-        @elseif (Auth::user()->role == 'Administrator')
-            @include('templates.partials.header1')
-        @else
-        @include('templates.partials.header2')
-        @endif
-
+        @include('templates.partials.header1')
         @yield('container')
     </section>
     <style>
