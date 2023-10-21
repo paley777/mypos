@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Transaction;
+use App\Models\Barang;
+use App\Models\StokBarang;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -14,6 +17,10 @@ class DashboardController extends Controller
             return view('dashboard.role.index_sa', [
                 'active' => 'beranda',
                 'breadcrumb' => 'beranda',
+                'total_penjualan' => Transaction::sum('total'),
+                'total_barang' => Barang::count(),
+                'total_stok' => StokBarang::sum('stok'),
+                'total_inv' => Transaction::count(),
             ]);
         }
     }

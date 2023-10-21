@@ -10,7 +10,8 @@
         "haruncpi/laravel-id-generator": "*",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.2",
-        "laravel/tinker": "^2.8"
+        "laravel/tinker": "^2.8",
+        "riskihajar/terbilang": "2.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

@@ -144,6 +144,13 @@
                                     <li class="breadcrumb-item">Kasir</li>
                                 </ol>
                             </nav>
+                        @elseif ($breadcrumb == 'invoice')
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb responsive-small">
+                                    <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
+                                    <li class="breadcrumb-item">Invoice</li>
+                                </ol>
+                            </nav>
                         @endif
                     </div>
                     <div class="app-utilities col-auto">
@@ -316,7 +323,7 @@
                     </li><!--//nav-item-->
                     <li class="nav-item">
                         <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-                        <a class="nav-link" href="docs.html">
+                        <a class="nav-link {{ $active === 'invoice' ? 'active' : '' }}" href="/dashboard/invoice">
                             <span class="nav-icon">
                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-card-list"
                                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
