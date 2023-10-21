@@ -151,6 +151,13 @@
                                     <li class="breadcrumb-item">Invoice</li>
                                 </ol>
                             </nav>
+                        @elseif ($breadcrumb == 'laporan')
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb responsive-small">
+                                    <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
+                                    <li class="breadcrumb-item">Report</li>
+                                </ol>
+                            </nav>
                         @endif
                     </div>
                     <div class="app-utilities col-auto">
@@ -341,7 +348,7 @@
                     </li><!--//nav-item-->
                     <li class="nav-item has-submenu">
                         <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-                        <a class="nav-link submenu-toggle" href="#" data-bs-toggle="collapse"
+                        <a class="nav-link {{ $active === 'laporan' ? 'active' : '' }} submenu-toggle" href="#" data-bs-toggle="collapse"
                             data-bs-target="#submenu-2" aria-expanded="false" aria-controls="submenu-1">
                             <span class="nav-icon">
                                 <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
@@ -364,12 +371,15 @@
                         </a><!--//nav-link-->
                         <div id="submenu-2" class="collapse submenu submenu-1" data-bs-parent="#menu-accordion">
                             <ul class="submenu-list list-unstyled">
-                                <li class="submenu-item"><a class="submenu-link" href="notifications.html">Barang
+                                <li class="submenu-item"><a class="submenu-link" href="/dashboard/report/barang-masuk">Barang
                                         Masuk</a></li>
-                                <li class="submenu-item"><a class="submenu-link" href="account.html">Barang
+                                <li class="submenu-item"><a class="submenu-link" href="/dashboard/report/barang-keluar">Barang
                                         Keluar</a>
                                 </li>
-                                <li class="submenu-item"><a class="submenu-link" href="account.html">Transaksi</a>
+                                <li class="submenu-item"><a class="submenu-link" href="/dashboard/report/stok-barang">Stok Barang</a>
+                                </li>
+                                <li class="submenu-item"><a class="submenu-link" href="/dashboard/report/invoice">Invoice</a>
+                                <li class="submenu-item"><a class="submenu-link" href="/dashboard/report/order">Order</a>
                                 </li>
                             </ul>
                         </div>

@@ -11,6 +11,7 @@ use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\StokBarangController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\ReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,3 +43,9 @@ Route::get('/dashboard/invoice/{transaction}/print', [InvoiceController::class, 
 Route::get('/dashboard/invoice/{transaction}/lunas', [InvoiceController::class, 'lunas']);
 Route::delete('/dashboard/invoice/{transaction}', [InvoiceController::class, 'destroy']);
 Route::post('/dashboard/cashier', [TransactionController::class, 'store']);
+
+Route::get('/dashboard/report/barang-masuk', [ReportController::class, 'barang_masuk']);
+Route::get('/dashboard/report/barang-keluar', [ReportController::class, 'barang_keluar']);
+Route::get('/dashboard/report/stok-barang', [ReportController::class, 'stok_barang']);
+Route::get('/dashboard/report/invoice', [ReportController::class, 'invoice']);
+Route::get('/dashboard/report/order', [ReportController::class, 'order']);
