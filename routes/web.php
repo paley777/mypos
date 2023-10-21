@@ -10,6 +10,7 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\StokBarangController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\InvoiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +24,7 @@ use App\Http\Controllers\TransactionController;
 */
 
 //Landing Login
-Route::get('/', [LandingController::class, 'index']);
+Route::get('/', [LandingController::class, 'index'])->name('login');
 Route::post('/', [LandingController::class, 'authenticate']);
 
 //Dashboard
@@ -36,4 +37,8 @@ Route::resource('/dashboard/barang-masuk', BarangMasukController::class)->middle
 Route::resource('/dashboard/barang-keluar', BarangKeluarController::class)->middleware('auth');
 Route::resource('/dashboard/regis-pelanggan', PelangganController::class)->middleware('auth');
 Route::get('/dashboard/cashier', [TransactionController::class, 'index']);
+Route::get('/dashboard/invoice', [InvoiceController::class, 'index']);
+Route::get('/dashboard/invoice/{transaction}/print', [InvoiceController::class, 'print']);
+Route::get('/dashboard/invoice/{transaction}/lunas', [InvoiceController::class, 'lunas']);
+Route::delete('/dashboard/invoice/{transaction}', [InvoiceController::class, 'destroy']);
 Route::post('/dashboard/cashier', [TransactionController::class, 'store']);
