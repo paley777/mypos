@@ -52,6 +52,7 @@
                     <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
                         <div class="app-card app-card-orders-table shadow-sm mb-5">
                             <div class="app-card-body">
+                                @if (Auth::user()->role == 'Super Administrator')
                                 <div class="table-responsive p-4">
                                     <table id="example" class="table app-table-hover mb-0 text-left">
                                         <thead>
@@ -135,6 +136,43 @@
                                         </tbody>
                                     </table>
                                 </div><!--//table-responsive-->
+                                @else
+                                <div class="table-responsive p-4">
+                                    <table id="example" class="table app-table-hover mb-0 text-left">
+                                        <thead>
+                                            <tr>
+                                                <th class="cell">No.</th>
+                                                <th class="cell">Waktu Masuk</th>
+                                                <th class="cell">Penerima</th>
+                                                <th class="cell">Nama Supplier</th>
+                                                <th class="cell">Nama Barang</th>
+                                                <th class="cell">Satuan</th>
+                                                <th class="cell">Jumlah Beli</th>
+                                                <th class="cell">Harga Beli Satuan</th>
+                                                <th class="cell">Harga Beli Total</th>
+                                              
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($barangmasuks as $key => $barangmasuk)
+                                                <tr>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $barangmasuk->created_at->isoFormat('dddd, D MMMM Y'); }}</td>
+                                                    <td>{{ $barangmasuk->nama_penerima }}</td>
+                                                    <td>{{ $barangmasuk->nama_supplier }}</td>
+                                                    <td>{{ $barangmasuk->nama_barang }}</td>
+                                                    <td>{{ $barangmasuk->satuan }}</td>
+                                                    <td>{{ $barangmasuk->jumlah_beli }}</td>
+                                                    <td>@currency($barangmasuk->harga_beli_satuan)</td>
+                                                    <td>@currency($barangmasuk->harga_beli_total)</td>
+                                                   
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div><!--//table-responsive-->
+                                @endif
+                               
                             </div><!--//app-card-body-->
                         </div><!--//app-card-->
                     </div><!--//tab-pane-->
