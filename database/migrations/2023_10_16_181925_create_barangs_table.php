@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama_barang')->unique();
             $table->string('satuan');
+            $table->integer('modal');
             $table->integer('harga_jual');
             $table->timestamps();
         });

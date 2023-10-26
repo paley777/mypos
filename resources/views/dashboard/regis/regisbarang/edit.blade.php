@@ -63,6 +63,12 @@
                                     value="{{ old('satuan', $barang->satuan) }}" placeholder="Isi Satuan" required>
                             </div>
                             <div class="col-md-3 position-relative">
+                                <label for="validationCustom01" class="form-label">Modal Per Satuan<span
+                                        class="text-danger">*</span></label>
+                                <input type="number" onkeypress="return event.charCode >= 48" id="inp1" min="1"
+                                    class="form-control" value="{{ old('modal', $barang->modal) }}" name="modal" placeholder="Isi Modal Per Satuan" required>
+                            </div>
+                            <div class="col-md-2 position-relative">
                                 <label for="validationCustom01" class="form-label">Harga Jual<span
                                         class="text-danger">*</span></label>
                                 <input type="number" onkeypress="return event.charCode >= 48" id="inp" min="1"

@@ -26,6 +26,7 @@ class StoreBarangRequest extends FormRequest
             'nama_barang' => 'required|unique:barangs',
             'satuan' => 'required',
             'harga_jual' => 'required',
+            'modal' => 'required',
         ];
     }
 }

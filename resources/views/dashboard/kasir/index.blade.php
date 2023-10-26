@@ -169,7 +169,7 @@
                                                 <label for="validationCustom01" class="form-label">Total<span
                                                         class="text-danger">*</span></label>
                                                 <input type="number" id="total" value=""
-                                                    class="form-control total" name="total" required readonly>
+                                                    class="form-control form-control-lg total" name="total" required readonly>
                                             </div>
                                         </div>
                                         <p>

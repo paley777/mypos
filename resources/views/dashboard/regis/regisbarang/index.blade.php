@@ -59,6 +59,7 @@
                                                 <th class="cell">No.</th>
                                                 <th class="cell">Nama Barang</th>
                                                 <th class="cell">Satuan</th>
+                                                <th class="cell">Modal</th>
                                                 <th class="cell">Harga Jual</th>
                                                 <th class="cell">Aksi</th>
                                             </tr>
@@ -69,6 +70,7 @@
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $barang->nama_barang }}</td>
                                                     <td>{{ $barang->satuan }}</td>
+                                                    <td>@currency($barang->modal)</td>
                                                     <td>@currency($barang->harga_jual)</td>
                                                     <td>
                                                         <a href="/dashboard/regis-barang/{{ $barang->id }}/edit"

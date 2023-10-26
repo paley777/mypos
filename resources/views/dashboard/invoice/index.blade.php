@@ -51,6 +51,7 @@
                                                     <th class="cell">Jatuh Tempo</th>
                                                     <th class="cell">Keterangan</th>
                                                     <th class="cell">Total</th>
+                                                    <th class="cell">Profit</th>
                                                     <th class="cell">Aksi</th>
                                                 </tr>
                                             </thead>
@@ -66,6 +67,7 @@
                                                         <td>{{ $transaction->jatuh_tempo }}</td>
                                                         <td>{{ $transaction->keterangan }}</td>
                                                         <td>@currency($transaction->total)</td>
+                                                        <td>@currency($transaction->profit)</td>
                                                         <td> <a target="_blank"
                                                                 href="/dashboard/invoice/{{ $transaction->id }}/print"
                                                                 class="btn btn-sm btn-warning"><svg width="16px"
@@ -169,6 +171,7 @@
                                                     <th class="cell">Jatuh Tempo</th>
                                                     <th class="cell">Keterangan</th>
                                                     <th class="cell">Total</th>
+                                                    <th class="cell">Profit</th>
                                                     <th class="cell">Aksi</th>
                                                 </tr>
                                             </thead>
@@ -185,6 +188,7 @@
                                                         <td>{{ $transaction->jatuh_tempo }}</td>
                                                         <td>{{ $transaction->keterangan }}</td>
                                                         <td>@currency($transaction->total)</td>
+                                                        <td>@currency($transaction->profit)</td>
                                                         <td> <a target="_blank"
                                                                 href="/dashboard/invoice/{{ $transaction->id }}/print"
                                                                 class="btn btn-sm btn-warning"><svg width="16px"

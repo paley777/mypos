@@ -6,6 +6,7 @@ use App\Models\Transaction;
 use App\Models\Order;
 use App\Models\Pelanggan;
 use App\Models\StokBarang;
+use App\Models\Barang;
 use App\Models\BarangKeluar;
 use App\Http\Requests\StoreTransactionRequest;
 use App\Http\Requests\UpdateTransactionRequest;
@@ -41,16 +42,8 @@ class TransactionController extends Controller
      */
     public function store(StoreTransactionRequest $request)
     {
+        $profit = 0;
         $validated = $request->validated();
-        Transaction::create([
-            'kode_inv' => $validated['kode_inv'],
-            'nama_petugas' => $validated['nama_petugas'],
-            'nama_pelanggan' => $validated['nama_pelanggan'],
-            'status' => $validated['status'],
-            'jatuh_tempo' => $validated['jatuh_tempo'],
-            'keterangan' => $validated['keterangan'],
-            'total' => $validated['total'],
-        ]);
 
         // Iterasi data barang yang dipesan
         $nama_barang = $request->input('nama_barang');
@@ -70,6 +63,9 @@ class TransactionController extends Controller
                 'disc_rp' => $disc_rp[$key],
                 'subtotal' => $subtotal[$key],
             ]);
+            $modal = Barang::where('nama_barang', $nama_barang)->first()->modal;
+            $profit += $subtotal[$key] - $modal * $qty[$key];
+
             $kurang = $qty[$key];
             $stokbarang = StokBarang::where('nama_barang', $nama_barang)->first();
             if ($stokbarang) {
@@ -82,6 +78,16 @@ class TransactionController extends Controller
                 'jumlah_keluar' => $qty[$key],
             ]);
         }
+        Transaction::create([
+            'kode_inv' => $validated['kode_inv'],
+            'nama_petugas' => $validated['nama_petugas'],
+            'nama_pelanggan' => $validated['nama_pelanggan'],
+            'status' => $validated['status'],
+            'jatuh_tempo' => $validated['jatuh_tempo'],
+            'keterangan' => $validated['keterangan'],
+            'total' => $validated['total'],
+            'profit' => $profit,
+        ]);
         return redirect()
             ->back()
             ->with('success', 'Transaksi sukses, Silakan menuju fitur Invoice untuk mencetak!');

@@ -17,7 +17,7 @@ class DashboardController extends Controller
             return view('dashboard.role.index_sa', [
                 'active' => 'beranda',
                 'breadcrumb' => 'beranda',
-                'total_penjualan' => Transaction::sum('total'),
+                'total_profit' => Transaction::sum('profit'),
                 'total_barang' => Barang::count(),
                 'total_stok' => StokBarang::sum('stok'),
                 'total_inv' => Transaction::count(),

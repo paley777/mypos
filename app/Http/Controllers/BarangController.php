@@ -48,6 +48,7 @@ class BarangController extends Controller
             'satuan' => $validated['satuan'],
             'stok' => 0,
             'harga_jual' => $validated['harga_jual'],
+            'modal' => $validated['modal'],
         ]);
 
         return redirect('/dashboard/regis-barang')->with('success', 'Barang telah ditambahkan!');

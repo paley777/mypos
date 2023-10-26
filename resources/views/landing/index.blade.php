@@ -31,9 +31,9 @@
                         <form class="text-center" method="POST" action="/">
                             @csrf
                             <div class="mb-3"><input class="form-control" type="text" name="email"
-                                    placeholder="Username"></div>
+                                    placeholder="Username" required></div>
                             <div class="mb-3"><input class="form-control" type="password" name="password"
-                                    placeholder="Password">
+                                    placeholder="Password" required>
                             </div>
                             <div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit">Masuk ke
                                     Sistem</button>

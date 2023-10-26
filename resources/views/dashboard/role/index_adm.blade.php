@@ -27,8 +27,8 @@
                     <div class="col-6 col-lg-3">
                         <div class="app-card app-card-stat shadow-sm h-100">
                             <div class="app-card-body p-3 p-lg-4">
-                                <h4 class="stats-type mb-1">Total Penjualan</h4>
-                                <div class="stats-figure">@currency($total_penjualan)</div>
+                                <h4 class="stats-type mb-1">Total Profit</h4>
+                                <div class="stats-figure">@currency($total_profit)</div>
 
                             </div><!--//app-card-body-->
                             <a class="app-card-link-mask" href="#"></a>

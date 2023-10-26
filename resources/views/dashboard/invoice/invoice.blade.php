@@ -25,10 +25,9 @@
     <center>
         <table style='width:1000px; font-size:8pt; font-family:calibri; border-collapse: collapse;' border = '0'>
             <td width='70%' align='left' style='padding-right:80px; vertical-align:top'>
-                <span style='font-size:12pt'><b>Nama Toko</b></span></br>
-                Alamat Toko Alamat Toko Alamat Toko Alamat Toko Alamat Toko Alamat Toko Alamat Toko Alamat Toko Alamat
-                Toko Alamat Toko </br>
-                Telp : 0594094545
+                <span style='font-size:12pt'><b>UD. Sinar Harapan Jaya</b></span></br>
+                JL. WR Supratman, Bentiring (Depan Bank Bengkulu)</br>
+                Telp : 0851-7684-8080
             </td>
             <td style='vertical-align:top' width='30%' align='left'>
                 <b><span style='font-size:12pt'>FAKTUR PENJUALAN</span></b></br>

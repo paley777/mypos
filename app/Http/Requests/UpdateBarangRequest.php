@@ -26,6 +26,7 @@ class UpdateBarangRequest extends FormRequest
             'nama_barang' => 'required|unique:barangs,nama_barang,' . $this->regis_barang->id . ',id',
             'satuan' => 'required',
             'harga_jual' => 'required',
+            'modal' => 'required',
         ];
     }
 }
