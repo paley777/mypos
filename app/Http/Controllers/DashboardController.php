@@ -27,6 +27,7 @@ class DashboardController extends Controller
             return view('dashboard.role.index_adm', [
                 'active' => 'beranda',
                 'breadcrumb' => 'beranda',
+                'total_profit' => Transaction::sum('profit'),
                 'total_penjualan' => Transaction::sum('total'),
                 'total_barang' => Barang::count(),
                 'total_stok' => StokBarang::sum('stok'),
@@ -36,6 +37,7 @@ class DashboardController extends Controller
             return view('dashboard.role.index_sa', [
                 'active' => 'beranda',
                 'breadcrumb' => 'beranda',
+                'total_profit' => Transaction::sum('profit'),
                 'total_penjualan' => Transaction::sum('total'),
                 'total_barang' => Barang::count(),
                 'total_stok' => StokBarang::sum('stok'),
