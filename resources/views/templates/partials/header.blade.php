@@ -172,6 +172,14 @@
                                     <li class="breadcrumb-item">Profil Saya</li>
                                 </ol>
                             </nav>
+                        @elseif ($breadcrumb == 'profile_edit')
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb responsive-small">
+                                    <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
+                                    <li class="breadcrumb-item"><a href="/dashboard/my-profile">Profil Saya</a></li>
+                                    <li class="breadcrumb-item">Edit Profil</li>
+                                </ol>
+                            </nav>
                         @endif
                     </div>
                     <div class="app-utilities col-auto">

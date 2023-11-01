@@ -33,7 +33,7 @@
                 <b><span style='font-size:12pt'>FAKTUR PENJUALAN</span></b></br>
                 No Invoice. : {{ $transaction->kode_inv }}</br>
                 Tanggal : {{ $transaction->created_at->isoFormat('dddd, D MMMM Y') }}</br>
-                 {{ $transaction->status }}</br>
+                {{ $transaction->status }}</br>
                 Jatuh Tempo : {{ $transaction->jatuh_tempo }}</br>
             </td>
         </table>
@@ -43,7 +43,7 @@
                 Alamat : {{ $pelanggan->alamat }} <br>
                 No Telp :{{ $pelanggan->no_tlp }}
             </td>
-           
+
         </table>
         <table cellspacing='0' style='width:1000px; font-size:8pt; font-family:calibri;  border-collapse: collapse;'
             border='1'>
@@ -55,16 +55,18 @@
                     <td width='7%'>Disc (%)</td>
                     <td width='7%'>Disc (Rp)</td>
                     <td width='7%'>Subtotal</td>
-                    @foreach ($orders as $order)
+
                 <tr>
-                    <td>{{ $order->nama_barang }}</td>
-                    <td>{{ $order->qty }}</td>
-                    <td>{{ $order->harga_Jual }}</td>
-                    <td>{{ $order->disc_perc }}</td>
-                    <td>{{ $order->disc_rp }}</td>
-                    <td>@currency($order->subtotal)</td>
+                    @foreach ($orders as $order)
+                        <td>{{ $order->nama_barang }}</td>
+                        <td>{{ $order->qty }}</td>
+                        <td>{{ $order->harga_Jual }}</td>
+                        <td>{{ $order->disc_perc }}</td>
+                        <td>{{ $order->disc_rp }}</td>
+                        <td>@currency($order->subtotal)</td>
+                    @endforeach
                 </tr>
-                @endforeach
+
 
                 <tr>
                     <td colspan = '5'>
@@ -78,28 +80,50 @@
                     </td>
                     <td style='text-align:right'>{{ Terbilang::make($transaction->total) }}</td>
                 </tr>
+                <tr>
+                    <td colspan = '5'>
+                        <div style='text-align:right'>Bayar : </div>
+                    </td>
+                    <td style='text-align:right'>@currency($transaction->bayar)</td>
+                </tr>
+                <tr>
+                    <td colspan = '5'>
+                        <div style='text-align:right'>Kembalian/Sisa Bayar : </div>
+                    </td>
+                    <td style='text-align:right'>@currency($transaction->kembalian)</td>
+                </tr>
             </tbody>
             <tfoot>
                 <tr>
                     <td>Keterangan</td>
-                    <td>{{ $transaction->keterangan }}</td>
-                </tr>
-                <tr class="ttd">
-                    <th colspan="3">Penerima</th>
-
-                    <th colspan="3">Hormat Kami</th>
+                    <td colspan="3">{{ $transaction->keterangan }}</td>
                 </tr>
                 <tr>
-                    <td colspan="3" style="text-align: center;">{{ $transaction->nama_pelanggan }}</td>
+                    <td>Barang Diterima Tanggal</td>
+                    <td colspan="3"></td>
+                </tr>
+                <tr class="ttd">
+                    <th colspan="1">Penerima</th>
+                    <th colspan="2">Disetujui</th>
+                    <th colspan="3">Pengirim</th>
+                </tr>
+                <tr>
+                    <td colspan="1" style="text-align: center;">{{ $transaction->nama_pelanggan }}</td>
 
-                    <td colspan="3" style="text-align: center;">{{ $transaction->nama_petugas }}</td>
+                    <td colspan="2" style="text-align: center;">{{ $transaction->nama_petugas }}</td>
+                    <td colspan="3" style="text-align: center;">..........</td>
                 </tr>
             </tfoot>
         </table>
-
+        <p style="text-align: left;padding-left:110px;">Note:</p>
+        <p style="text-align: left;padding-left:110px;">1. Barang tersebut telah dikirim dalam keadaan baik dan cukup.</p>
+        <p style="text-align: left;padding-left:110px;">2. Barang yang telah dibeli tidak dapat ditukar atau dikembalikan tanpa persetujuan
+            kami.</p>
 </body>
 
 </html>
 <script>
-   window.onload = function() { window.print(); }
+    window.onload = function() {
+        window.print();
+    }
 </script>

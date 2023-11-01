@@ -51,6 +51,8 @@
                                                     <th class="cell">Jatuh Tempo</th>
                                                     <th class="cell">Keterangan</th>
                                                     <th class="cell">Total</th>
+                                                    <th class="cell">Bayar</th>
+                                                    <th class="cell">Kembalian/Sisa Bayar</th>
                                                     <th class="cell">Profit</th>
                                                     <th class="cell">Aksi</th>
                                                 </tr>
@@ -67,6 +69,8 @@
                                                         <td>{{ $transaction->jatuh_tempo }}</td>
                                                         <td>{{ $transaction->keterangan }}</td>
                                                         <td>@currency($transaction->total)</td>
+                                                        <td>@currency($transaction->bayar)</td>
+                                                        <td>@currency($transaction->kembalian)</td>
                                                         <td>@currency($transaction->profit)</td>
                                                         <td> <a target="_blank"
                                                                 href="/dashboard/invoice/{{ $transaction->id }}/print"

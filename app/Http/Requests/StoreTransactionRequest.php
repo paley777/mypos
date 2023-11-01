@@ -30,6 +30,8 @@ class StoreTransactionRequest extends FormRequest
             'jatuh_tempo' => 'nullable',
             'keterangan' => 'required',
             'total' => 'required',
+            'bayar' => 'required',
+            'kembalian' => 'required',
             'nama_barang.*' => 'required',
             'harga_jual.*' => 'required',
             'qty.*' => 'required',

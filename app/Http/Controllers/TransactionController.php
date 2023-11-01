@@ -64,7 +64,7 @@ class TransactionController extends Controller
                 'subtotal' => $subtotal[$key],
             ]);
             $modal = Barang::where('nama_barang', $nama_barang)->first()->modal;
-            $profit += $subtotal[$key] - $modal * $qty[$key];
+            $profit += $subtotal[$key] - ($modal * $qty[$key]);
 
             $kurang = $qty[$key];
             $stokbarang = StokBarang::where('nama_barang', $nama_barang)->first();
@@ -86,6 +86,8 @@ class TransactionController extends Controller
             'jatuh_tempo' => $validated['jatuh_tempo'],
             'keterangan' => $validated['keterangan'],
             'total' => $validated['total'],
+            'bayar' => $validated['bayar'],
+            'kembalian' => $validated['kembalian'],
             'profit' => $profit,
         ]);
         return redirect()

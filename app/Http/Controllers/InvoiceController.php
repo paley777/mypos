@@ -49,6 +49,8 @@ class InvoiceController extends Controller
     {
         Transaction::where('kode_inv', $transaction->kode_inv)->update([
             'status' => 'LUNAS',
+            'kembalian' => 0,
+            'bayar' => $transaction->total,
         ]);
 
         return redirect('/dashboard/invoice')->with('success', 'Invoice telah dilunaskan!');

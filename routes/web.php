@@ -50,4 +50,6 @@ Route::get('/dashboard/report/stok-barang', [ReportController::class, 'stok_bara
 Route::get('/dashboard/report/invoice', [ReportController::class, 'invoice']);
 Route::get('/dashboard/report/order', [ReportController::class, 'order']);
 Route::get('/dashboard/my-profile', [DashboardController::class, 'my_profile']);
+Route::get('/dashboard/my-profile/edit', [DashboardController::class, 'my_profile_edit']);
+Route::post('/dashboard/my-profile/edit', [DashboardController::class, 'my_profile_store']);
 Route::get('/dashboard/about', [DashboardController::class, 'about']);

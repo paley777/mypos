@@ -159,6 +159,15 @@
                                         <li class="breadcrumb-item">Report</li>
                                     </ol>
                                 </nav>
+                            @elseif ($breadcrumb == 'profile_edit')
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb responsive-small">
+                                        <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
+                                        <li class="breadcrumb-item"><a href="/dashboard/my-profile">Profil Saya</a>
+                                        </li>
+                                        <li class="breadcrumb-item">Edit Profil</li>
+                                    </ol>
+                                </nav>
                         @endif
                     </div>
                     <div class="app-utilities col-auto">
@@ -266,9 +275,7 @@
                                 <li class="submenu-item"><a class="submenu-link"
                                         href="/dashboard/regis-supplier">Registrasi Supplier</a>
                                 </li>
-                                <li class="submenu-item"><a class="submenu-link"
-                                        href="/dashboard/regis-pelanggan">Registrasi Pelanggan</a>
-                                </li>
+
                             </ul>
                         </div>
                     </li><!--//nav-item-->
@@ -321,8 +328,7 @@
                     <ul class="app-menu footer-menu list-unstyled">
                         <li class="nav-item {{ $active === 'about' ? 'active' : '' }}">
                             <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-                            <a class="nav-link"
-                                href="/dashboard/about">
+                            <a class="nav-link" href="/dashboard/about">
                                 <span class="nav-icon">
                                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-person"
                                         fill="currentColor" xmlns="http://www.w3.org/2000/svg">

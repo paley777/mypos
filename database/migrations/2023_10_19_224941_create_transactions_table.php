@@ -19,6 +19,8 @@ return new class extends Migration {
             $table->date('jatuh_tempo');
             $table->string('keterangan');
             $table->integer('total')->default(0);
+            $table->integer('bayar')->default(0);
+            $table->integer('kembalian')->default(0);
             $table->integer('profit')->default(0);
             $table->timestamps();
         });

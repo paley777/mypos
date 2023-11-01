@@ -168,8 +168,22 @@
                                             <div class="col-md-12 position-relative">
                                                 <label for="validationCustom01" class="form-label">Total<span
                                                         class="text-danger">*</span></label>
-                                                <input type="number" id="total" value=""
-                                                    class="form-control form-control-lg total" name="total" required readonly>
+                                                <input type="number" id="total" value="0"
+                                                    class="form-control form-control-lg total" name="total" required
+                                                    readonly>
+                                            </div>
+                                            <div class="col-md-12 position-relative">
+                                                <label for="validationCustom01" class="form-label">Bayar<span
+                                                        class="text-danger">*</span></label>
+                                                <input type="number" id="bayar" value="0"
+                                                    class="form-control form-control-lg" name="bayar" required>
+                                            </div>
+                                            <div class="col-md-12 position-relative">
+                                                <label for="validationCustom01" class="form-label">Kembalian/Sisa Bayar (Jika Minus)<span
+                                                        class="text-danger">*</span></label>
+                                                <input type="number" id="kembalian"
+                                                    class="form-control form-control-lg" name="kembalian" value="0" required
+                                                    readonly>
                                             </div>
                                         </div>
                                         <p>
@@ -213,7 +227,7 @@
             $('#example1').DataTable();
         });
     </script>
-     <div class="modal fade" id="modalSukses" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modalSukses" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -386,7 +400,7 @@
             }
         })
     </script>
-   
+
     <!-- Script JavaScript untuk menampilkan modal -->
     @if (session('success'))
         <script>
@@ -396,4 +410,16 @@
             });
         </script>
     @endif
+    <script>
+        const bayarInput = document.getElementById('bayar');
+        const kembalianInput = document.getElementById('kembalian');
+        const totalInput = document.getElementById('total'); // Pastikan Anda memiliki input total
+
+        bayarInput.addEventListener('input', function() {
+            const bayar = parseFloat(bayarInput.value);
+            const total = parseFloat(totalInput.value); // Pastikan total ada
+            const kembalian = bayar - total;
+            kembalianInput.value = kembalian;
+        });
+    </script>
 @endsection

@@ -2,6 +2,11 @@
 
 @section('container')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js"
+        integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css"
+        integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
     <div class="app-wrapper">
         <div class="app-content pt-3 p-md-3 p-lg-4">
             <div class="container-xl">
@@ -54,12 +59,13 @@
                                 <label for="validationCustom01" class="form-label ">Nama Penerima<span
                                         class="text-danger">*</span></label>
                                 <input type="text" class="form-control" name="nama_penerima"
-                                    placeholder="Isi Nama Penerima" value="{{ $barangmasuk->nama_penerima }}" readonly required>
+                                    placeholder="Isi Nama Penerima" value="{{ $barangmasuk->nama_penerima }}" readonly
+                                    required>
                             </div>
                             <div class="col-md-4 position-relative">
                                 <label for="validationCustom01" class="form-label ">Nama Supplier<span
                                         class="text-danger">*</span></label>
-                                <select class="form-select" name="nama_supplier" required>
+                                <select class="" name="nama_supplier" required>
                                     <option value="">Pilih Supplier</option>
                                     @foreach ($suppliers as $supplier)
                                         <option value="{{ $supplier->nama }}"
@@ -71,7 +77,7 @@
                             <div class="col-md-4 position-relative">
                                 <label for="validationCustom01" class="form-label ">Nama Barang<span
                                         class="text-danger">*</span></label>
-                                <select class="form-select" name="nama_barang" required>
+                                <select class="" name="nama_barang" required>
                                     <option value="">Pilih Barang</option>
                                     @foreach ($barangs as $barang)
                                         <option value="{{ $barang->nama_barang }}"
@@ -105,8 +111,8 @@
                             <div class="col-md-3 position-relative">
                                 <label for="validationCustom01" class="form-label">Harga Beli Total<span
                                         class="text-danger">*</span></label>
-                                <input type="number" onkeypress="return event.charCode >= 48" id="inp1" min="1"
-                                    class="form-control" name="harga_beli_total"
+                                <input type="number" onkeypress="return event.charCode >= 48" id="inp1"
+                                    min="1" class="form-control" name="harga_beli_total"
                                     value="{{ old('harga_beli_total', $barangmasuk->harga_beli_total) }}"
                                     placeholder="Isi Harga Beli Total" required>
                             </div>
@@ -134,7 +140,14 @@
             </div>
         </div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('select').selectize({
+                sortField: 'text'
+            });
+        });
+    </script>
+    
     <script>
         document.getElementById("inp").addEventListener("change", function() {
             let v = parseInt(this.value);

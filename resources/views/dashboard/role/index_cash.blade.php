@@ -24,18 +24,9 @@
                 </div><!--//app-card-->
 
                 <div class="row g-4 mb-4">
-                    <div class="col-6 col-lg-3">
-                        <div class="app-card app-card-stat shadow-sm h-100">
-                            <div class="app-card-body p-3 p-lg-4">
-                                <h4 class="stats-type mb-1">Total Profit Hari Ini</h4>
-                                <div class="stats-figure">@currency($total_profit)</div>
+                  
 
-                            </div><!--//app-card-body-->
-                            <a class="app-card-link-mask" href="#"></a>
-                        </div><!--//app-card-->
-                    </div><!--//col-->
-
-                    <div class="col-6 col-lg-3">
+                    <div class="col-12 col-lg-4">
                         <div class="app-card app-card-stat shadow-sm h-100">
                             <div class="app-card-body p-3 p-lg-4">
                                 <h4 class="stats-type mb-1">Total Barang</h4>
@@ -45,7 +36,7 @@
                             <a class="app-card-link-mask" href="#"></a>
                         </div><!--//app-card-->
                     </div><!--//col-->
-                    <div class="col-6 col-lg-3">
+                    <div class="col-12 col-lg-4">
                         <div class="app-card app-card-stat shadow-sm h-100">
                             <div class="app-card-body p-3 p-lg-4">
                                 <h4 class="stats-type mb-1">Total Stok</h4>
@@ -55,7 +46,7 @@
                             <a class="app-card-link-mask" href="#"></a>
                         </div><!--//app-card-->
                     </div><!--//col-->
-                    <div class="col-6 col-lg-3">
+                    <div class="col-12 col-lg-4">
                         <div class="app-card app-card-stat shadow-sm h-100">
                             <div class="app-card-body p-3 p-lg-4">
                                 <h4 class="stats-type mb-1">Total Invoice Hari Ini</h4>
@@ -84,16 +75,16 @@
 
                                     </div><!--//col-->
                                     <div class="col-auto">
-                                        <h4 class="app-card-title">Barang Masuk</h4>
+                                        <h4 class="app-card-title">Stok Barang</h4>
                                     </div><!--//col-->
                                 </div><!--//row-->
                             </div><!--//app-card-header-->
                             <div class="app-card-body px-4">
 
-                                <div class="intro">Mengelola arus barang yang masuk ke dalam manajemen stok barang.</div>
+                                <div class="intro">Melihat stok barang yang ada di dalam manajemen stok barang.</div>
                             </div><!--//app-card-body-->
                             <div class="app-card-footer p-4 mt-auto">
-                                <a class="btn app-btn-secondary" href="/dashboard/barang-masuk">Akses Fitur</a>
+                                <a class="btn app-btn-secondary" href="/dashboard/stok-barang">Akses Fitur</a>
                             </div><!--//app-card-footer-->
                         </div><!--//app-card-->
                     </div><!--//col-->
