@@ -1,66 +1,88 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<a href="https://ibb.co/w79WMN9"><img src="https://i.ibb.co/w79WMN9/logo-app.png" alt="logo-app" border="0"></a>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# MyPOS V1 | Point of Sales Integrated Systems
 
-## About Laravel
+MyPOS V1 adalah sistem point of sales terintegrasi berbasis website menggunakan Laravel Framework. Sistem ini memiliki fitur yang dibutuhkan sistem POS mulai dari manajemen arus barang, stok, kasir, invoice hingga pelaporan.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Integrasi
+Sistem ini selain menggunakan Laravel 10. Juga mengintegrasikan Framework Bootstrap sebagai front-end. Sistem ini menggunakan database SQL dan Jquery.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Fitur Pengguna
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- Manajemen Registrasi, Pelanggan dan Supplier.
+- Manajemen arus barang masuk, keluar dan stok.
+- Sistem Kasir
+- Invoice
+- Reporting
 
-## Learning Laravel
+## Fitur Sistem
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- Laravel 8
+- Using Eloquent from Laravel
+- Templating for header and footer
+- Full CRUD Integrating
+- Authentication from Laravel
+- Paginations
+- Search Data
+- Role Account: Super Admin, Admin, Cashier
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Optimalisasi
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Table optimized by Datatables.
+- Middleware
+- FormRequest
 
-## Laravel Sponsors
+## Run Locally
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Clone the project
 
-### Premium Partners
+```bash
+  git clone [https://github.com/paley777/siperpus.git](https://github.com/paley777/mypos.git)
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+Go to the project directory
 
-## Contributing
+```bash
+  cd mypos
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Install dependencies
 
-## Code of Conduct
+```bash
+  composer install
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Delete Cache
 
-## Security Vulnerabilities
+```bash
+  php artisan cache:clear
+```
+Generate Laravel Key
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+  php artisan key:generate
+```
+Make Storage Link
 
-## License
+```bash
+  php artisan storage:link
+```
+Migrate
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+   php artisan migrate
+```
+Start the server
+
+```bash
+   php artisan serve
+```
+
+## Screenshots
+
+![image](https://github.com/paley777/mypos/assets/97278264/28f6eed1-2c6c-438f-8eeb-a647c29bc9fc)
+![image](https://github.com/paley777/mypos/assets/97278264/4fdc36c5-841c-47e9-ab61-96533c625045)
+![image](https://github.com/paley777/mypos/assets/97278264/4c318138-2fbd-46f9-87a8-da683e834624)
+
+## Saran
+Untuk saran dan masukan sistem ini harap berkenan email ke valleryan1212@gmail.com
