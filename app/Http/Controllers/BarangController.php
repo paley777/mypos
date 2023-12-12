@@ -41,14 +41,24 @@ class BarangController extends Controller
      */
     public function store(StoreBarangRequest $request)
     {
+        $modal = $request->modal;
+        $modalclean = intval(str_replace([','], '', $modal));
+        $hargajual = $request->harga_jual;
+        $hargajualclean = intval(str_replace([','], '', $hargajual));
+
         $validated = $request->validated();
-        Barang::create($validated);
+        Barang::create([
+            'nama_barang' => $validated['nama_barang'],
+            'satuan' => $validated['satuan'],
+            'harga_jual' => $hargajualclean,
+            'modal' => $modalclean,
+        ]);
         StokBarang::create([
             'nama_barang' => $validated['nama_barang'],
             'satuan' => $validated['satuan'],
             'stok' => 0,
-            'harga_jual' => $validated['harga_jual'],
-            'modal' => $validated['modal'],
+            'harga_jual' => $hargajualclean,
+            'modal' => $modalclean,
         ]);
 
         return redirect('/dashboard/regis-barang')->with('success', 'Barang telah ditambahkan!');
@@ -79,17 +89,26 @@ class BarangController extends Controller
      */
     public function update(UpdateBarangRequest $request, Barang $regis_barang)
     {
+        $modal = $request->modal;
+        $modalclean = intval(str_replace([','], '', $modal));
+        $hargajual = $request->harga_jual;
+        $hargajualclean = intval(str_replace([','], '', $hargajual));
+
         $validated = $request->validated();
-        Barang::where('id', $regis_barang['id'])->update($validated);
+        Barang::where('id', $regis_barang['id'])->update([
+            'nama_barang' => $validated['nama_barang'],
+            'satuan' => $validated['satuan'],
+            'harga_jual' => $hargajualclean,
+            'modal' => $modalclean,
+        ]);
         StokBarang::where('nama_barang', $regis_barang->nama_barang)->update([
             'nama_barang' => $validated['nama_barang'],
             'satuan' => $validated['satuan'],
-            'harga_jual' => $validated['harga_jual'],
+            'harga_jual' => $hargajualclean,
         ]);
         BarangMasuk::where('nama_barang', $regis_barang->nama_barang)->update([
             'nama_barang' => $validated['nama_barang'],
         ]);
-
         return redirect('/dashboard/regis-barang')->with('success', 'Barang telah diubah!');
     }
 
