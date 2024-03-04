@@ -179,11 +179,10 @@
                                                     class="form-control form-control-lg" name="bayar" required>
                                             </div>
                                             <div class="col-md-12 position-relative">
-                                                <label for="validationCustom01" class="form-label">Kembalian/Sisa Bayar (Jika Minus)<span
-                                                        class="text-danger">*</span></label>
-                                                <input type="number" id="kembalian"
-                                                    class="form-control form-control-lg" name="kembalian" value="0" required
-                                                    readonly>
+                                                <label for="validationCustom01" class="form-label">Kembalian/Sisa Bayar
+                                                    (Jika Minus)<span class="text-danger">*</span></label>
+                                                <input type="number" id="kembalian" class="form-control form-control-lg"
+                                                    name="kembalian" value="0" required readonly>
                                             </div>
                                         </div>
                                         <p>
@@ -381,7 +380,7 @@
                     var total = 0;
                     table.rows().every(function() {
                         var data = this.data();
-                        var subtotal = parseInt(row.find('td:eq(7) input').val());
+                        var subtotal = parseInt(this.data()[7].replace(/[^0-9.]/g, ''));
                         total += subtotal;
                     });
                     $('.total').val(total);
