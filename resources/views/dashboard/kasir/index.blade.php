@@ -76,7 +76,7 @@
                                                             <th class="cell" width="5%">Satuan</th>
                                                             <th class="cell" width="5%">Stok</th>
                                                             <th class="cell" width="10%">Harga</th>
-                                                            <th class="cell" width="5%">Qty</th>
+                                                            <th class="cell" width="15%">Qty</th>
                                                             <th class="cell" width="10%">Disc (%)</th>
                                                             <th class="cell" width="10%">Disc (Rp.)</th>
                                                             <th class="cell" width="10%">Subtotal</th>

@@ -82,7 +82,6 @@
                                                     <td>{{ $transaction->keterangan }}</td>
                                                     <td>@currency($transaction->total)</td>
                                                     <td>@currency($transaction->profit)</td>
-
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -92,6 +91,7 @@
                         </div><!--//app-card-->
                     </div><!--//tab-pane-->
                 </div><!--//tab-content-->
+                <div style="font-size: 20px;">Total Profit: <span id="totalProfit" style="font-size: 20px;"></span></div>
             </div><!--//container-fluid-->
         </div><!--//app-content-->
     </div><!--//app-wrapper-->
@@ -173,6 +173,35 @@
             $('#min, #max').on('change', function() {
                 table.draw();
             });
+
+            // Tambahkan event listener untuk perubahan pada tabel
+            table.on('draw', function() {
+                var totalProfit = calculateTotalProfit();
+                var formattedTotalProfit = totalProfit.toLocaleString('id-ID', {
+                    style: 'currency',
+                    currency: 'IDR'
+                });
+                $('#totalProfit').text(formattedTotalProfit);
+            });
+
+            function calculateTotalProfit() {
+                var totalProfit = 0;
+                table.rows().every(function() {
+                    var data = this.data();
+                    var date = new Date(data[1]);
+                    var min = minDate.val() ? new Date(minDate.val()) : null;
+                    var max = maxDate.val() ? new Date(maxDate.val()) : null;
+
+                    // Cek apakah tanggal dalam rentang yang dipilih
+                    if ((!min || date >= min) && (!max || date <= max)) {
+                        if (data[10]) {
+                            var profit = parseFloat(data[10].replace(/[^\d]/g, ''));
+                            totalProfit += profit;
+                        }
+                    }
+                });
+                return totalProfit;
+            }
         });
     </script>
 @endsection

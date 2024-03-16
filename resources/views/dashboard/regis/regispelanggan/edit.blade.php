@@ -54,7 +54,7 @@
                                 <label for="validationCustom01" class="form-label ">Nama Pelanggan<span
                                         class="text-danger">*</span></label>
                                 <input type="text" id="validationCustom01" class="form-control" name="nama"
-                                    value="{{ old('nama', $pelanggan->nama) }}" placeholder="Isi Nama Supplier" required>
+                                    value="{{ old('nama', $pelanggan->nama) }}" placeholder="Isi Nama Pelanggan" required>
                             </div>
                             <div class="col-md-3 position-relative">
                                 <label for="validationCustom01" class="form-label">No. Telp<span
