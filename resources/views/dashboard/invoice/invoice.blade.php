@@ -12,10 +12,11 @@
             padding-left: 5px;
             border: 1px solid black;
         }
-        
+
         .note {
             text-align: left;
-            margin-left: 50px; /* Reset margin-left */
+            margin-left: 50px;
+            /* Reset margin-left */
         }
     </style>
     <style>
@@ -55,7 +56,7 @@
             <tbody>
                 <tr align='center'>
                     <td width='20%'>Nama Barang</td>
-                    <td width='13%'>Qty</td>
+                    <td width='4%'>Qty</td>
                     <td width='4%'>Harga</td>
                     <td width='7%'>Disc (%)</td>
                     <td width='7%'>Disc (Rp)</td>
@@ -66,7 +67,7 @@
                 <tr>
                     <td>{{ $order->nama_barang }}</td>
                     <td>{{ $order->qty }}</td>
-                    <td>{{ $order->harga_Jual }}</td>
+                    <td>@currency($order->harga_jual)</td>
                     <td>{{ $order->disc_perc }}</td>
                     <td>{{ $order->disc_rp }}</td>
                     <td>@currency($order->subtotal)</td>
