@@ -27,9 +27,9 @@
     </style>
 </head>
 
-<body style='font-family:tahoma; font-size:8pt;'>
+<body style='font-family:tahoma; font-size:12pt;'>
     <center>
-        <table style='width:1000px; font-size:8pt; font-family:calibri; border-collapse: collapse;' border='0'>
+        <table style='width:1000px; font-size:12pt; font-family:calibri; border-collapse: collapse;' border='0'>
             <td width='70%' align='left' style='padding-right:80px; vertical-align:top'>
                 <span style='font-size:12pt'><b>UD. Sinar Harapan Jaya</b></span></br>
                 JL. WR Supratman, Bentiring (Depan Bank Bengkulu)</br>
@@ -43,7 +43,7 @@
                 Jatuh Tempo : {{ $transaction->jatuh_tempo }}</br>
             </td>
         </table>
-        <table style='width:1000px; font-size:8pt; font-family:calibri; border-collapse: collapse;' border='0'>
+        <table style='width:1000px; font-size:12pt; font-family:calibri; border-collapse: collapse;' border='0'>
             <td width='70%' align='left' style='padding-right:80px; vertical-align:top'>
                 Kepada Yth. : {{ $transaction->nama_pelanggan }}</br>
                 Alamat : {{ $pelanggan->alamat }} <br>
@@ -51,7 +51,7 @@
             </td>
 
         </table>
-        <table cellspacing='0' style='width:1000px; font-size:8pt; font-family:calibri;  border-collapse: collapse;'
+        <table cellspacing='0' style='width:1000px; font-size:12pt; font-family:calibri;  border-collapse: collapse;'
             border='1'>
             <tbody>
                 <tr align='center'>
