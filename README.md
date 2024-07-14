@@ -2,31 +2,31 @@
 
 # MyPOS V1 | Point of Sales Integrated Systems
 
-MyPOS V1 adalah sistem point of sales terintegrasi berbasis website menggunakan Laravel Framework. Sistem ini memiliki fitur yang dibutuhkan sistem POS mulai dari manajemen arus barang, stok, kasir, invoice hingga pelaporan.
+MyPOS V1 is a website-based integrated point of sales system using the Laravel Framework. This system has the features needed by a POS system, starting from management of goods flow, stock, cashier, invoices to reporting.
 
-## Integrasi
-Sistem ini selain menggunakan Laravel 10. Juga mengintegrasikan Framework Bootstrap sebagai front-end. Sistem ini menggunakan database SQL dan Jquery.
+## Integration
+Apart from using Laravel 10, this system also integrates the Bootstrap Framework as a front-end. This system uses SQL and Jquery databases.
 
-## Fitur Pengguna
+## User Features
 
-- Manajemen Registrasi, Pelanggan dan Supplier.
-- Manajemen arus barang masuk, keluar dan stok.
-- Sistem Kasir
-- Invoice
+- Registration, Customer and Supplier Management.
+- Management of incoming, outgoing and stock flow of goods.
+- Cashier System
+- Invoices
 - Reporting
-
-## Fitur Sistem
+  
+## System Features
 
 - Laravel 8
 - Using Eloquent from Laravel
-- Templating for header and footer
-- Full CRUD Integrating
+- Templates for headers and footers
+- Full CRUD integration
 - Authentication from Laravel
-- Paginations
+- Pagination
 - Search Data
-- Role Account: Super Admin, Admin, Cashier
+- Account Role: Super Admin, Admin, Cashier
 
-## Optimalisasi
+## Optimization
 
 - Table optimized by Datatables.
 - Middleware
@@ -84,5 +84,5 @@ Start the server
 ![image](https://github.com/paley777/mypos/assets/97278264/4fdc36c5-841c-47e9-ab61-96533c625045)
 ![image](https://github.com/paley777/mypos/assets/97278264/4c318138-2fbd-46f9-87a8-da683e834624)
 
-## Saran
-Untuk saran dan masukan sistem ini harap berkenan email ke valleryan1212@gmail.com
+## Suggestion
+For suggestions and input on this system, please email valleryan1212@gmail.com
