@@ -32,6 +32,10 @@ Apart from using Laravel 10, this system also integrates the Bootstrap Framework
 - Middleware
 - FormRequest
 
+## licences
+
+- Under license by Valleryan Virgil Zuliuskandar
+
 ## Run Locally
 
 Clone the project
