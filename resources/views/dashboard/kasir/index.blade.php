@@ -68,26 +68,27 @@
                                     <div class="app-card-body">
                                         <form class="row g-2" method="post" action="/dashboard/cashier">
                                             @csrf
-                                            <div class="table-responsive p-4">
-                                                <table id="example1" class="table app-table-hover mb-0 text-left">
+                                            <div class="table-responsive p-4"
+                                                style="overflow-x: auto; white-space: nowrap;">
+                                                <table id="example1" class="table app-table-hover mb-0 text-left" style="table-layout: fixed;">
                                                     <thead>
                                                         <tr>
-                                                            <th class="cell" width="10%">Nama Barang</th>
-                                                            <th class="cell" width="5%">Satuan</th>
-                                                            <th class="cell" width="5%">Stok</th>
-                                                            <th class="cell" width="10%">Harga</th>
-                                                            <th class="cell" width="15%">Qty</th>
-                                                            <th class="cell" width="10%">Disc (%)</th>
-                                                            <th class="cell" width="10%">Disc (Rp.)</th>
-                                                            <th class="cell" width="10%">Subtotal</th>
-                                                            <th class="cell" width="5%">Aksi</th>
+                                                            <th class="cell" style="width: 150px;">Nama Barang</th>
+                                                            <th class="cell" style="width: 50px;">Satuan</th>
+                                                            <th class="cell" style="width: 30px;">Stok</th>
+                                                            <th class="cell" style="width: 70px;">Harga</th>
+                                                            <th class="cell" style="width: 70px;">Qty</th>
+                                                            <th class="cell" style="width: 40px;">Disc (%)</th>
+                                                            <th class="cell" style="width: 70px;">Disc (Rp.)</th>
+                                                            <th class="cell" style="width: 70px;">Subtotal</th>
+                                                            <th class="cell" style="width: 30px;">Aksi</th>
                                                         </tr>
                                                     </thead>
+                                                    <tbody>
+                                                        <!-- Data rows will be inserted here dynamically -->
+                                                    </tbody>
                                                 </table>
-                                                <tbody>
-
-                                                </tbody>
-                                            </div><!--//table-responsive-->
+                                            </div>
                                     </div><!--//app-card-body-->
                                 </div>
                             </div>

@@ -63,7 +63,7 @@ class TransactionController extends Controller
                 'disc_rp' => $disc_rp[$key],
                 'subtotal' => $subtotal[$key],
             ]);
-            $modal = Barang::where('nama_barang', 'LIKE', '%' . $nama_barang . '%')->first()->modal;
+            $modal = Barang::where('nama_barang', $nama_barang)->first()->modal;
             $profit += $subtotal[$key] - $modal * $qty[$key];
 
             $kurang = $qty[$key];

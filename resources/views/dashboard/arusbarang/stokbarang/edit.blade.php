@@ -53,13 +53,13 @@
                             <div class="col-md-4 position-relative">
                                 <label for="validationCustom01" class="form-label ">Nama Barang<span
                                         class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="nama_barang"
-                                    placeholder="Isi Nama Barang" value="{{ $stokbarang->nama_barang }}" readonly required>
+                                <input type="text" class="form-control" name="nama_barang" placeholder="Isi Nama Barang"
+                                    value="{{ $stokbarang->nama_barang }}" readonly required>
                             </div>
                             <div class="col-md-2 position-relative">
                                 <label for="validationCustom01" class="form-label">Stok<span
                                         class="text-danger">*</span></label>
-                                <input type="number" onkeypress="return event.charCode >= 48" id="inp2" min="1"
+                                <input type="number" onkeypress="return event.charCode >= 48" id="inp2" min="0"
                                     class="form-control" name="stok" placeholder="Isi Stok"
                                     value="{{ old('stok', $stokbarang->stok) }}" required>
                             </div>
@@ -88,38 +88,19 @@
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script>
-        document.getElementById("inp").addEventListener("change", function() {
-            let v = parseInt(this.value);
-            if (v < 1) this.value = 1;
-        });
-        $("#inp").on("input", function() {
-            if (/^0/.test(this.value)) {
-                this.value = this.value.replace(/^0/, "1")
-            }
-        })
-    </script>
-    <script>
-        document.getElementById("inp1").addEventListener("change", function() {
-            let v = parseInt(this.value);
-            if (v < 1) this.value = 1;
-        });
-        $("#inp1").on("input", function() {
-            if (/^0/.test(this.value)) {
-                this.value = this.value.replace(/^0/, "1")
-            }
-        })
-    </script>
-    <script>
+        // Validasi untuk input angka dengan ID inp2
         document.getElementById("inp2").addEventListener("change", function() {
             let v = parseInt(this.value);
-            if (v < 1) this.value = 1;
+            if (v < 0) this.value = 0; // Izinkan stok bernilai 0, tetapi tidak kurang dari itu
         });
+
         $("#inp2").on("input", function() {
-            if (/^0/.test(this.value)) {
-                this.value = this.value.replace(/^0/, "1")
+            if (/^-/.test(this.value)) { // Cegah nilai negatif
+                this.value = this.value.replace(/^-/, "0");
             }
-        })
+        });
     </script>
+
     <script>
         function hitungTotal() {
             // Ambil nilai dari input angka 1 dan angka 2
