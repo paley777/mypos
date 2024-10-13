@@ -67,14 +67,14 @@ class TransactionController extends Controller
             $profit += $subtotal[$key] - $modal * $qty[$key];
 
             $kurang = $qty[$key];
-            $stokbarang = StokBarang::where('nama_barang', 'LIKE', '%' . $nama_barang . '%')->first();
+            $stokbarang = StokBarang::where('nama_barang', $nama_barang)->first();
             if ($stokbarang) {
                 $stokbarang->kurangStok($kurang);
             }
             BarangKeluar::create([
                 'kode_inv' => $validated['kode_inv'],
                 'nama_barang' => $nama_barang,
-                'satuan' => StokBarang::where('nama_barang', 'LIKE', '%' . $nama_barang . '%')->first()->satuan,
+                'satuan' => StokBarang::where('nama_barang', $nama_barang)->first()->satuan,
                 'jumlah_keluar' => $qty[$key],
             ]);
         }
