@@ -32,9 +32,9 @@
                                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-receipt"
                                         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd"
-                                            d="M1.92.506a.5.5 0 0 1 .434.14L3 1.293l.646-.647a.5.5 0 0 1 .708 0L5 1.293l.646-.647a.5.5 0 0 1 .708 0L7 1.293l.646-.647a.5.5 0 0 1 .708 0L9 1.293l.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .801.13l.5 1A.5.5 0 0 1 15 2v12a.5.5 0 0 1-.053.224l-.5 1a.5.5 0 0 1-.8.13L13 14.707l-.646.647a.5.5 0 0 1-.708 0L11 14.707l-.646.647a.5.5 0 0 1-.708 0L9 14.707l-.646.647a.5.5 0 0 1-.708 0L7 14.707l-.646.647a.5.5 0 0 1-.708 0L5 14.707l-.646.647a.5.5 0 0 1-.708 0L3 14.707l-.646.647a.5.5 0 0 1-.801-.13l-.5-1A.5.5 0 0 1 1 14V2a.5.5 0 0 1 .053-.224l.5-1a.5.5 0 0 1 .367-.27zm.217 1.338L2 2.118v11.764l.137.274.51-.51a.5.5 0 0 1 .707 0l.646.647.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.509.509.137-.274V2.118l-.137-.274-.51.51a.5.5 0 0 1-.707 0L12 1.707l-.646.647a.5.5 0 0 1-.708 0L10 1.707l-.646.647a.5.5 0 0 1-.708 0L8 1.707l-.646.647a.5.5 0 0 1-.708 0L6 1.707l-.646.647a.5.5 0 0 1-.708 0L4 1.707l-.646.647a.5.5 0 0 1-.708 0l-.509-.51z" />
+                                            d="M1.92.506a.5.5 0 0 1 .434.14L3 1.293l.646-.647a.5.5 0 0 1 .708 0L5 1.293l.646-.647a.5.5 0 0 1 .708 0L7 1.293l.646-.647a.5.5 0 0 1 .708 0L9 1.293l.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .801.13l.5 1A.5.5 0 0 1 15 2v12a.5.5 0 0 1-.053.224l-.5 1a.5.5 0 0 1-.8.13L13 14.707l-.646.647a.5.5 0 0 1-.708 0L11 14.707l-.646.647a.5.5 0 0 1-.708 0L9 14.707l-.646.647a.5.5 0 0 1-.708 0L7 14.707l-.646.647a.5.5 0 0 1-.708 0L5 14.707l-.646.647a.5.5 0 0 1-.708 0L3 14.707l-.646.647a.5.5 0 0 1-.801-.13l-.5-1A.5.5 0 0 1 1 14V2a.5.5 0 0 1 .053-.224l.5-1a.5.5 0 0 1 .367-.27zm.217 1.338L2 2.118v11.764l.137.274.51-.51a.5.5 0 0 1 .707 0l.646.647.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.509.509.137-.274V2.118l-.137-.274-.51.51a.5.5 0 0 1-.707 0L12 1.707l-.646.647a.5.5 0 0 1-.708 0L10 1.707l-.646.647a.5.5 0 0 1-.708 0L8 1.707l-.646.647a.5.5 0 0 1-.708 0L6 1.707l-.646.647a.5.5 0 0 1-.708 0L4 1.707l-.646.647a.5.5 0 0 1-.708 0l-.509-.51z" />
                                         <path fill-rule="evenodd"
-                                            d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm8-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5z" />
+                                            d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm8-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5z" />
                                     </svg>
                                 </div><!--//app-icon-holder-->
                             </div><!--//col-->
@@ -50,7 +50,7 @@
                         </div><!--//row-->
                     </div><!--//app-card-header-->
                     <div class="app-card-body p-4">
-                        <form class="row g-2" method="post" action="/dashboard/barang-masuk">
+                        <form class="row g-2" method="post" action="/dashboard/barang-masuk" onsubmit="removeCommas()">
                             @csrf
                             <div class="col-md-4 position-relative">
                                 <label for="validationCustom01" class="form-label ">Nama Penerima<span
@@ -82,13 +82,13 @@
                             <div class="col-md-2 position-relative">
                                 <label for="validationCustom01" class="form-label">Jumlah Beli<span
                                         class="text-danger">*</span></label>
-                                <input type="number" onkeypress="return event.charCode >= 48" id="inp2" min="1"
+                                <input type="text" onkeypress="return event.charCode >= 48" id="inp2" min="1"
                                     class="form-control" name="jumlah_beli" placeholder="Isi Jumlah Beli" required>
                             </div>
                             <div class="col-md-3 position-relative">
                                 <label for="validationCustom01" class="form-label">Harga Beli Satuan<span
                                         class="text-danger">*</span></label>
-                                <input type="number" onkeypress="return event.charCode >= 48" id="inp" min="1"
+                                <input data-type='currency' type="text" onkeypress="return event.charCode >= 48" id="inp" min="1"
                                     class="form-control" name="harga_beli_satuan" placeholder="Isi Harga Beli Satuan"
                                     required>
                             </div>
@@ -101,7 +101,7 @@
                             <div class="col-md-3 position-relative">
                                 <label for="validationCustom01" class="form-label">Harga Beli Total<span
                                         class="text-danger">*</span></label>
-                                <input type="number" onkeypress="return event.charCode >= 48" id="inp1" min="1"
+                                <input data-type='currency' type="text" onkeypress="return event.charCode >= 48" id="inp1" min="1"
                                     class="form-control" name="harga_beli_total" placeholder="Isi Harga Beli Total"
                                     required>
                             </div>
@@ -130,56 +130,143 @@
         </div>
     </div>
     <script>
-        $(document).ready(function() {
-            $('select').selectize({
-                sortField: 'text'
-            });
+    $(document).ready(function() {
+        $('select').selectize({
+            sortField: 'text'
         });
-    </script>
-    <script>
-        document.getElementById("inp").addEventListener("change", function() {
-            let v = parseInt(this.value);
-            if (v < 1) this.value = 1;
-        });
-        $("#inp").on("input", function() {
-            if (/^0/.test(this.value)) {
-                this.value = this.value.replace(/^0/, "1")
-            }
-        })
-    </script>
-    <script>
-        document.getElementById("inp1").addEventListener("change", function() {
-            let v = parseInt(this.value);
-            if (v < 1) this.value = 1;
-        });
-        $("#inp1").on("input", function() {
-            if (/^0/.test(this.value)) {
-                this.value = this.value.replace(/^0/, "1")
-            }
-        })
-    </script>
-    <script>
-        document.getElementById("inp2").addEventListener("change", function() {
-            let v = parseInt(this.value);
-            if (v < 1) this.value = 1;
-        });
-        $("#inp2").on("input", function() {
-            if (/^0/.test(this.value)) {
-                this.value = this.value.replace(/^0/, "1")
-            }
-        })
-    </script>
-    <script>
-        function hitungTotal() {
-            // Ambil nilai dari input angka 1 dan angka 2
-            var angka1 = parseFloat(document.getElementById("inp2").value);
-            var angka2 = parseFloat(document.getElementById("inp").value);
+    });
 
-            // Hitung totalnya
-            var total = angka1 * angka2;
+    document.getElementById("inp").addEventListener("change", function() {
+        let v = parseInt(this.value.replace(/,/g, ''));
+        if (v < 1) this.value = 1;
+    });
 
-            // Tampilkan total di dalam elemen span dengan id "total"
-            document.getElementById("inp1").value = total;
+    $("#inp").on("input", function() {
+        if (/^0/.test(this.value)) {
+            this.value = this.value.replace(/^0/, "1")
         }
-    </script>
+    });
+
+    document.getElementById("inp1").addEventListener("change", function() {
+        let v = parseInt(this.value.replace(/,/g, ''));
+        if (v < 1) this.value = 1;
+    });
+
+    $("#inp1").on("input", function() {
+        if (/^0/.test(this.value)) {
+            this.value = this.value.replace(/^0/, "1")
+        }
+    });
+
+    document.getElementById("inp2").addEventListener("change", function() {
+        let v = parseInt(this.value.replace(/,/g, ''));
+        if (v < 1) this.value = 1;
+    });
+
+    $("#inp2").on("input", function() {
+        if (/^0/.test(this.value)) {
+            this.value = this.value.replace(/^0/, "1")
+        }
+    });
+
+    function hitungTotal() {
+        // Ambil nilai dari input angka 1 dan angka 2
+        var angka1 = parseFloat(document.getElementById("inp2").value.replace(/,/g, ''));
+        var angka2 = parseFloat(document.getElementById("inp").value.replace(/,/g, ''));
+
+        // Hitung totalnya
+        var total = angka1 * angka2;
+
+        // Tampilkan total di dalam elemen span dengan id "total"
+        document.getElementById("inp1").value = total;
+        formatCurrency($("#inp1"));
+    }
+
+    function removeCommas() {
+        document.getElementById("inp").value = document.getElementById("inp").value.replace(/,/g, '');
+        document.getElementById("inp1").value = document.getElementById("inp1").value.replace(/,/g, '');
+        document.getElementById("inp2").value = document.getElementById("inp2").value.replace(/,/g, '');
+    }
+</script>
+
+<script>
+    // Jquery Dependency
+
+    $("input[data-type='currency']").on({
+        keyup: function() {
+            formatCurrency($(this));
+        },
+        blur: function() {
+            formatCurrency($(this), "blur");
+        }
+    });
+
+    function formatNumber(n) {
+        // format number 1000000 to 1,234,567
+        return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    }
+
+    function formatCurrency(input, blur) {
+        // get input value
+        var input_val = input.val();
+
+        // don't validate empty input
+        if (input_val === "") {
+            return;
+        }
+
+        // original length
+        var original_len = input_val.length;
+
+        // initial caret position 
+        var caret_pos = input.prop("selectionStart");
+
+        // check for decimal
+        if (input_val.indexOf(".") >= 0) {
+
+            // get position of first decimal
+            var decimal_pos = input_val.indexOf(".");
+
+            // split number by decimal point
+            var left_side = input_val.substring(0, decimal_pos);
+            var right_side = input_val.substring(decimal_pos);
+
+            // add commas to left side of number
+            left_side = formatNumber(left_side);
+
+            // validate right side
+            right_side = formatNumber(right_side);
+
+            // On blur make sure 2 numbers after decimal
+            if (blur === "blur") {
+                right_side += "";
+            }
+
+            // Limit decimal to only 2 digits
+            right_side = right_side.substring(0, 2);
+
+            // join number by .
+            input_val = left_side + "." + right_side;
+
+        } else {
+            // no decimal entered
+            // add commas to number
+            input_val = formatNumber(input_val);
+            input_val = input_val;
+
+            // final formatting
+            if (blur === "blur") {
+                input_val += "";
+            }
+        }
+
+        // send updated string to input
+        input.val(input_val);
+
+        // put caret back in the right position
+        var updated_len = input_val.length;
+        caret_pos = updated_len - original_len + caret_pos;
+        input[0].setSelectionRange(caret_pos, caret_pos);
+    }
+</script>
 @endsection
