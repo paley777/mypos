@@ -170,21 +170,22 @@
                                             <div class="col-md-12 position-relative">
                                                 <label for="validationCustom01" class="form-label">Total<span
                                                         class="text-danger">*</span></label>
-                                                <input type="number" id="total" value="0"
+                                                <input data-type='currency' type="text" id="total" value="0"
                                                     class="form-control form-control-lg total" name="total" required
                                                     readonly>
                                             </div>
                                             <div class="col-md-12 position-relative">
                                                 <label for="validationCustom01" class="form-label">Bayar<span
                                                         class="text-danger">*</span></label>
-                                                <input type="number" id="bayar" value="0"
+                                                <input data-type='currency' type="text" id="bayar" value="0"
                                                     class="form-control form-control-lg" name="bayar" required>
                                             </div>
                                             <div class="col-md-12 position-relative">
                                                 <label for="validationCustom01" class="form-label">Kembalian/Sisa Bayar
                                                     (Jika Minus)<span class="text-danger">*</span></label>
-                                                <input type="number" id="kembalian" class="form-control form-control-lg"
-                                                    name="kembalian" value="0" required readonly>
+                                                <input data-type='currency' type="text" id="kembalian"
+                                                    class="form-control form-control-lg" name="kembalian" value="0"
+                                                    required readonly>
                                             </div>
                                         </div>
                                         <p>
@@ -302,6 +303,14 @@
             table.page.len(100).draw();
             $(document).on('click', '.tambah-ke-keranjang', function() {
                 // Mengambil data
+                function formatNumberWithCommas(number) {
+                    return number.toLocaleString('en-US');
+                }
+
+                function removeCommas(str) {
+                    return str.replace(/,/g, '');
+                }
+
                 var nama_barang = $(this).data("nama_barang");
                 var satuan = $(this).data("satuan");
                 var stok = $(this).data("stok");
@@ -316,8 +325,8 @@
                 var data = [
                     ['<input type="text" class="form-control" name="nama_barang[]" value="' +
                         escapedNamaBarang + '" readonly>', satuan, stok,
-                        '<input type="text" class="form-control" name="harga_jual[]" value="' +
-                        harga_jual + '" readonly>',
+                        '<input  type="text" class="form-control" name="harga_jual[]" value="' +
+                        formatNumberWithCommas(harga_jual) + '" readonly>',
                         '<input type="number" class="form-control qty" onkeypress="return event.charCode >= 48" id="inp1" name="qty[]" min="1" value="' +
                         qty + '">',
                         '<input type="number" class="form-control discount-percent" name="disc_perc[]" value="' +
@@ -330,8 +339,10 @@
                 ];
 
                 var tableRow = table.rows.add(data).draw().node();
+                $('.subtotal')
             });
             $(document).on('click', '.hapus-baris', function() {
+
                 var table = $('#example1').DataTable();
                 var row = $(this).closest('tr');
                 table.row(row).remove().draw();
@@ -341,7 +352,7 @@
                     var total = 0;
                     table.rows().every(function() {
                         var data = this.data();
-                        var subtotal = parseInt(row.find('td:eq(7) input').val());
+                        var subtotal = parseInt(row.find('td:eq(7) input').val().replace(/,/g, ''));
                         total += subtotal;
                     });
                     $('.total').val(total);
@@ -349,9 +360,12 @@
             });
 
             $(document).on('input', '.qty, .discount-percent, .discount-rp', function() {
+                function formatNumberWithCommas(number) {
+                    return number.toLocaleString('en-US');
+                }
                 var row = $(this).closest('tr');
                 var qty = parseInt(row.find('td:eq(4) input').val());
-                var harga_jual = row.find('td:eq(3) input').val();
+                var harga_jual = row.find('td:eq(3) input').val().replace(/,/g, '');
                 var discountPercent = parseInt(row.find('td:eq(5) input').val());
                 var discountRp = parseFloat(row.find('td:eq(6) input').val());
                 var stok = row.find('td:eq(2)').text().replace(/[^0-9.]/g, '');
@@ -368,23 +382,27 @@
                 // Hitung diskon dalam rupiah
                 var diskonRpAmount = discountRp;
                 row.find('td:eq(6) input').val(discountRp);
-                row.find('td:eq(5) input').val(0); // Nolkan diskon dalam persentase
+                row.find(
+                    'td:eq(5) input').val(0); // Nolkan diskon dalam persentase
                 subtotal -= diskonRpAmount;
 
                 // Hitung diskon dalam persentase
                 var diskonPercentAmount = subtotal * discountPercent / 100;
-                row.find('td:eq(5) input').val(discountPercent);
+                row.find('td:eq(5) input').val(
+                    discountPercent);
                 subtotal -= diskonPercentAmount;
-                row.find('td:eq(7) input').val(subtotal);
+                row.find('td:eq(7) input').val(formatNumberWithCommas(subtotal));
 
                 // Update the data in the DataTable
                 var rowData = table.row(row).data();
-                rowData[7] = '<input type="text" class="form-control" name="subtotal[]" value="' +
-                    subtotal +
+                rowData[7] =
+                    '<input type="text" class="form-control" name="subtotal[]" value="' +
+                    formatNumberWithCommas(subtotal) +
                     '" readonly>';
                 table.row(row).data(rowData).draw();
                 row.find('.qty').val(qty);
-                row.find('.discount-percent').val(discountPercent);
+                row.find(
+                    '.discount-percent').val(discountPercent);
                 row.find('.discount-rp').val(discountRp);
                 // Hitung total
                 hitungTotal();
@@ -397,6 +415,7 @@
                         total += subtotal;
                     });
                     $('.total').val(total);
+                    formatCurrency($('.total'));
                 }
             });
         });
@@ -423,15 +442,80 @@
         </script>
     @endif
     <script>
-        const bayarInput = document.getElementById('bayar');
-        const kembalianInput = document.getElementById('kembalian');
-        const totalInput = document.getElementById('total'); // Pastikan Anda memiliki input total
+        $(document).ready(function() {
+            // Event listener for the 'bayar' input field
+            $('#bayar').on('input', function() {
+                // Get the values of 'bayar' and 'total' inputs
+                const bayar = parseFloat($(this).val().replace(/,/g, '')) || 0;
+                const total = parseFloat($('#total').val().replace(/,/g, '')) || 0;
 
-        bayarInput.addEventListener('input', function() {
-            const bayar = parseFloat(bayarInput.value);
-            const total = parseFloat(totalInput.value); // Pastikan total ada
-            const kembalian = bayar - total;
-            kembalianInput.value = kembalian;
+                // Calculate the 'kembalian'
+                const kembalian = bayar - total;
+
+                // Update the 'kembalian' input field
+                $('#kembalian').val(formatNumber(kembalian.toString()));
+                if (bayar < total) {
+                    const kembalians = "-" + $('#kembalian').val();
+
+                    $('#kembalian').val(kembalians);
+                }
+
+
+            });
+
+
+        });
+
+        // Function to format numbers with commas
+        function formatNumber(n) {
+            return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        // Function to format currency
+        function formatCurrency(input, blur) {
+            var input_val = input.val();
+
+            if (input_val === "") {
+                return;
+            }
+
+            var original_len = input_val.length;
+            var caret_pos = input.prop("selectionStart");
+
+            if (input_val.indexOf(".") >= 0) {
+                var decimal_pos = input_val.indexOf(".");
+                var left_side = input_val.substring(0, decimal_pos);
+                var right_side = input_val.substring(decimal_pos);
+
+                left_side = formatNumber(left_side);
+                right_side = formatNumber(right_side);
+
+                if (blur === "blur") {
+                    right_side += "";
+                }
+
+                right_side = right_side.substring(0, 2);
+                input_val = left_side + "." + right_side;
+            } else {
+                input_val = formatNumber(input_val);
+                if (blur === "blur") {
+                    input_val += "";
+                }
+            }
+
+            input.val(input_val);
+            var updated_len = input_val.length;
+            caret_pos = updated_len - original_len + caret_pos;
+            input[0].setSelectionRange(caret_pos, caret_pos);
+        }
+
+        $("input[data-type='currency']").on({
+            keyup: function() {
+                formatCurrency($(this));
+            },
+            blur: function() {
+                formatCurrency($(this), "blur");
+            }
         });
     </script>
 @endsection
