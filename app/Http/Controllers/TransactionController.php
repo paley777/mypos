@@ -43,6 +43,10 @@ class TransactionController extends Controller
     public function store(StoreTransactionRequest $request)
     {
         $profit = 0;
+        $bayar = intval(str_replace([','], '', $request->bayar));
+        $total = intval(str_replace([','], '', $request->total));
+        $kembalian = intval(str_replace([','], '', $request->kembalian));
+
         $validated = $request->validated();
 
         // Iterasi data barang yang dipesan
@@ -54,6 +58,9 @@ class TransactionController extends Controller
         $subtotal = $request->input('subtotal');
 
         foreach ($nama_barang as $key => $nama_barang) {
+            $harga_jual[$key] = intval(str_replace([','], '', $harga_jual[$key])); // Convert harga_jual to integer
+            $subtotal[$key] = intval(str_replace([','], '', $subtotal[$key])); // Convert subtotal to integer
+
             Order::create([
                 'kode_inv' => $validated['kode_inv'],
                 'nama_barang' => $nama_barang,
@@ -85,9 +92,9 @@ class TransactionController extends Controller
             'status' => $validated['status'],
             'jatuh_tempo' => $validated['jatuh_tempo'],
             'keterangan' => $validated['keterangan'],
-            'total' => $validated['total'],
-            'bayar' => $validated['bayar'],
-            'kembalian' => $validated['kembalian'],
+            'total' => $total,
+            'bayar' => $bayar,
+            'kembalian' => $kembalian,
             'profit' => $profit,
         ]);
         return redirect()->back()->with('success', 'Transaksi sukses, Silakan menuju fitur Invoice untuk mencetak!');

@@ -44,6 +44,9 @@ class BarangMasukController extends Controller
      */
     public function store(StoreBarangMasukRequest $request)
     {
+        $hargabelisatuan = intval(str_replace([','], '', $request->harga_beli_satuan));
+        $hargabelitotal = intval(str_replace([','], '', $request->harga_beli_total));
+
         $validated = $request->validated();
         $barang = Barang::where('nama_barang', $validated['nama_barang'])->first();
         BarangMasuk::create([
@@ -52,8 +55,8 @@ class BarangMasukController extends Controller
             'nama_barang' => $validated['nama_barang'],
             'satuan' => $barang->satuan,
             'jumlah_beli' => $validated['jumlah_beli'],
-            'harga_beli_satuan' => $validated['harga_beli_satuan'],
-            'harga_beli_total' => $validated['harga_beli_total'],
+            'harga_beli_satuan' => $hargabelisatuan,
+            'harga_beli_total' => $hargabelitotal,
         ]);
         $tambah = $validated['jumlah_beli'];
         $stokbarang = StokBarang::where('nama_barang', $validated['nama_barang'])->first();
