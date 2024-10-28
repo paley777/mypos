@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->string('nama_petugas');
             $table->string('nama_pelanggan');
             $table->string('status');
-            $table->date('jatuh_tempo');
+            $table->date('jatuh_tempo')->nullable();
             $table->string('keterangan');
             $table->integer('total')->default(0);
             $table->integer('bayar')->default(0);
