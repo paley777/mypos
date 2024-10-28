@@ -152,6 +152,13 @@
                                         <li class="breadcrumb-item">Invoice</li>
                                     </ol>
                                 </nav>
+                            @elseif ($breadcrumb == 'piutang')
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb responsive-small">
+                                        <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
+                                        <li class="breadcrumb-item">Piutang</li>
+                                    </ol>
+                                </nav>
                             @elseif ($breadcrumb == 'laporan')
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb responsive-small">
@@ -320,6 +327,21 @@
                                 </li>
                             </ul>
                         </div>
+
+                    </li><!--//nav-item-->
+                    <li class="nav-item">
+                        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+                        <a class="nav-link {{ $active === 'piutang' ? 'active' : '' }}" href="/dashboard/piutang">
+                            <span class="nav-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-cash" viewBox="0 0 16 16">
+                                    <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4" />
+                                    <path
+                                        d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2z" />
+                                </svg>
+                            </span>
+                            <span class="nav-link-text">Piutang</span>
+                        </a><!--//nav-link-->
                     </li><!--//nav-item-->
                 </ul><!--//app-menu-->
             </nav><!--//app-nav-->

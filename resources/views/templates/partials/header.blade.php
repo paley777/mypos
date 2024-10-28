@@ -129,57 +129,66 @@
                                             Pelanggan</a></li>
                                     <li class="breadcrumb-item">Ubah Pelanggan</li>
                                 </ol>
-                        @elseif ($breadcrumb == 'edit_stokbarang')
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb responsive-small">
-                                    <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
-                                    <li class="breadcrumb-item"><a href="/dashboard/stok-barang">Stok Barang</a></li>
-                                    <li class="breadcrumb-item">Ubah Stok</li>
-                                </ol>
-                            </nav>
-                        @elseif ($breadcrumb == 'kasir')
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb responsive-small">
-                                    <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
-                                    <li class="breadcrumb-item">Kasir</li>
-                                </ol>
-                            </nav>
-                        @elseif ($breadcrumb == 'invoice')
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb responsive-small">
-                                    <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
-                                    <li class="breadcrumb-item">Invoice</li>
-                                </ol>
-                            </nav>
-                        @elseif ($breadcrumb == 'laporan')
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb responsive-small">
-                                    <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
-                                    <li class="breadcrumb-item">Report</li>
-                                </ol>
-                            </nav>
-                        @elseif ($breadcrumb == 'about')
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb responsive-small">
-                                    <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
-                                    <li class="breadcrumb-item">Tentang Sistem</li>
-                                </ol>
-                            </nav>
-                        @elseif ($breadcrumb == 'profile')
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb responsive-small">
-                                    <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
-                                    <li class="breadcrumb-item">Profil Saya</li>
-                                </ol>
-                            </nav>
-                        @elseif ($breadcrumb == 'profile_edit')
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb responsive-small">
-                                    <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
-                                    <li class="breadcrumb-item"><a href="/dashboard/my-profile">Profil Saya</a></li>
-                                    <li class="breadcrumb-item">Edit Profil</li>
-                                </ol>
-                            </nav>
+                            @elseif ($breadcrumb == 'edit_stokbarang')
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb responsive-small">
+                                        <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
+                                        <li class="breadcrumb-item"><a href="/dashboard/stok-barang">Stok Barang</a>
+                                        </li>
+                                        <li class="breadcrumb-item">Ubah Stok</li>
+                                    </ol>
+                                </nav>
+                            @elseif ($breadcrumb == 'kasir')
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb responsive-small">
+                                        <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
+                                        <li class="breadcrumb-item">Kasir</li>
+                                    </ol>
+                                </nav>
+                            @elseif ($breadcrumb == 'invoice')
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb responsive-small">
+                                        <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
+                                        <li class="breadcrumb-item">Invoice</li>
+                                    </ol>
+                                </nav>
+                            @elseif ($breadcrumb == 'piutang')
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb responsive-small">
+                                        <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
+                                        <li class="breadcrumb-item">Piutang</li>
+                                    </ol>
+                                </nav>
+                            @elseif ($breadcrumb == 'laporan')
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb responsive-small">
+                                        <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
+                                        <li class="breadcrumb-item">Report</li>
+                                    </ol>
+                                </nav>
+                            @elseif ($breadcrumb == 'about')
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb responsive-small">
+                                        <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
+                                        <li class="breadcrumb-item">Tentang Sistem</li>
+                                    </ol>
+                                </nav>
+                            @elseif ($breadcrumb == 'profile')
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb responsive-small">
+                                        <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
+                                        <li class="breadcrumb-item">Profil Saya</li>
+                                    </ol>
+                                </nav>
+                            @elseif ($breadcrumb == 'profile_edit')
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb responsive-small">
+                                        <li class="breadcrumb-item"><a href="/dashboard">Beranda</a></li>
+                                        <li class="breadcrumb-item"><a href="/dashboard/my-profile">Profil Saya</a>
+                                        </li>
+                                        <li class="breadcrumb-item">Edit Profil</li>
+                                    </ol>
+                                </nav>
                         @endif
                     </div>
                     <div class="app-utilities col-auto">
@@ -368,10 +377,25 @@
                             <span class="nav-link-text">Invoice</span>
                         </a><!--//nav-link-->
                     </li><!--//nav-item-->
+                    <li class="nav-item">
+                        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+                        <a class="nav-link {{ $active === 'piutang' ? 'active' : '' }}" href="/dashboard/piutang">
+                            <span class="nav-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-cash" viewBox="0 0 16 16">
+                                    <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4" />
+                                    <path
+                                        d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2z" />
+                                </svg>
+                            </span>
+                            <span class="nav-link-text">Piutang</span>
+                        </a><!--//nav-link-->
+                    </li><!--//nav-item-->
                     <li class="nav-item has-submenu">
                         <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-                        <a class="nav-link {{ $active === 'laporan' ? 'active' : '' }} submenu-toggle" href="#" data-bs-toggle="collapse"
-                            data-bs-target="#submenu-2" aria-expanded="false" aria-controls="submenu-1">
+                        <a class="nav-link {{ $active === 'laporan' ? 'active' : '' }} submenu-toggle" href="#"
+                            data-bs-toggle="collapse" data-bs-target="#submenu-2" aria-expanded="false"
+                            aria-controls="submenu-1">
                             <span class="nav-icon">
                                 <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-folder"
@@ -393,15 +417,22 @@
                         </a><!--//nav-link-->
                         <div id="submenu-2" class="collapse submenu submenu-1" data-bs-parent="#menu-accordion">
                             <ul class="submenu-list list-unstyled">
-                                <li class="submenu-item"><a class="submenu-link" href="/dashboard/report/barang-masuk">Barang
+                                <li class="submenu-item"><a class="submenu-link" href="/dashboard/report/harian">
+                                        Harian</a></li>
+                                <li class="submenu-item"><a class="submenu-link"
+                                        href="/dashboard/report/barang-masuk">Barang
                                         Masuk</a></li>
-                                <li class="submenu-item"><a class="submenu-link" href="/dashboard/report/barang-keluar">Barang
+                                <li class="submenu-item"><a class="submenu-link"
+                                        href="/dashboard/report/barang-keluar">Barang
                                         Keluar</a>
                                 </li>
-                                <li class="submenu-item"><a class="submenu-link" href="/dashboard/report/stok-barang">Stok Barang</a>
+                                <li class="submenu-item"><a class="submenu-link"
+                                        href="/dashboard/report/stok-barang">Stok Barang</a>
                                 </li>
-                                <li class="submenu-item"><a class="submenu-link" href="/dashboard/report/invoice">Invoice</a>
-                                <li class="submenu-item"><a class="submenu-link" href="/dashboard/report/order">Order</a>
+                                <li class="submenu-item"><a class="submenu-link"
+                                        href="/dashboard/report/invoice">Invoice</a>
+                                <li class="submenu-item"><a class="submenu-link"
+                                        href="/dashboard/report/order">Order</a>
                                 </li>
                             </ul>
                         </div>
@@ -413,8 +444,7 @@
                     <ul class="app-menu footer-menu list-unstyled">
                         <li class="nav-item {{ $active === 'about' ? 'active' : '' }}">
                             <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-                            <a class="nav-link"
-                                href="/dashboard/about">
+                            <a class="nav-link" href="/dashboard/about">
                                 <span class="nav-icon">
                                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-person"
                                         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
