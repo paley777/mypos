@@ -206,7 +206,7 @@
                 </div><!--//tab-content-->
             </div><!--//container-fluid-->
         </div><!--//app-content-->
-    </div><!--//app-wrapper-->
+    </div><!--//app-wrappers-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script>
