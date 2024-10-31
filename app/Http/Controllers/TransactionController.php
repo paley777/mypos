@@ -8,6 +8,7 @@ use App\Models\Pelanggan;
 use App\Models\StokBarang;
 use App\Models\Barang;
 use App\Models\BarangKeluar;
+use App\Models\Piutang;
 use App\Http\Requests\StoreTransactionRequest;
 use App\Http\Requests\UpdateTransactionRequest;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
@@ -97,6 +98,19 @@ class TransactionController extends Controller
             'kembalian' => $kembalian,
             'profit' => $profit,
         ]);
+
+        if ($validated['status'] == 'HUTANG') {
+            Piutang::create([
+                'kode_inv' => $validated['kode_inv'],
+                'nama_pelanggan' => $validated['nama_pelanggan'],
+                'sisa_bayar' => $kembalian,
+                'harga_asli' => $total,
+                'jatuh_tempo' => $validated['jatuh_tempo']
+            ]);
+        }
+
+
+
         return redirect()->back()->with('success', 'Transaksi sukses, Silakan menuju fitur Invoice untuk mencetak!');
     }
 

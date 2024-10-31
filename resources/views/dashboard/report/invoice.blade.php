@@ -168,7 +168,7 @@
                 ]
 
             });
-
+ o
             // Refilter the table
             $('#min, #max').on('change', function() {
                 table.draw();

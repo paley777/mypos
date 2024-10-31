@@ -12,6 +12,7 @@ use App\Http\Controllers\StokBarangController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\PiutangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,8 @@ Route::resource('/dashboard/regis-barang', BarangController::class)->middleware(
 Route::resource('/dashboard/regis-supplier', SupplierController::class)->middleware('auth');
 Route::resource('/dashboard/stok-barang', StokBarangController::class)->middleware('auth');
 Route::resource('/dashboard/barang-masuk', BarangMasukController::class)->middleware('auth');
+Route::resource('/dashboard/piutang', PiutangController::class)->middleware('auth');
+Route::post('/dashboard/piutang/bayar', [PiutangController::class, 'bayar'])->middleware('auth');
 Route::resource('/dashboard/barang-keluar', BarangKeluarController::class)->middleware('auth');
 Route::resource('/dashboard/regis-pelanggan', PelangganController::class)->middleware('auth');
 Route::get('/dashboard/cashier', [TransactionController::class, 'index'])->middleware('auth');
@@ -49,6 +52,7 @@ Route::get('/dashboard/report/barang-keluar', [ReportController::class, 'barang_
 Route::get('/dashboard/report/stok-barang', [ReportController::class, 'stok_barang'])->middleware('auth');
 Route::get('/dashboard/report/invoice', [ReportController::class, 'invoice'])->middleware('auth');
 Route::get('/dashboard/report/order', [ReportController::class, 'order'])->middleware('auth');
+Route::get('/dashboard/report/penjualan', [ReportController::class, 'daily'])->middleware('auth');
 Route::get('/dashboard/my-profile', [DashboardController::class, 'my_profile'])->middleware('auth');
 Route::get('/dashboard/my-profile/edit', [DashboardController::class, 'my_profile_edit'])->middleware('auth');
 Route::post('/dashboard/my-profile/edit', [DashboardController::class, 'my_profile_store'])->middleware('auth');
