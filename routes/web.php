@@ -52,7 +52,7 @@ Route::get('/dashboard/report/barang-keluar', [ReportController::class, 'barang_
 Route::get('/dashboard/report/stok-barang', [ReportController::class, 'stok_barang'])->middleware('auth');
 Route::get('/dashboard/report/invoice', [ReportController::class, 'invoice'])->middleware('auth');
 Route::get('/dashboard/report/order', [ReportController::class, 'order'])->middleware('auth');
-Route::get('/dashboard/report/harian', [ReportController::class, 'daily'])->middleware('auth');
+Route::get('/dashboard/report/penjualan', [ReportController::class, 'daily'])->middleware('auth');
 Route::get('/dashboard/my-profile', [DashboardController::class, 'my_profile'])->middleware('auth');
 Route::get('/dashboard/my-profile/edit', [DashboardController::class, 'my_profile_edit'])->middleware('auth');
 Route::post('/dashboard/my-profile/edit', [DashboardController::class, 'my_profile_store'])->middleware('auth');
