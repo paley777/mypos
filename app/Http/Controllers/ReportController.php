@@ -7,6 +7,7 @@ use App\Models\BarangMasuk;
 use App\Models\BarangKeluar;
 use App\Models\StokBarang;
 use App\Models\Transaction;
+use App\Models\Piutang;
 use App\Models\Order;
 
 class ReportController extends Controller
@@ -73,24 +74,23 @@ class ReportController extends Controller
         ]);
     }
 
+
     public function daily(Request $request)
     {
-        $date = $request->input('date');
+        $transactions = Transaction::leftJoin('piutangs', 'transactions.kode_inv', '=', 'piutangs.kode_inv')
+            ->select('transactions.*', 'piutangs.sisa_bayar')
+            ->get();
 
-        // Fetch transactions for the requested date
-        $transactions = Transaction::whereDate('created_at', $date)->get();
+        foreach ($transactions as $transaction) {
+            if ($transaction->status != 'HUTANG') {
+                $transaction->bayar -= $transaction->kembalian;
+            }
+        }
 
-        // Calculate gross income
-        $grossIncome = $transactions->sum('total_amount');
-
-        // Calculate net income (assuming 'expenses' is a field in the transactions table)
-        $netIncome = $grossIncome - $transactions->sum('expenses');
-
-        return view('dashboard.report.harian', [
+        return view('dashboard.report.penjualan', [
             'active' => 'laporan',
             'breadcrumb' => 'laporan',
-            'grossIncome' => $grossIncome,
-            'netIncome' => $netIncome,
+            'transactions' => $transactions,
         ]);
     }
 }
