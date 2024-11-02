@@ -300,6 +300,7 @@
         }
         $(document).ready(function() {
             var table = $('#example1').DataTable();
+            table.page.len(100).draw();
             $(document).on('click', '.tambah-ke-keranjang', function() {
                 // Mengambil data
                 function formatNumberWithCommas(number) {
