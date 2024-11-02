@@ -98,7 +98,7 @@
                                                 <tbody>
                                                     @foreach ($barangmasuks as $key => $barangmasuk)
                                                         <tr>
-                                                            <td>{{ $loop->iteration }}</td>
+                                                            <td></td>
                                                             <td>{{ $barangmasuk->created_at }}</td>
                                                             <td>{{ $barangmasuk->created_at->isoFormat('dddd, D MMMM Y') }}
                                                             </td>
@@ -214,38 +214,58 @@
                 </div><!--//container-fluid-->
             </div><!--//app-content-->
         </div><!--//app-wrapper-->
-        <script>
-            var minDate, maxDate;
-            // Custom filtering function which will search data in column four between two values
-            $.fn.dataTable.ext.search.push(
-                function(settings, data, dataIndex) {
-                    var min = minDate.val();
-                    var max = maxDate.val();
-                    var date = new Date(data[1]);
-                    if (
-                        (min === null && max === null) ||
-                        (min === null && date <= max) ||
-                        (min <= date && max === null) ||
-                        (min <= date && date <= max)
-                    ) {
-                        return true;
-                    }
-                    return false;
+
+    </div>
+    <script>
+        var minDate, maxDate;
+        // Custom filtering function which will search data in column four between two values
+        $.fn.dataTable.ext.search.push(
+            function(settings, data, dataIndex) {
+                var min = minDate.val();
+                var max = maxDate.val();
+                var date = new Date(data[1]);
+                if (
+                    (min === null && max === null) ||
+                    (min === null && date <= max) ||
+                    (min <= date && max === null) ||
+                    (min <= date && date <= max)
+                ) {
+                    return true;
                 }
-            );
-            $(document).ready(function() {
-                // Create date inputs
-                minDate = new DateTime($('#min'), {
-                    format: 'MMMM Do YYYY'
-                });
-                maxDate = new DateTime($('#max'), {
-                    format: 'MMMM Do YYYY'
-                });
-                var table = $('#example').DataTable();
-                // Refilter the table
-                $('#min, #max').on('change', function() {
-                    table.draw();
-                });
+                return false;
+            }
+        );
+        $(document).ready(function() {
+            // Create date inputs
+            minDate = new DateTime($('#min'), {
+                format: 'MMMM Do YYYY'
             });
-        </script>
-    @endsection
+            maxDate = new DateTime($('#max'), {
+                format: 'MMMM Do YYYY'
+            });
+            var table = $('#example').DataTable({
+                "order": [
+                    [1, "desc"]
+                ],
+                "columnDefs": [{
+                    "orderable": false,
+                    "searchable": false,
+                    "targets": 0
+                }],
+                "drawCallback": function(settings) {
+                    var api = this.api();
+                    api.column(0, {
+                        search: 'applied',
+                        order: 'applied'
+                    }).nodes().each(function(cell, i) {
+                        cell.innerHTML = i + 1;
+                    });
+                }
+            });
+            // Refilter the table
+            $('#min, #max').on('change', function() {
+                table.draw();
+            });
+        });
+    </script>
+@endsection
