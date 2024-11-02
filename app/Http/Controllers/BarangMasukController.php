@@ -55,6 +55,8 @@ class BarangMasukController extends Controller
             'nama_barang' => $validated['nama_barang'],
             'satuan' => $barang->satuan,
             'jumlah_beli' => $validated['jumlah_beli'],
+            'status' => $validated['status'],
+            'keterangan' => $validated['keterangan'],
             'harga_beli_satuan' => $hargabelisatuan,
             'harga_beli_total' => $hargabelitotal,
         ]);

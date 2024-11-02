@@ -90,6 +90,8 @@
                                                         <th class="cell">Nama Barang</th>
                                                         <th class="cell">Satuan</th>
                                                         <th class="cell">Jumlah Beli</th>
+                                                        <th class="cell">Keterangan</th>
+                                                        <th class="cell">Status</th>
                                                         <th class="cell">Harga Beli Satuan</th>
                                                         <th class="cell">Harga Beli Total</th>
                                                         <th class="cell">Aksi</th>
@@ -107,6 +109,8 @@
                                                             <td>{{ $barangmasuk->nama_barang }}</td>
                                                             <td>{{ $barangmasuk->satuan }}</td>
                                                             <td>{{ $barangmasuk->jumlah_beli }}</td>
+                                                            <td>{{ $barangmasuk->keterangan }}</td>
+                                                            <td>{{ $barangmasuk->status }}</td>
                                                             <td>@currency($barangmasuk->harga_beli_satuan)</td>
                                                             <td>@currency($barangmasuk->harga_beli_total)</td>
                                                             <td>
@@ -183,6 +187,8 @@
                                                         <th class="cell">Nama Barang</th>
                                                         <th class="cell">Satuan</th>
                                                         <th class="cell">Jumlah Beli</th>
+                                                        <th class="cell">Keterangan</th>
+                                                        <th class="cell">Status</th>
                                                         <th class="cell">Harga Beli Satuan</th>
                                                         <th class="cell">Harga Beli Total</th>
                                                     </tr>
@@ -199,6 +205,8 @@
                                                             <td>{{ $barangmasuk->nama_barang }}</td>
                                                             <td>{{ $barangmasuk->satuan }}</td>
                                                             <td>{{ $barangmasuk->jumlah_beli }}</td>
+                                                            <td>{{ $barangmasuk->keterangan }}</td>
+                                                            <td>{{ $barangmasuk->status }}</td>
                                                             <td>@currency($barangmasuk->harga_beli_satuan)</td>
                                                             <td>@currency($barangmasuk->harga_beli_total)</td>
                                                         </tr>
