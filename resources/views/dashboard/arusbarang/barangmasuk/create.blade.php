@@ -74,6 +74,11 @@
                                     @endforeach
                                 </select>
                             </div>
+                            <!-- New Keterangan Input -->
+                            <div class="col-md-12 position-relative">
+                                <label for="keterangan" class="form-label">Keterangan</label>
+                                <textarea id="keterangan" class="form-control" name="keterangan" placeholder="Isi Keterangan"></textarea>
+                            </div>
                             <div class="col-md-2 position-relative">
                                 <label for="validationCustom01" class="form-label">Jumlah Beli<span
                                         class="text-danger">*</span></label>
@@ -99,6 +104,15 @@
                                 <input type="text" data-type="currency" onkeypress="return event.charCode >= 48"
                                     id="inp1" min="1" class="form-control" name="harga_beli_total"
                                     placeholder="Isi Harga Beli Total" required>
+                            </div>
+                            <!-- New Status Input -->
+                            <div class="col-md-4 position-relative">
+                                <label for="status" class="form-label">Status<span class="text-danger">*</span></label>
+                                <select class="form-select" name="status" id="status" required>
+                                    <option value="">Pilih Status</option>
+                                    <option value="LUNAS">LUNAS</option>
+                                    <option value="HUTANG">HUTANG</option>
+                                </select>
                             </div>
                             <p>
                                 (Wajib terisi untuk kolom dengan tanda "<span class="text-danger">*</span>").
