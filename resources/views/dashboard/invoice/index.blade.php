@@ -108,7 +108,7 @@
                                                                 @method('delete')
                                                                 @csrf
                                                                 <button class="btn btn-sm btn-danger text-white"
-                                                                    onclick="return confirm('Anda yakin untuk menghapus data ini?')">
+                                                                    onclick="return confirm('Anda yakin untuk menghapus data ini, dan mengembalikan stok barang?')">
                                                                     <svg width="16px" height="16px"
                                                                         viewBox="0 0 1024 1024"
                                                                         xmlns="http://www.w3.org/2000/svg" fill="#000000">

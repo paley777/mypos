@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Transaction;
 use App\Models\Pelanggan;
 use App\Models\Order;
+use App\Models\StokBarang;
 
 class InvoiceController extends Controller
 {
@@ -38,8 +39,25 @@ class InvoiceController extends Controller
      */
     public function destroy(Transaction $transaction)
     {
+        // Retrieve all orders associated with the transaction
+        $orders = Order::where('kode_inv', $transaction->kode_inv)->get();
+
+        // Loop through each order to return items back to stock
+        foreach ($orders as $order) {
+            // Get the stock item
+            $stokBarang = StokBarang::where('nama_barang', $order->nama_barang)->first();
+            if ($stokBarang) {
+                // Add back the quantity to the stock
+                $stokBarang->tambahStok($order->qty);
+            }
+        }
+
+        // Delete the orders
         Order::where('kode_inv', $transaction->kode_inv)->delete();
+
+        // Delete the transaction
         Transaction::destroy($transaction->id);
+
         return redirect('/dashboard/invoice')->with('success', 'Invoice telah dihapus!');
     }
     /**
