@@ -192,7 +192,7 @@
                                         </p>
                                     </div><!--//app-card-body-->
                                     <div class="app-card-footer px-4 py-3">
-                                        <button class="btn app-btn-primary" type="submit">
+                                        <button class="btn app-btn-primary" type="submit" id="submitButton">
                                             <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -217,7 +217,6 @@
             </div><!--//tab-content-->
         </div><!--//container-fluid-->
     </div><!--//app-content-->
-    </div><!--//app-wrapper-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script>
@@ -228,6 +227,22 @@
             $('#example1').DataTable();
         });
     </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const submitButton = document.getElementById('submitButton');
+
+        submitButton.addEventListener('click', function() {
+            // Ubah teks terlebih dahulu, lalu tunggu sebelum men-disable tombol
+            submitButton.innerHTML = 'Memproses...'; // Ubah teks untuk memberi indikasi kepada pengguna
+
+            // Set delay sebelum tombol di-disable
+            setTimeout(() => {
+                submitButton.disabled = true; // Disable tombol setelah jeda 500ms
+            }, 500); // 500ms delay sebelum tombol di-disable, bisa disesuaikan
+        });
+    });
+</script>
+
     <div class="modal fade" id="modalSukses" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
