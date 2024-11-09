@@ -1,8 +1,8 @@
 <a href="https://ibb.co/w79WMN9"><img src="https://i.ibb.co/w79WMN9/logo-app.png" alt="logo-app" border="0"></a>
 
-# MyPOS V1 | Point of Sales Integrated Systems
+# MyPOS V2 | Point of Sales Integrated Systems
 
-MyPOS V1 is a website-based integrated point of sales system using the Laravel Framework. This system has the features needed by a POS system, starting from management of goods flow, stock, cashier, invoices to reporting.
+MyPOS V2 is a website-based integrated point of sales system using the Laravel Framework. This system has the features needed by a POS system, starting from management of goods flow, stock, cashier, invoices to reporting.
 
 ## Integration
 Apart from using Laravel 10, this system also integrates the Bootstrap Framework as a front-end. This system uses SQL and Jquery databases.
@@ -48,6 +48,12 @@ Go to the project directory
 
 ```bash
   cd mypos
+```
+
+Copy example.env to .env file
+
+```bash
+  cp .env.example .env
 ```
 
 Install dependencies
