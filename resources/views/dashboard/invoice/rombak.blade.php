@@ -4,14 +4,12 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-
-
     <div class="app-wrapper">
         <div class="app-content pt-3 p-md-3 p-lg-4">
             <div class="container-xl">
                 <div class="row g-3 mb-4 align-items-center justify-content-between">
                     <div class="col-auto">
-                        <h1 class="app-page-title mb-0">Kasir</h1>
+                        <h1 class="app-page-title mb-0">Rombak Invoice</h1>
                     </div>
                     <div class="col-auto">
                         <div class="page-utilities">
@@ -70,7 +68,8 @@
                                         </div><!--//row-->
                                     </div><!--//app-card-header-->
                                     <div class="app-card-body">
-                                        <form class="row g-2" method="post" action="/dashboard/cashier">
+                                        <form class="row g-2" method="post"
+                                            action="/dashboard/invoice/{{ $transaction->id }}/rombak">
                                             @csrf
                                             <div class="table-responsive p-4"
                                                 style="overflow-x: auto; white-space: nowrap;">
@@ -90,7 +89,61 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <!-- Data rows will be inserted here dynamically -->
+                                                        @foreach ($orders as $order)
+                                                            @php
+                                                                $stokbarang = \App\Models\StokBarang::where(
+                                                                    'nama_barang',
+                                                                    $order->nama_barang,
+                                                                )->first();
+                                                                $stok = $stokbarang ? $stokbarang->stok : 0;
+                                                                $satuan = $stokbarang ? $stokbarang->satuan : '';
+                                                            @endphp
+                                                            <tr>
+                                                                <td><input type="text" class="form-control"
+                                                                        name="nama_barang[]"
+                                                                        value="{{ $order->nama_barang }}" readonly></td>
+                                                                <td>{{ $satuan }}</td>
+                                                                <td>{{ $stok }}</td>
+                                                                <td><input type="text" class="form-control"
+                                                                        name="harga_jual[]"
+                                                                        value="{{ number_format($order->harga_jual, 0, ',', ',') }}"
+                                                                        readonly></td>
+                                                                <td><input type="number" class="form-control qty"
+                                                                        name="qty[]" min="1"
+                                                                        value="{{ $order->qty }}"></td>
+                                                                <td><input type="number"
+                                                                        class="form-control discount-percent"
+                                                                        name="disc_perc[]" value="{{ $order->disc_perc }}"
+                                                                        min="0" max="100"></td>
+                                                                <td><input type="number" class="form-control discount-rp"
+                                                                        name="disc_rp[]" value="{{ $order->disc_rp }}"
+                                                                        min="0"></td>
+                                                                <td><input type="text" class="form-control subtotal"
+                                                                        name="subtotal[]"
+                                                                        value="{{ number_format($order->subtotal, 0, ',', ',') }}"
+                                                                        readonly></td>
+                                                                <td>
+                                                                    <button
+                                                                        class="btn btn-sm btn-danger text-white hapus-baris"><svg
+                                                                            width="16px" height="16px"
+                                                                            viewBox="0 0 24 24" fill="none"
+                                                                            xmlns="http://www.w3.org/2000/svg">
+                                                                            <g id="SVGRepo_bgCarrier" stroke-width="0">
+                                                                            </g>
+                                                                            <g id="SVGRepo_tracerCarrier"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round"></g>
+                                                                            <g id="SVGRepo_iconCarrier">
+                                                                                <path
+                                                                                    d="M18 6L17.1991 18.0129C17.129 19.065 17.0939 19.5911 16.8667 19.99C16.6666 20.3412 16.3648 20.6235 16.0011 20.7998C15.588 21 15.0607 21 14.0062 21H9.99377C8.93927 21 8.41202 21 7.99889 20.7998C7.63517 20.6235 7.33339 20.3412 7.13332 19.99C6.90607 19.5911 6.871 19.065 6.80086 18.0129L6 6M4 6H20M16 6L15.7294 5.18807C15.4671 4.40125 15.3359 4.00784 15.0927 3.71698C14.8779 3.46013 14.6021 3.26132 14.2905 3.13878C13.9376 3 13.523 3 12.6936 3H11.3064C10.477 3 10.0624 3 9.70951 3.13878C9.39792 3.26132 9.12208 3.46013 8.90729 3.71698C8.66405 4.00784 8.53292 4.40125 8.27064 5.18807L8 6M14 10V17M10 10V17"
+                                                                                    stroke="#ffffff" stroke-width="2"
+                                                                                    stroke-linecap="round"
+                                                                                    stroke-linejoin="round"></path>
+                                                                            </g>
+                                                                        </svg></button>
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -145,9 +198,14 @@
                                                 <select class="form-select" name="nama_pelanggan" required>
                                                     <option value="" selected>Pilih Pelanggan</option>
                                                     @foreach ($pelanggans as $pelanggan)
-                                                        <option value="{{ $pelanggan->nama }}">{{ $pelanggan->nama }}
+                                                        <option value="{{ $pelanggan->nama }}"
+                                                            {{ $transaction->nama_pelanggan == $pelanggan->nama ? 'selected' : '' }}>
+                                                            {{ $pelanggan->nama }}
                                                         </option>
                                                     @endforeach
+
+
+
                                                 </select>
                                             </div>
 
@@ -155,42 +213,48 @@
                                                 <label for="validationCustom01" class="form-label ">Status<span
                                                         class="text-danger">*</span></label>
                                                 <select class="form-select" name="status" required>
-                                                    <option value="">Pilih Status</option>
-                                                    <option value="LUNAS">LUNAS</option>
-                                                    <option value="HUTANG">HUTANG</option>
+                                                    <option value="LUNAS"
+                                                        {{ $transaction->status == 'LUNAS' ? 'selected' : '' }}>LUNAS
+                                                    </option>
+                                                    <option value="HUTANG"
+                                                        {{ $transaction->status == 'HUTANG' ? 'selected' : '' }}>HUTANG
+                                                    </option>
                                                 </select>
                                             </div>
                                             <div class="col-md-12 position-relative">
                                                 <label for="validationCustom01" class="form-label ">Jatuh Tempo (Jika
                                                     status
                                                     HUTANG)</label>
-                                                <input type="date" class="form-control" name="jatuh_tempo">
+                                                <input type="date" class="form-control" name="jatuh_tempo"
+                                                    value="{{ $transaction->jatuh_tempo }}">
                                             </div>
                                             <div class="col-md-12 position-relative">
                                                 <label for="validationCustom01" class="form-label">Keterangan<span
                                                         class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" name="keterangan"
-                                                    placeholder="Isi Keterangan" value="-">
+                                                    placeholder="Isi Keterangan" value="{{ $transaction->keterangan }}">
                                             </div>
                                             <div class="col-md-12 position-relative">
                                                 <label for="validationCustom01" class="form-label">Total<span
                                                         class="text-danger">*</span></label>
-                                                <input data-type='currency' type="text" id="total" value="0"
+                                                <input data-type='currency' type="text" id="total"
+                                                    value="{{ $transaction->total }}"
                                                     class="form-control form-control-lg total" name="total" required
                                                     readonly>
                                             </div>
                                             <div class="col-md-12 position-relative">
                                                 <label for="validationCustom01" class="form-label">Bayar<span
                                                         class="text-danger">*</span></label>
-                                                <input data-type='currency' type="text" id="bayar" value="0"
+                                                <input data-type='currency' type="text" id="bayar"
+                                                    value="{{ $transaction->bayar }}"
                                                     class="form-control form-control-lg" name="bayar" required>
                                             </div>
                                             <div class="col-md-12 position-relative">
                                                 <label for="validationCustom01" class="form-label">Kembalian/Sisa Bayar
                                                     (Jika Minus)<span class="text-danger">*</span></label>
                                                 <input data-type='currency' type="text" id="kembalian"
-                                                    class="form-control form-control-lg" name="kembalian" value="0"
-                                                    required readonly>
+                                                    class="form-control form-control-lg" name="kembalian"
+                                                    value="{{ $transaction->kembalian }}" required readonly>
                                             </div>
                                         </div>
                                         <p>
@@ -284,6 +348,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+
                                 @foreach ($stokbarangs as $key => $stokbarang)
                                     @if ($stokbarang->stok != 0)
                                         <tr>
@@ -292,13 +357,14 @@
                                             <td>{{ $stokbarang->satuan }}</td>
                                             <td>{{ $stokbarang->stok }}</td>
                                             <td>@currency($stokbarang->harga_jual)</td>
-                                            <td><button class="btn app-btn-primary tambah-ke-keranjang" type="button"
+                                            <td>
+                                                <button class="btn app-btn-primary tambah-ke-keranjang" type="button"
                                                     data-nama_barang="{{ $stokbarang->nama_barang }}"
                                                     data-satuan="{{ $stokbarang->satuan }}"
                                                     data-stok="{{ $stokbarang->stok }}"
-                                                    data-harga_jual="{{ $stokbarang->harga_jual }}">Tambah
-                                                    Pesanan
-                                                </button></td>
+                                                    data-harga_jual="{{ $stokbarang->harga_jual }}">Tambah Pesanan
+                                                </button>
+                                            </td>
                                         </tr>
                                     @endif
                                 @endforeach

@@ -105,6 +105,8 @@ class BarangMasukController extends Controller
             'jumlah_beli' => $validated['jumlah_beli'],
             'harga_beli_satuan' => $validated['harga_beli_satuan'],
             'harga_beli_total' => $validated['harga_beli_total'],
+            'keterangan' => $validated['keterangan'],
+            'status' => $validated['status'],
         ]);
         $kurang = $barang_masuk['jumlah_beli'];
         $tambah = $validated['jumlah_beli'];
@@ -128,5 +130,14 @@ class BarangMasukController extends Controller
         }
         BarangMasuk::destroy($barang_masuk->id);
         return redirect('/dashboard/barang-masuk')->with('success', 'Barang Masuk telah dihapus!');
+    }
+
+    public function lunas(BarangMasuk $BarangMasuk)
+    {
+        BarangMasuk::where('id', $BarangMasuk->id)->update([
+            'status' => 'LUNAS',
+        ]);
+
+        return redirect('/dashboard/barang-masuk')->with('success', 'Barang telah dilunaskan!');
     }
 }

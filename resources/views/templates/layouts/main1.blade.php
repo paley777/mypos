@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>MyPOS V1 | Dashboard</title>
+    <title>MyPOS V2 | Dashboard</title>
     <link rel="icon" href="{{ asset('storage\container\logo_app_white.png') }}" />
     <!-- App CSS -->
     <link id="theme-style" rel="stylesheet" href="{{ URL::asset('assets/css/portal.css') }}">

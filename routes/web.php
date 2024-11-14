@@ -36,12 +36,19 @@ Route::resource('/dashboard/regis-barang', BarangController::class)->middleware(
 Route::resource('/dashboard/regis-supplier', SupplierController::class)->middleware('auth');
 Route::resource('/dashboard/stok-barang', StokBarangController::class)->middleware('auth');
 Route::resource('/dashboard/barang-masuk', BarangMasukController::class)->middleware('auth');
+Route::get('/dashboard/barang-masuk/{BarangMasuk}/lunas', [BarangMasukController::class, 'lunas'])->middleware('auth');
 Route::resource('/dashboard/piutang', PiutangController::class)->middleware('auth');
 Route::post('/dashboard/piutang/bayar', [PiutangController::class, 'bayar'])->middleware('auth');
 Route::resource('/dashboard/barang-keluar', BarangKeluarController::class)->middleware('auth');
 Route::resource('/dashboard/regis-pelanggan', PelangganController::class)->middleware('auth');
 Route::get('/dashboard/cashier', [TransactionController::class, 'index'])->middleware('auth');
 Route::get('/dashboard/invoice', [InvoiceController::class, 'index'])->middleware('auth');
+Route::get('/dashboard/invoice/{transaction}/edit', [InvoiceController::class, 'edit'])->middleware('auth');
+Route::get('/dashboard/invoice/{transaction}/rombak', [TransactionController::class, 'rombak_view'])->middleware('auth');
+
+Route::post('/dashboard/invoice/{transaction}/rombak', [TransactionController::class, 'rombak'])->middleware('auth');
+Route::post('/dashboard/invoice/{transaction}/update', [InvoiceController::class, 'update'])->name("invoice.update")->middleware('auth');
+
 Route::get('/dashboard/invoice/{transaction}/print', [InvoiceController::class, 'print'])->middleware('auth');
 Route::get('/dashboard/invoice/{transaction}/lunas', [InvoiceController::class, 'lunas'])->middleware('auth');
 Route::delete('/dashboard/invoice/{transaction}', [InvoiceController::class, 'destroy'])->middleware('auth');

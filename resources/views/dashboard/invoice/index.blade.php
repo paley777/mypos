@@ -101,7 +101,40 @@
                                                                             </g>
                                                                         </g>
                                                                     </g>
-                                                                </svg> Cetak Invoice</a>
+                                                                </svg> Cetak Invoice
+                                                            </a>
+                                                            @if (Auth::user()->role == 'Super Administrator')
+                                                                <a href="/dashboard/invoice/{{ $transaction->id }}/edit"
+                                                                    class="btn btn-sm btn-warning"><svg width="16px"
+                                                                        height="16px" viewBox="0 0 24 24"
+                                                                        xmlns="http://www.w3.org/2000/svg" fill="#000000">
+                                                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                                            stroke-linejoin="round"></g>
+                                                                        <g id="SVGRepo_iconCarrier">
+                                                                            <title></title>
+                                                                            <g id="Complete">
+                                                                                <g id="edit">
+                                                                                    <g>
+                                                                                        <path
+                                                                                            d="M20,16v4a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V6A2,2,0,0,1,4,4H8"
+                                                                                            fill="none" stroke="#000000"
+                                                                                            stroke-linecap="round"
+                                                                                            stroke-linejoin="round"
+                                                                                            stroke-width="2"></path>
+                                                                                        <polygon fill="none"
+                                                                                            points="12.5 15.8 22 6.2 17.8 2 8.3 11.5 8 16 12.5 15.8"
+                                                                                            stroke="#000000"
+                                                                                            stroke-linecap="round"
+                                                                                            stroke-linejoin="round"
+                                                                                            stroke-width="2"></polygon>
+                                                                                    </g>
+                                                                                </g>
+                                                                            </g>
+                                                                        </g>
+                                                                    </svg> Ubah
+                                                                </a>
+                                                            @endif
 
                                                             <form action="/dashboard/invoice/{{ $transaction->id }}"
                                                                 method="post" class="d-inline">
@@ -113,7 +146,8 @@
                                                                         viewBox="0 0 1024 1024"
                                                                         xmlns="http://www.w3.org/2000/svg" fill="#000000">
                                                                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                                        <g id="SVGRepo_tracerCarrier"
+                                                                            stroke-linecap="round"
                                                                             stroke-linejoin="round">
                                                                         </g>
                                                                         <g id="SVGRepo_iconCarrier">

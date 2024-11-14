@@ -126,18 +126,27 @@
                                 required readonly>
                         </div>
 
+                                                {{-- Sisa Bayar --}}
+                        <div class="position-relative">
+                            <label for="validationCustom01" class="form-label">Sisa Bayar</label>
+                            <input data-type='currency' type="text" id="sisa_bayar" value="0"
+                                class="form-control form-control-lg" name="sisa_bayar" required readonly>
+                        </div>
+
                         <div class="position-relative">
                             <label for="validationCustom01" class="form-label">Bayar<span
                                     class="text-danger">*</span></label>
                             <input data-type='currency' type="text" id="bayar" value="0"
                                 class="form-control form-control-lg" name="bayar" required>
                         </div>
-                        {{-- Sisa Bayar --}}
-                        <div class="position-relative">
-                            <label for="validationCustom01" class="form-label">Sisa Bayar</label>
-                            <input data-type='currency' type="text" id="sisa_bayar" value="0"
-                                class="form-control form-control-lg" name="sisa_bayar" required readonly>
+
+                         <div class="position-relative">
+                            <label for="validationCustom01" class="form-label">Kembalian<span
+                                    class="text-danger">*</span></label>
+                            <input data-type='currency' type="text" id="kembalian" value="0"
+                                class="form-control form-control-lg" name="kembalian" required>
                         </div>
+
 
                         {{-- button submit --}}
                         <div class="d-grid mt-3">
@@ -153,103 +162,109 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#example').DataTable();
+  <script>
+    $(document).ready(function() {
+        $('#example').DataTable();
 
-            // Show modal and populate fields
-            $('.bayar-btn').on('click', function() {
-                var sisa = parseFloat($(this).data('sisa'));
+        // Show modal and populate fields
+        $('.bayar-btn').on('click', function() {
+            var sisa = parseFloat($(this).data('sisa'));
+            $('#bayar').val(0);
+            $('#sisa_bayar').val(formatNumberWithCommas(Math.abs(sisa)));
+            $('#bayar').data('sisa', sisa);
+            $('#kembalian').val(0); // Reset kembalian
+            $('#submit-btn').prop('disabled', false); // Enable the submit button initially
+            $('#kode_inv').val($(this).closest('tr').find('td:eq(1)').text());
+
+            // Reset the form when the modal is closed
+            $('#editModal').on('hidden.bs.modal', function() {
                 $('#bayar').val(0);
-                $('#sisa_bayar').val(formatNumberWithCommas(Math.abs(sisa)));
-                $('#bayar').data('sisa', sisa);
-                $('#submit-btn').prop('disabled', false); // Enable the submit button initially
-                $('#kode_inv').val($(this).closest('tr').find('td:eq(1)').text());
-
-                // Reset the form when the modal is closed
-                $('#editModal').on('hidden.bs.modal', function() {
-                    $('#bayar').val(0);
-                    $('#sisa_bayar').val(0);
-                    $('#bayar').data('sisa', 0);
-                    $('#submit-btn').prop('disabled', false);
-                });
-            });
-
-            // Update Sisa Bayar when Bayar input changes
-            $('#bayar').on('input', function() {
-                var bayar = parseFloat($(this).val().replace(/,/g, '')) || 0;
-                var sisa = Math.abs(parseFloat($(this).data('sisa'))); // Convert negative sisa to positive
-
-                // Calculate the new sisa bayar
-                var newSisa = sisa - bayar;
-
-
-                $('#sisa_bayar').val(formatNumberWithCommas(newSisa));
-
-
-                // Disable the submit button if bayar exceeds sisa
-                if (bayar > sisa) {
-                    $('#submit-btn').prop('disabled', true);
-                } else {
-                    $('#submit-btn').prop('disabled', false);
-                }
+                $('#sisa_bayar').val(0);
+                $('#kembalian').val(0);
+                $('#bayar').data('sisa', 0);
+                $('#submit-btn').prop('disabled', false);
             });
         });
 
-        // Function to format numbers with commas
-        function formatNumber(n) {
-            return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        // Update Sisa Bayar and calculate Kembalian when Bayar input changes
+     $('#bayar').on('input', function() {
+    var bayar = parseFloat($(this).val().replace(/,/g, '')) || 0;
+    var sisa = Math.abs(parseFloat($(this).data('sisa'))); // Convert negative sisa to positive
+
+    // Calculate the new sisa bayar
+    var newSisa = sisa - bayar;
+
+    // If newSisa is negative, set it to 0
+    $('#sisa_bayar').val(formatNumberWithCommas(newSisa < 0 ? 0 : newSisa));
+
+    // Calculate Kembalian if bayar exceeds sisa
+    if (bayar > sisa) {
+        var kembalian = bayar - sisa;
+        $('#kembalian').val(formatNumberWithCommas(kembalian));
+        $('#submit-btn').prop('disabled', false); // Allow submission with kembalian
+    } else {
+        $('#kembalian').val(0); // Reset kembalian if bayar is less than or equal to sisa
+        $('#submit-btn').prop('disabled', false);
+    }
+});
+
+    });
+
+    // Function to format numbers with commas
+    function formatNumber(n) {
+        return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    // Function to format currency
+    function formatCurrency(input, blur) {
+        var input_val = input.val();
+
+        if (input_val === "") {
+            return;
         }
 
-        // Function to format currency
-        function formatCurrency(input, blur) {
-            var input_val = input.val();
+        var original_len = input_val.length;
+        var caret_pos = input.prop("selectionStart");
 
-            if (input_val === "") {
-                return;
+        if (input_val.indexOf(".") >= 0) {
+            var decimal_pos = input_val.indexOf(".");
+            var left_side = input_val.substring(0, decimal_pos);
+            var right_side = input_val.substring(decimal_pos);
+
+            left_side = formatNumber(left_side);
+            right_side = formatNumber(right_side);
+
+            if (blur === "blur") {
+                right_side += "";
             }
 
-            var original_len = input_val.length;
-            var caret_pos = input.prop("selectionStart");
-
-            if (input_val.indexOf(".") >= 0) {
-                var decimal_pos = input_val.indexOf(".");
-                var left_side = input_val.substring(0, decimal_pos);
-                var right_side = input_val.substring(decimal_pos);
-
-                left_side = formatNumber(left_side);
-                right_side = formatNumber(right_side);
-
-                if (blur === "blur") {
-                    right_side += "";
-                }
-
-                right_side = right_side.substring(0, 2);
-                input_val = left_side + "." + right_side;
-            } else {
-                input_val = formatNumber(input_val);
-                if (blur === "blur") {
-                    input_val += "";
-                }
+            right_side = right_side.substring(0, 2);
+            input_val = left_side + "." + right_side;
+        } else {
+            input_val = formatNumber(input_val);
+            if (blur === "blur") {
+                input_val += "";
             }
-
-            input.val(input_val);
-            var updated_len = input_val.length;
-            caret_pos = updated_len - original_len + caret_pos;
-            input[0].setSelectionRange(caret_pos, caret_pos);
         }
 
-        function formatNumberWithCommas(number) {
-            return number.toLocaleString('en-US');
-        }
+        input.val(input_val);
+        var updated_len = input_val.length;
+        caret_pos = updated_len - original_len + caret_pos;
+        input[0].setSelectionRange(caret_pos, caret_pos);
+    }
 
-        $("input[data-type='currency']").on({
-            keyup: function() {
-                formatCurrency($(this));
-            },
-            blur: function() {
-                formatCurrency($(this), "blur");
-            }
-        });
-    </script>
+    function formatNumberWithCommas(number) {
+        return number.toLocaleString('en-US');
+    }
+
+    $("input[data-type='currency']").on({
+        keyup: function() {
+            formatCurrency($(this));
+        },
+        blur: function() {
+            formatCurrency($(this), "blur");
+        }
+    });
+</script>
+
 @endsection
