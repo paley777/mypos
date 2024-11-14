@@ -43,6 +43,6 @@
                 </div>
             </div>
         </div>
-        <p class="botto-text text-center">Copyright MyPOS V1</p>
+        <p class="botto-text text-center">Copyright MyPOS V2</p>
     </div>
 @endsection
