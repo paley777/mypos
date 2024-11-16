@@ -7,14 +7,15 @@ use App\Models\BarangMasuk;
 use App\Models\BarangKeluar;
 use App\Models\StokBarang;
 use App\Models\Transaction;
+use App\Models\Piutang;
 use App\Models\Order;
 
 class ReportController extends Controller
 {
-     /**
+    /**
      * Display a listing of the resource.
      */
-     public function barang_masuk()
+    public function barang_masuk()
     {
         return view('dashboard.report.barangmasuk', [
             'active' => 'laporan',
@@ -24,10 +25,10 @@ class ReportController extends Controller
                 ->get(),
         ]);
     }
-     /**
+    /**
      * Display a listing of the resource.
      */
-     public function barang_keluar()
+    public function barang_keluar()
     {
         return view('dashboard.report.barangkeluar', [
             'active' => 'laporan',
@@ -37,10 +38,10 @@ class ReportController extends Controller
                 ->get(),
         ]);
     }
-     /**
+    /**
      * Display a listing of the resource.
      */
-     public function stok_barang()
+    public function stok_barang()
     {
         return view('dashboard.report.stokbarang', [
             'active' => 'laporan',
@@ -50,10 +51,10 @@ class ReportController extends Controller
                 ->get(),
         ]);
     }
-     /**
+    /**
      * Display a listing of the resource.
      */
-     public function invoice()
+    public function invoice()
     {
         return view('dashboard.report.invoice', [
             'active' => 'laporan',
@@ -61,15 +62,35 @@ class ReportController extends Controller
             'transactions' => Transaction::get(),
         ]);
     }
-     /**
+    /**
      * Display a listing of the resource.
      */
-     public function order()
+    public function order()
     {
         return view('dashboard.report.order', [
             'active' => 'laporan',
             'breadcrumb' => 'laporan',
             'orders' => Order::get(),
+        ]);
+    }
+
+
+    public function daily(Request $request)
+    {
+        $transactions = Transaction::leftJoin('piutangs', 'transactions.kode_inv', '=', 'piutangs.kode_inv')
+            ->select('transactions.*', 'piutangs.sisa_bayar')
+            ->get();
+
+        foreach ($transactions as $transaction) {
+            if ($transaction->status != 'HUTANG') {
+                $transaction->bayar -= $transaction->kembalian;
+            }
+        }
+
+        return view('dashboard.report.penjualan', [
+            'active' => 'laporan',
+            'breadcrumb' => 'laporan',
+            'transactions' => $transactions,
         ]);
     }
 }

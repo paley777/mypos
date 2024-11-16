@@ -16,6 +16,8 @@ return new class extends Migration {
             $table->string('nama_supplier');
             $table->string('nama_barang');
             $table->string('satuan');
+            $table->string('keterangan')->nullable();
+            $table->string('status');
             $table->integer('jumlah_beli');
             $table->integer('harga_beli_satuan');
             $table->integer('harga_beli_total');

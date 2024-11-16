@@ -31,7 +31,7 @@ class LandingController extends Controller
             $request->session()->regenerate();
             return redirect()
                 ->intended('/dashboard')
-                ->with('success', 'Selamat Datang di Dashboard MyPOS V1!');
+                ->with('success', 'Selamat Datang di Dashboard MyPOS V2!');
         }
         return back()->with('loginError', 'E-mail/Password Anda Salah, Coba Lagi!');
     }
