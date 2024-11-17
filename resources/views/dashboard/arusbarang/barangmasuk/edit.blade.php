@@ -125,7 +125,7 @@
                             </div>
                             <div class="col-md-4 position-relative">
                                 <label for="status" class="form-label">Status<span class="text-danger">*</span></label>
-                                <select class="form-select" name="status" id="status" required>
+                                <select name="status" id="status" required>
                                     <option value="">Pilih Status</option>
                                     <option value="LUNAS" {{ $barangmasuk->status == 'LUNAS' ? 'selected' : '' }}>LUNAS
                                     </option>
