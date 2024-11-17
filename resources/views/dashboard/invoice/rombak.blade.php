@@ -117,7 +117,7 @@
                                                                         min="0" max="100"></td>
                                                                 <td><input type="number" class="form-control discount-rp"
                                                                         name="disc_rp[]" value="{{ $order->disc_rp }}"
-                                                                        min="0"></td>
+                                                                        min="0" step="500"></td>
                                                                 <td><input type="text" class="form-control subtotal"
                                                                         name="subtotal[]"
                                                                         value="{{ number_format($order->subtotal, 0, ',', ',') }}"
