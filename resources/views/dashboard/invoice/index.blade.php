@@ -104,7 +104,7 @@
                                                                 </svg> Cetak Invoice
                                                             </a>
                                                             @if (Auth::user()->role == 'Super Administrator')
-                                                                <a href="/dashboard/invoice/{{ $transaction->id }}/edit"
+                                                                <a href="/dashboard/invoice/{{ $transaction->id }}/rombak"
                                                                     class="btn btn-sm btn-warning"><svg width="16px"
                                                                         height="16px" viewBox="0 0 24 24"
                                                                         xmlns="http://www.w3.org/2000/svg" fill="#000000">
