@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * PelangganController
+ *
+ * This controller manages the CRUD operations for the "Pelanggan" model (Customers).
+ * It handles listing, creating, editing, updating, and deleting customer records.
+ */
+
 namespace App\Http\Controllers;
 
 use App\Models\Pelanggan;
@@ -11,6 +18,10 @@ class PelangganController extends Controller
 {
     /**
      * Display a listing of the resource.
+     *
+     * Shows a list of customers (Pelanggan) with an optional search filter.
+     *
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -25,6 +36,10 @@ class PelangganController extends Controller
 
     /**
      * Show the form for creating a new resource.
+     *
+     * Displays a form for adding a new customer.
+     *
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -36,6 +51,14 @@ class PelangganController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     *
+     * Handles the creation of a new customer after form submission.
+     *
+     * @param \App\Http\Requests\StorePelangganRequest $request
+     *    Validated request containing customer data.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     *    Redirects to the customer list with a success message.
      */
     public function store(StorePelangganRequest $request)
     {
@@ -47,14 +70,25 @@ class PelangganController extends Controller
 
     /**
      * Display the specified resource.
+     *
+     * Currently not implemented.
+     *
+     * @param \App\Models\Pelanggan $pelanggan
      */
     public function show(Pelanggan $pelanggan)
     {
-        //
+        // Reserved for future use
     }
 
     /**
      * Show the form for editing the specified resource.
+     *
+     * Displays a form to edit an existing customer record.
+     *
+     * @param \App\Models\Pelanggan $regis_pelanggan
+     *    The customer to edit.
+     *
+     * @return \Illuminate\View\View
      */
     public function edit(Pelanggan $regis_pelanggan)
     {
@@ -67,6 +101,16 @@ class PelangganController extends Controller
 
     /**
      * Update the specified resource in storage.
+     *
+     * Updates an existing customer record with new data from the form submission.
+     *
+     * @param \App\Http\Requests\UpdatePelangganRequest $request
+     *    Validated request containing updated customer data.
+     * @param \App\Models\Pelanggan $regis_pelanggan
+     *    The customer record to update.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     *    Redirects to the customer list with a success message.
      */
     public function update(UpdatePelangganRequest $request, Pelanggan $regis_pelanggan)
     {
@@ -78,6 +122,14 @@ class PelangganController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     *
+     * Deletes a customer record from the database.
+     *
+     * @param \App\Models\Pelanggan $regis_pelanggan
+     *    The customer record to delete.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     *    Redirects to the customer list with a success message.
      */
     public function destroy(Pelanggan $regis_pelanggan)
     {

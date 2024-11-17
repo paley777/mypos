@@ -10,6 +10,25 @@ class BarangKeluarController extends Controller
 {
     /**
      * Display a listing of the resource.
+     *
+     * This method is responsible for retrieving and displaying a list of "BarangKeluar" resources.
+     * It fetches the data from the database, optionally applies filters based on user input,
+     * and passes the data to the appropriate view for rendering.
+     *
+     * @return \Illuminate\View\View
+     *    Returns a view containing the list of "BarangKeluar" items to be displayed.
+     *
+     * Functionality:
+     * 1. Sets up the view with required variables:
+     *    - 'active' => Indicates the currently active menu or tab, set to 'arusbarang'.
+     *    - 'breadcrumb' => Used for breadcrumb navigation, set to 'barangkeluar'.
+     *    - 'barangkeluars' => Retrieves a sorted and optionally filtered list of "BarangKeluar" items:
+     *      - The items are sorted in descending order by 'kode_inv'.
+     *      - Applies a filter based on the 'search' query parameter, if provided.
+     * 2. Passes these variables to the view located at 'dashboard.arusbarang.barangkeluar.index'.
+     *
+     * This ensures that the "BarangKeluar" resources are presented to the user with proper context
+     * and functionality for searching and navigating through the data.
      */
     public function index()
     {

@@ -1,6 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+/**
+ * InvoiceController
+ * 
+ * This controller manages the creation, deletion, updating, and printing of invoices.
+ * It ensures that stock levels and transaction records are updated in sync with invoice operations.
+ */
+
+ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Transaction;
@@ -14,7 +21,11 @@ use App\Models\Piutang;
 class InvoiceController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of invoices.
+     * 
+     * Shows a list of all transactions (invoices) in the system.
+     * 
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -24,8 +35,16 @@ class InvoiceController extends Controller
             'transactions' => Transaction::get(),
         ]);
     }
+
     /**
-     * Display a listing of the resource.
+     * Print an invoice.
+     * 
+     * Displays a detailed view of a single invoice, including related customer and order data.
+     * 
+     * @param \App\Models\Transaction $transaction
+     *    The transaction (invoice) to print.
+     * 
+     * @return \Illuminate\View\View
      */
     public function print(Transaction $transaction)
     {
@@ -37,34 +56,48 @@ class InvoiceController extends Controller
             'orders' => Order::where('kode_inv', $transaction->kode_inv)->get(),
         ]);
     }
+
     /**
-     * Remove the specified resource from storage.
+     * Delete an invoice.
+     * 
+     * Removes an invoice and associated orders from the database, returning stock items to inventory.
+     * 
+     * @param \App\Models\Transaction $transaction
+     *    The transaction (invoice) to delete.
+     * 
+     * @return \Illuminate\Http\RedirectResponse
+     *    Redirects to the invoice dashboard with a success message.
      */
     public function destroy(Transaction $transaction)
     {
         // Retrieve all orders associated with the transaction
         $orders = Order::where('kode_inv', $transaction->kode_inv)->get();
 
-        // Loop through each order to return items back to stock
+        // Return items back to stock
         foreach ($orders as $order) {
-            // Get the stock item
             $stokBarang = StokBarang::where('nama_barang', $order->nama_barang)->first();
             if ($stokBarang) {
-                // Add back the quantity to the stock
                 $stokBarang->tambahStok($order->qty);
             }
         }
 
-        // Delete the orders
+        // Delete orders and transaction
         Order::where('kode_inv', $transaction->kode_inv)->delete();
-
-        // Delete the transaction
         Transaction::destroy($transaction->id);
 
         return redirect('/dashboard/invoice')->with('success', 'Invoice telah dihapus!');
     }
+
     /**
-     * Remove the specified resource from storage.
+     * Mark an invoice as paid (LUNAS).
+     * 
+     * Updates the payment status of an invoice to "LUNAS".
+     * 
+     * @param \App\Models\Transaction $transaction
+     *    The transaction (invoice) to mark as paid.
+     * 
+     * @return \Illuminate\Http\RedirectResponse
+     *    Redirects to the invoice dashboard with a success message.
      */
     public function lunas(Transaction $transaction)
     {
@@ -77,6 +110,19 @@ class InvoiceController extends Controller
         return redirect('/dashboard/invoice')->with('success', 'Invoice telah dilunaskan!');
     }
 
+    /**
+     * Update an invoice.
+     * 
+     * Modifies an existing invoice, updating associated orders, stocks, and financial data.
+     * 
+     * @param \Illuminate\Http\Request $request
+     *    The HTTP request containing the updated invoice data.
+     * @param \App\Models\Transaction $transaction
+     *    The transaction (invoice) to update.
+     * 
+     * @return \Illuminate\Http\RedirectResponse
+     *    Redirects to the invoice dashboard with a success message.
+     */
     public function update(Request $request, Transaction $transaction)
     {
         $bayar = intval(str_replace([','], '', $request->bayar));
@@ -96,20 +142,16 @@ class InvoiceController extends Controller
             'subtotal' => 'required|array',
         ]);
 
-        // Retrieve all orders associated with the transaction
+        // Restore stock from old orders
         $orders = Order::where('kode_inv', $transaction->kode_inv)->get();
-
-        // Loop through each order to return items back to stock
         foreach ($orders as $order) {
-            // Get the stock item
             $stokBarang = StokBarang::where('nama_barang', $order->nama_barang)->first();
             if ($stokBarang) {
-                // Add back the quantity to the stock
                 $stokBarang->tambahStok($order->qty);
             }
         }
 
-        // Delete the old orders
+        // Delete old orders and related data
         Order::where('kode_inv', $transaction->kode_inv)->delete();
         BarangKeluar::where('kode_inv', $transaction->kode_inv)->delete();
 
@@ -123,7 +165,7 @@ class InvoiceController extends Controller
             'kembalian' => $kembalian,
         ]);
 
-        // Create new orders
+        // Recreate orders and update stock
         $profit = 0;
         foreach ($validated['nama_barang'] as $key => $nama_barang) {
             $harga_jual = intval(str_replace([','], '', $validated['harga_jual'][$key]));
@@ -142,10 +184,9 @@ class InvoiceController extends Controller
             $modal = Barang::where('nama_barang', $nama_barang)->first()->modal;
             $profit += $subtotal - $modal * $validated['qty'][$key];
 
-            $kurang = $validated['qty'][$key];
             $stokbarang = StokBarang::where('nama_barang', $nama_barang)->first();
             if ($stokbarang) {
-                $stokbarang->kurangStok($kurang);
+                $stokbarang->kurangStok($validated['qty'][$key]);
             }
 
             BarangKeluar::create([
@@ -156,23 +197,23 @@ class InvoiceController extends Controller
             ]);
         }
 
+        // Handle debt (HUTANG) and payment status
         if ($validated['status'] == 'HUTANG') {
             Piutang::create([
                 'kode_inv' => $transaction->kode_inv,
                 'nama_pelanggan' => $validated['nama_pelanggan'],
                 'sisa_bayar' => $kembalian,
                 'harga_asli' => $total,
-                'jatuh_tempo' => $validated['jatuh_tempo']
+                'jatuh_tempo' => $validated['jatuh_tempo'],
             ]);
         } elseif ($validated['status'] == 'LUNAS') {
-            // Check if the Piutang record exists and delete it
             $piutang = Piutang::where('kode_inv', $transaction->kode_inv)->first();
             if ($piutang) {
                 $piutang->delete();
             }
         }
 
-
+        // Update profit
         $transaction->update(['profit' => $profit]);
 
         return redirect('/dashboard/invoice')->with('success', 'Invoice telah diperbarui!');

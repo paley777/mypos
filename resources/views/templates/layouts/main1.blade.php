@@ -5,10 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>MyPOS V2 | Dashboard</title>
-    <link rel="icon" href="{{ asset('storage\container\logo_app_white.png') }}" />
+    <title>MyPOS Version 2.0 | Dashboard</title>
+    <link rel="icon" href="{{ asset('storage\container\icon.png') }}" />
     <!-- App CSS -->
     <link id="theme-style" rel="stylesheet" href="{{ URL::asset('assets/css/portal.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 </head>
 
 <body class="app" style="font-family: Manrope, sans-serif;">
@@ -26,7 +27,7 @@
     </style>
     <!-- Back to top button -->
     <button type="button" class="btn btn-light btn-floating btn-lg" id="btn-back-to-top">
-      
+
         <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
         <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g id="Arrow / Arrow_Up_SM">

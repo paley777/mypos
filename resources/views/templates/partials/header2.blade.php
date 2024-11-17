@@ -220,7 +220,7 @@
                 <a class="app-logo" href="#"><img class="logo-icon me-2"
                         src="{{ asset('storage\container\logo_app.png') }}" alt="logo"><span
                         class="logo-text">MyPOS
-                        V1</span></a>
+                        Version 2.0</span></a>
             </div><!--//app-branding-->
             <nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1">
                 <ul class="app-menu list-unstyled accordion" id="menu-accordion">
