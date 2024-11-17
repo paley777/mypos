@@ -329,6 +329,13 @@
                 sortField: 'text'
             });
 
+            $(document).on('input', '.qty', function() {
+                let qty = parseInt($(this).val());
+                if (qty < 1) {
+                    $(this).val(1);
+                }
+            });
+
             var table = $('#example1').DataTable();
             table.page.len(100).draw();
             $(document).on('click', '.tambah-ke-keranjang', function() {
@@ -345,7 +352,7 @@
                 var satuan = $(this).data("satuan");
                 var stok = $(this).data("stok");
                 var harga_jual = $(this).data("harga_jual");
-                var qty = 0; // Default qty
+                var qty = 1; // Default qty
                 var discountPercent = 0; // Default diskon dalam persentase
                 var discountRp = 0; // Default diskon dalam rupiah
 
