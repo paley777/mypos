@@ -43,7 +43,6 @@ Route::resource('/dashboard/barang-keluar', BarangKeluarController::class)->midd
 Route::resource('/dashboard/regis-pelanggan', PelangganController::class)->middleware('auth');
 Route::get('/dashboard/cashier', [TransactionController::class, 'index'])->middleware('auth');
 Route::get('/dashboard/invoice', [InvoiceController::class, 'index'])->middleware('auth');
-Route::get('/dashboard/invoice/{transaction}/edit', [InvoiceController::class, 'edit'])->middleware('auth');
 Route::get('/dashboard/invoice/{transaction}/rombak', [TransactionController::class, 'rombak_view'])->middleware('auth');
 
 Route::post('/dashboard/invoice/{transaction}/rombak', [TransactionController::class, 'rombak'])->middleware('auth');

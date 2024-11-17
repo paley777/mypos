@@ -56,7 +56,7 @@
                             <div class="col-md-4 position-relative">
                                 <label for="validationCustom01" class="form-label ">Nama Supplier<span
                                         class="text-danger">*</span></label>
-                                <select class="form-select" name="nama_supplier" required>
+                                <select name="nama_supplier" required>
                                     <option value="">Pilih Supplier</option>
                                     @foreach ($suppliers as $supplier)
                                         <option value="{{ $supplier->nama }}">{{ $supplier->nama }}</option>
@@ -66,7 +66,7 @@
                             <div class="col-md-4 position-relative">
                                 <label for="validationCustom01" class="form-label ">Nama Barang<span
                                         class="text-danger">*</span></label>
-                                <select class="form-select" name="nama_barang" required>
+                                <select name="nama_barang" required>
                                     <option value="">Pilih Barang</option>
                                     @foreach ($barangs as $barang)
                                         <option value="{{ $barang->nama_barang }}">{{ $barang->nama_barang }} |
@@ -77,8 +77,10 @@
                             <!-- New Keterangan Input -->
                             <div class="col-md-12 position-relative">
                                 <label for="keterangan" class="form-label">Keterangan</label>
-                                <textarea id="keterangan" class="form-control" name="keterangan" placeholder="Isi Keterangan"></textarea>
+                                <textarea rows="4" style="height: 80px;" id="keterangan" class="form-control" name="keterangan"
+                                    placeholder="Isi Keterangan"></textarea>
                             </div>
+
                             <div class="col-md-2 position-relative">
                                 <label for="validationCustom01" class="form-label">Jumlah Beli<span
                                         class="text-danger">*</span></label>
@@ -108,7 +110,7 @@
                             <!-- New Status Input -->
                             <div class="col-md-4 position-relative">
                                 <label for="status" class="form-label">Status<span class="text-danger">*</span></label>
-                                <select class="form-select" name="status" id="status" required>
+                                <select name="status" id="status" required>
                                     <option value="">Pilih Status</option>
                                     <option value="LUNAS">LUNAS</option>
                                     <option value="HUTANG">HUTANG</option>
@@ -139,7 +141,16 @@
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js"
+        integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css"
+        integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
     <script>
+        $('select').selectize({
+            sortField: 'text'
+        });
+
         document.getElementById("inp").addEventListener("change", function() {
             let v = parseInt(this.value);
             if (v < 1) this.value = 1;
@@ -149,6 +160,23 @@
                 this.value = this.value.replace(/^0/, "1")
             }
         })
+    </script>
+    <script>
+        document.getElementById("inp2").addEventListener("keydown", function(event) {
+            if (event.key === "e" || event.key === "E") {
+                event.preventDefault();
+            }
+        });
+
+        document.getElementById("inp2").addEventListener("change", function() {
+            let v = parseInt(this.value);
+            if (v < 1) this.value = 1;
+        });
+        $("#inp2").on("input", function() {
+            if (/^0/.test(this.value)) {
+                this.value = this.value.replace(/^0/, "1")
+            }
+        });
     </script>
     <script>
         document.getElementById("inp1").addEventListener("change", function() {

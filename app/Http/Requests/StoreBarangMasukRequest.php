@@ -27,7 +27,7 @@ class StoreBarangMasukRequest extends FormRequest
             'nama_supplier' => 'required',
             'nama_barang' => 'required',
             'jumlah_beli' => 'required',
-            'keterangan' => 'required',
+            'keterangan' => 'nullable',
             'status' => 'required',
             'harga_beli_satuan' => 'required',
             'harga_beli_total' => 'required',

@@ -99,6 +99,13 @@
                 this.value = this.value.replace(/^-/, "0");
             }
         });
+
+        // Disable typing 'e' in the input field
+        document.getElementById("inp2").addEventListener("keydown", function(event) {
+            if (event.key === 'e' || event.key === 'E') {
+                event.preventDefault();
+            }
+        });
     </script>
 
     <script>

@@ -77,20 +77,6 @@ class InvoiceController extends Controller
         return redirect('/dashboard/invoice')->with('success', 'Invoice telah dilunaskan!');
     }
 
-    // Edit Route
-    public function edit(Transaction $transaction)
-    {
-        return view('dashboard.invoice.edit', [
-            'active' => 'invoice',
-            'breadcrumb' => 'edit_invoice',
-            'transaction' => $transaction,
-            'pelanggan' => Pelanggan::where('nama', $transaction->nama_pelanggan)->first(),
-            'orders' => Order::where('kode_inv', $transaction->kode_inv)->get(),
-            'stokbarangs' => StokBarang::get(),
-            'allPelanggan' => Pelanggan::all(), // Fetch all customers
-        ]);
-    }
-
     public function update(Request $request, Transaction $transaction)
     {
         $bayar = intval(str_replace([','], '', $request->bayar));

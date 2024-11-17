@@ -82,7 +82,7 @@
                                                             <th class="cell" style="width: 30px;">Stok</th>
                                                             <th class="cell" style="width: 70px;">Harga</th>
                                                             <th class="cell" style="width: 70px;">Qty</th>
-                                                            <th class="cell" style="width: 40px;">Disc (%)</th>
+                                                            <th class="cell" style="width: 70px;">Disc (%)</th>
                                                             <th class="cell" style="width: 70px;">Disc (Rp.)</th>
                                                             <th class="cell" style="width: 70px;">Subtotal</th>
                                                             <th class="cell" style="width: 30px;">Aksi</th>
@@ -195,7 +195,7 @@
                                             <div class="col-md-12 position-relative">
                                                 <label for="validationCustom01" class="form-label ">Nama Pelanggan<span
                                                         class="text-danger">*</span></label>
-                                                <select class="form-select" name="nama_pelanggan" required>
+                                                <select name="nama_pelanggan" required>
                                                     <option value="" selected>Pilih Pelanggan</option>
                                                     @foreach ($pelanggans as $pelanggan)
                                                         <option value="{{ $pelanggan->nama }}"
@@ -212,7 +212,7 @@
                                             <div class="col-md-12 position-relative">
                                                 <label for="validationCustom01" class="form-label ">Status<span
                                                         class="text-danger">*</span></label>
-                                                <select class="form-select" name="status" required>
+                                                <select name="status" required>
                                                     <option value="LUNAS"
                                                         {{ $transaction->status == 'LUNAS' ? 'selected' : '' }}>LUNAS
                                                     </option>
@@ -292,9 +292,6 @@
     <script>
         $(document).ready(function() {
             $('#example').DataTable();
-        });
-        $(document).ready(function() {
-            $('#example1').DataTable();
         });
     </script>
     <script>
@@ -380,156 +377,6 @@
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css"
         integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
-    <script>
-        function escapeHtml(text) {
-            return text
-                .replace(/&/g, "&amp;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;")
-                .replace(/"/g, "&quot;")
-                .replace(/'/g, "&#039;");
-        }
-        $(document).ready(function() {
-            $('select').selectize({
-                sortField: 'text'
-            });
-
-            var table = $('#example1').DataTable();
-            table.page.len(100).draw();
-            $(document).on('click', '.tambah-ke-keranjang', function() {
-                // Mengambil data
-                function formatNumberWithCommas(number) {
-                    return number.toLocaleString('en-US');
-                }
-
-                function removeCommas(str) {
-                    return str.replace(/,/g, '');
-                }
-
-                var nama_barang = $(this).data("nama_barang");
-                var satuan = $(this).data("satuan");
-                var stok = $(this).data("stok");
-                var harga_jual = $(this).data("harga_jual");
-                var qty = 0; // Default qty
-                var discountPercent = 0; // Default diskon dalam persentase
-                var discountRp = 0; // Default diskon dalam rupiah
-
-                // Gunakan escapeHtml untuk mengamankan karakter spesial
-                var escapedNamaBarang = escapeHtml(nama_barang);
-
-                var data = [
-                    ['<input type="text" class="form-control" name="nama_barang[]" value="' +
-                        escapedNamaBarang + '" readonly>', satuan, stok,
-                        '<input  type="text" class="form-control" name="harga_jual[]" value="' +
-                        formatNumberWithCommas(harga_jual) + '" readonly>',
-                        '<input type="number" class="form-control qty" onkeypress="return event.charCode >= 48" id="inp1" name="qty[]" min="1" value="' +
-                        qty + '">',
-                        '<input type="number" class="form-control discount-percent" name="disc_perc[]" value="' +
-                        discountPercent + '"  min="0" max="100">',
-                        '<input type="number" class="form-control discount-rp" name="disc_rp[]" value="' +
-                        discountRp + '" min="0">',
-                        '<input type="text" class="form-control subtotal" name="subtotal[]" value="0" readonly>',
-                        '<button class="btn btn-sm btn-danger text-white hapus-baris"><svg width="16px" height="16px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M18 6L17.1991 18.0129C17.129 19.065 17.0939 19.5911 16.8667 19.99C16.6666 20.3412 16.3648 20.6235 16.0011 20.7998C15.588 21 15.0607 21 14.0062 21H9.99377C8.93927 21 8.41202 21 7.99889 20.7998C7.63517 20.6235 7.33339 20.3412 7.13332 19.99C6.90607 19.5911 6.871 19.065 6.80086 18.0129L6 6M4 6H20M16 6L15.7294 5.18807C15.4671 4.40125 15.3359 4.00784 15.0927 3.71698C14.8779 3.46013 14.6021 3.26132 14.2905 3.13878C13.9376 3 13.523 3 12.6936 3H11.3064C10.477 3 10.0624 3 9.70951 3.13878C9.39792 3.26132 9.12208 3.46013 8.90729 3.71698C8.66405 4.00784 8.53292 4.40125 8.27064 5.18807L8 6M14 10V17M10 10V17" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg></button>'
-                    ]
-                ];
-
-                var tableRow = table.rows.add(data).draw().node();
-                $('.subtotal')
-            });
-            $(document).on('click', '.hapus-baris', function() {
-
-                var table = $('#example1').DataTable();
-                var row = $(this).closest('tr');
-                table.row(row).remove().draw();
-                hitungTotal();
-                // Fungsi untuk menghitung total
-                function hitungTotal() {
-                    var total = 0;
-                    table.rows().every(function() {
-                        var data = this.data();
-                        var subtotal = parseInt(row.find('td:eq(7) input').val().replace(/,/g, ''));
-                        total += subtotal;
-                    });
-                    $('.total').val(total);
-                    $('#kembalian').val(-total);
-                }
-            });
-
-            $(document).on('input', '.qty, .discount-percent, .discount-rp', function() {
-                function formatNumberWithCommas(number) {
-                    return number.toLocaleString('en-US');
-                }
-                var row = $(this).closest('tr');
-                var qty = parseInt(row.find('td:eq(4) input').val());
-                var harga_jual = row.find('td:eq(3) input').val().replace(/,/g, '');
-                var discountPercent = parseInt(row.find('td:eq(5) input').val());
-                var discountRp = parseFloat(row.find('td:eq(6) input').val());
-                var stok = row.find('td:eq(2)').text().replace(/[^0-9.]/g, '');
-                var subtotal = qty * harga_jual;
-                // Batasi qty hingga maksimum stok yang tersedia
-                if (qty > stok) {
-                    qty = stok;
-                    $(this).val(qty);
-                }
-                // Hitung subtotal berdasarkan perubahan qty
-                row.find('td:eq(4) input').val(qty);
-                subtotal = qty * harga_jual;
-
-                // Hitung diskon dalam rupiah
-                var diskonRpAmount = discountRp;
-                row.find('td:eq(6) input').val(discountRp);
-                row.find(
-                    'td:eq(5) input').val(0); // Nolkan diskon dalam persentase
-                subtotal -= diskonRpAmount;
-
-                // Hitung diskon dalam persentase
-                var diskonPercentAmount = subtotal * discountPercent / 100;
-                row.find('td:eq(5) input').val(
-                    discountPercent);
-                subtotal -= diskonPercentAmount;
-                row.find('td:eq(7) input').val(formatNumberWithCommas(subtotal));
-
-                // Update the data in the DataTable
-                var rowData = table.row(row).data();
-                rowData[7] =
-                    '<input type="text" class="form-control" name="subtotal[]" value="' +
-                    formatNumberWithCommas(subtotal) +
-                    '" readonly>';
-                table.row(row).data(rowData).draw();
-                row.find('.qty').val(qty);
-                row.find(
-                    '.discount-percent').val(discountPercent);
-                row.find('.discount-rp').val(discountRp);
-                // Hitung total
-                hitungTotal();
-                // Fungsi untuk menghitung total
-                function hitungTotal() {
-                    var total = 0;
-                    table.rows().every(function() {
-                        var data = this.data();
-                        var subtotal = parseInt(this.data()[7].replace(/[^0-9.]/g, ''));
-                        total += subtotal;
-                    });
-                    $('.total').val(total);
-                    $('#kembalian').val(-total);
-
-                    formatCurrency($('.total'));
-                }
-            });
-        });
-    </script>
-    <script>
-        document.getElementById("inp1").addEventListener("change", function() {
-            let v = parseInt(this.value);
-            if (v < 1) this.value = 1;
-        });
-        $("#inp1").on("input", function() {
-            if (/^0/.test(this.value)) {
-                this.value = this.value.replace(/^0/, "1")
-            }
-        })
-    </script>
-
     <!-- Script JavaScript untuk menampilkan modal -->
     @if (session('success'))
         <script>
@@ -540,80 +387,175 @@
         </script>
     @endif
     <script>
+        function escapeHtml(text) {
+            return text
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        function formatNumber(number) {
+            return number.toLocaleString('en-US');
+        }
+
+        function removeCommas(str) {
+            return str.replace(/,/g, '');
+        }
+
+        function formatCurrency(input, blur = false) {
+            let inputVal = input.val();
+            if (!inputVal) return;
+
+            // Remove non-numeric characters except for the decimal point
+            inputVal = inputVal.replace(/[^0-9.]/g, '');
+
+            // Split the input value into integer and decimal parts
+            const parts = inputVal.split('.');
+            let integerPart = parts[0];
+            const decimalPart = parts[1] ? parts[1].substring(0, 2) : '';
+
+            // Format the integer part with commas
+            integerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+            // Combine the integer and decimal parts
+            inputVal = decimalPart ? `${integerPart}.${decimalPart}` : integerPart;
+
+            // Set the formatted value back to the input
+            input.val(inputVal);
+
+            // Adjust the caret position
+            const originalLen = inputVal.length;
+            let caretPos = input.prop("selectionStart");
+            const updatedLen = inputVal.length;
+            caretPos = updatedLen - originalLen + caretPos;
+            input[0].setSelectionRange(caretPos, caretPos);
+        }
         $(document).ready(function() {
-            // Event listener for the 'bayar' input field
-            $('#bayar').on('input', function() {
-                // Get the values of 'bayar' and 'total' inputs
-                const bayar = parseFloat($(this).val().replace(/,/g, '')) || 0;
-                const total = parseFloat($('#total').val().replace(/,/g, '')) || 0;
+            // Initialize Selectize
+            $('select').selectize({
+                sortField: 'text'
+            });
 
-                // Calculate the 'kembalian'
-                const kembalian = bayar - total;
+            // Enforce minimum quantity of 1
+            $(document).on('input', '.qty', function() {
+                const qty = Math.max(parseInt($(this).val()) || 1, 1);
+                $(this).val(qty);
+            });
 
-                // Update the 'kembalian' input field
-                $('#kembalian').val(formatNumber(kembalian.toString()));
-                if (bayar < total) {
-                    const kembalians = "-" + $('#kembalian').val();
+            // Initialize DataTable with default page length
+            const table = $('#example1').DataTable({
+                scrollX: true, // Enables horizontal scrolling
+                autoWidth: false, // Prevents automatic width calculation
+                columnDefs: [{
+                        width: '150px',
+                        targets: 0
+                    },
+                    {
+                        width: '50px',
+                        targets: 1
+                    },
+                    {
+                        width: '30px',
+                        targets: 2
+                    },
+                    {
+                        width: '70px',
+                        targets: [3, 4, 5, 6, 7]
+                    },
+                    {
+                        width: '30px',
+                        targets: 8
+                    }
+                ]
+            });
 
-                    $('#kembalian').val(kembalians);
-                }
+            // Add item to the cart
+            // Add item to the cart
+            $(document).on('click', '.tambah-ke-keranjang', function() {
+                const price = $(this).data("harga_jual");
+                const defaultQty = 1;
+                const subtotal = price * defaultQty;
 
+                const data = [
+                    escapeHtml($(this).data("nama_barang")),
+                    $(this).data("satuan"),
+                    $(this).data("stok"),
+                    formatNumber(price),
+                    defaultQty, // Default quantity
+                    0, // Default discount percent
+                    0, // Default discount amount
+                    formatNumber(subtotal), // Calculate subtotal
+                ];
 
+                const rowHtml = `
+    <tr>
+        <td><input type="text" class="form-control" name="nama_barang[]" value="${data[0]}" readonly></td>
+        <td>${data[1]}</td>
+        <td>${data[2]}</td>
+        <td><input type="text" class="form-control" name="harga_jual[]" value="${data[3]}" readonly></td>
+        <td><input type="number" class="form-control qty" name="qty[]" value="${data[4]}" min="1"></td>
+        <td><input type="number" class="form-control discount-percent" name="disc_perc[]" value="${data[5]}" min="0" max="100"></td>
+        <td><input type="number" class="form-control discount-rp" name="disc_rp[]" value="${data[6]}" min="0" step="500"></td>
+        <td><input type="text" class="form-control subtotal" name="subtotal[]" value="${data[7]}" readonly></td>
+        <td><button class="btn btn-sm btn-danger text-white hapus-baris">Remove</button></td>
+    </tr>`;
+                table.row.add($(rowHtml)).draw();
+                updateTotal();
             });
 
 
-        });
+            // Remove row from the cart
+            $(document).on('click', '.hapus-baris', function() {
+                table.row($(this).closest('tr')).remove().draw();
+                updateTotal();
+            });
 
-        // Function to format numbers with commas
-        function formatNumber(n) {
-            return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        }
+            // Update subtotal and total when quantity, discount percent, or discount amount changes
+            $(document).on('input', '.qty, .discount-percent, .discount-rp', function() {
+                const row = $(this).closest('tr');
+                const qty = Math.max(parseInt(row.find('.qty').val()) || 1, 1);
+                const price = parseFloat(removeCommas(row.find('[name="harga_jual[]"]').val())) || 0;
+                const discountPercent = parseFloat(row.find('.discount-percent').val()) || 0;
+                const discountAmount = parseFloat(row.find('.discount-rp').val()) || 0;
 
-        // Function to format currency
-        function formatCurrency(input, blur) {
-            var input_val = input.val();
+                // Update subtotal
+                let subtotal = qty * price - discountAmount;
+                subtotal -= subtotal * (discountPercent / 100);
+                row.find('.subtotal').val(formatNumber(subtotal));
 
-            if (input_val === "") {
-                return;
+                updateTotal();
+            });
+
+            // Update total and change due
+            function updateTotal() {
+                let total = 0;
+                table.rows().every(function() {
+                    const row = this.node();
+                    total += parseFloat(removeCommas($(row).find('.subtotal').val())) || 0;
+                });
+
+                $('.total').val(formatNumber(total));
+
+                const payment = parseFloat(removeCommas($('#bayar').val())) || 0;
+                $('#kembalian').val(formatNumber(payment - total));
             }
 
-            var original_len = input_val.length;
-            var caret_pos = input.prop("selectionStart");
+            // Calculate change when payment is updated
+            $('#bayar').on('input', function() {
+                updateTotal();
+            });
 
-            if (input_val.indexOf(".") >= 0) {
-                var decimal_pos = input_val.indexOf(".");
-                var left_side = input_val.substring(0, decimal_pos);
-                var right_side = input_val.substring(decimal_pos);
-
-                left_side = formatNumber(left_side);
-                right_side = formatNumber(right_side);
-
-                if (blur === "blur") {
-                    right_side += "";
+            // Format currency fields
+            $("input[data-type='currency']").on({
+                keyup: function() {
+                    formatCurrency($(this));
+                },
+                blur: function() {
+                    formatCurrency($(this), true);
                 }
-
-                right_side = right_side.substring(0, 2);
-                input_val = left_side + "." + right_side;
-            } else {
-                input_val = formatNumber(input_val);
-                if (blur === "blur") {
-                    input_val += "";
-                }
-            }
-
-            input.val(input_val);
-            var updated_len = input_val.length;
-            caret_pos = updated_len - original_len + caret_pos;
-            input[0].setSelectionRange(caret_pos, caret_pos);
-        }
-
-        $("input[data-type='currency']").on({
-            keyup: function() {
-                formatCurrency($(this));
-            },
-            blur: function() {
-                formatCurrency($(this), "blur");
-            }
+            });
         });
     </script>
 @endsection
