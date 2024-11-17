@@ -142,7 +142,7 @@
                                             <div class="col-md-12 position-relative">
                                                 <label for="validationCustom01" class="form-label ">Nama Pelanggan<span
                                                         class="text-danger">*</span></label>
-                                                <select class="form-select" name="nama_pelanggan" required>
+                                                <select name="nama_pelanggan" required>
                                                     <option value="" selected>Pilih Pelanggan</option>
                                                     @foreach ($pelanggans as $pelanggan)
                                                         <option value="{{ $pelanggan->nama }}">{{ $pelanggan->nama }}
@@ -154,7 +154,7 @@
                                             <div class="col-md-12 position-relative">
                                                 <label for="validationCustom01" class="form-label ">Status<span
                                                         class="text-danger">*</span></label>
-                                                <select class="form-select" name="status" required>
+                                                <select name="status" required>
                                                     <option value="">Pilih Status</option>
                                                     <option value="LUNAS">LUNAS</option>
                                                     <option value="HUTANG">HUTANG</option>
