@@ -83,7 +83,7 @@
                                                             <th class="cell" style="width: 30px;">Stok</th>
                                                             <th class="cell" style="width: 70px;">Harga</th>
                                                             <th class="cell" style="width: 70px;">Qty</th>
-                                                            <th class="cell" style="width: 40px;">Disc (%)</th>
+                                                            <th class="cell" style="width: 70px;">Disc (%)</th>
                                                             <th class="cell" style="width: 70px;">Disc (Rp.)</th>
                                                             <th class="cell" style="width: 70px;">Subtotal</th>
                                                             <th class="cell" style="width: 30px;">Aksi</th>
@@ -381,37 +381,65 @@
 
             // Initialize DataTable with default page length
             const table = $('#example1').DataTable({
-                pageLength: 100
+                scrollX: true, // Enables horizontal scrolling
+                autoWidth: false, // Prevents automatic width calculation
+                columnDefs: [{
+                        width: '150px',
+                        targets: 0
+                    },
+                    {
+                        width: '50px',
+                        targets: 1
+                    },
+                    {
+                        width: '30px',
+                        targets: 2
+                    },
+                    {
+                        width: '70px',
+                        targets: [3, 4, 5, 6, 7]
+                    },
+                    {
+                        width: '30px',
+                        targets: 8
+                    }
+                ]
             });
 
             // Add item to the cart
+            // Add item to the cart
             $(document).on('click', '.tambah-ke-keranjang', function() {
+                const price = $(this).data("harga_jual");
+                const defaultQty = 1;
+                const subtotal = price * defaultQty;
+
                 const data = [
                     escapeHtml($(this).data("nama_barang")),
                     $(this).data("satuan"),
                     $(this).data("stok"),
-                    formatNumber($(this).data("harga_jual")),
-                    1, // Default quantity
+                    formatNumber(price),
+                    defaultQty, // Default quantity
                     0, // Default discount percent
                     0, // Default discount amount
-                    0, // Default subtotal
+                    formatNumber(subtotal), // Calculate subtotal
                 ];
 
                 const rowHtml = `
-                <tr>
-                    <td><input type="text" class="form-control" name="nama_barang[]" value="${data[0]}" readonly></td>
-                    <td>${data[1]}</td>
-                    <td>${data[2]}</td>
-                    <td><input type="text" class="form-control" name="harga_jual[]" value="${data[3]}" readonly></td>
-                    <td><input type="number" class="form-control qty" name="qty[]" value="${data[4]}" min="1"></td>
-                    <td><input type="number" class="form-control discount-percent" name="disc_perc[]" value="${data[5]}" min="0" max="100"></td>
-                    <td><input type="number" class="form-control discount-rp" name="disc_rp[]" value="${data[6]}" min="0" step="500"></td>
-                    <td><input type="text" class="form-control subtotal" name="subtotal[]" value="${data[7]}" readonly></td>
-                    <td><button class="btn btn-sm btn-danger text-white hapus-baris">Remove</button></td>
-                </tr>`;
+    <tr>
+        <td><input type="text" class="form-control" name="nama_barang[]" value="${data[0]}" readonly></td>
+        <td>${data[1]}</td>
+        <td>${data[2]}</td>
+        <td><input type="text" class="form-control" name="harga_jual[]" value="${data[3]}" readonly></td>
+        <td><input type="number" class="form-control qty" name="qty[]" value="${data[4]}" min="1"></td>
+        <td><input type="number" class="form-control discount-percent" name="disc_perc[]" value="${data[5]}" min="0" max="100"></td>
+        <td><input type="number" class="form-control discount-rp" name="disc_rp[]" value="${data[6]}" min="0" step="500"></td>
+        <td><input type="text" class="form-control subtotal" name="subtotal[]" value="${data[7]}" readonly></td>
+        <td><button class="btn btn-sm btn-danger text-white hapus-baris">Remove</button></td>
+    </tr>`;
                 table.row.add($(rowHtml)).draw();
                 updateTotal();
             });
+
 
             // Remove row from the cart
             $(document).on('click', '.hapus-baris', function() {
