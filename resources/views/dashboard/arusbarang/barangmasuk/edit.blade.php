@@ -166,7 +166,23 @@
             });
         });
     </script>
+    <script>
+        document.getElementById("inp2").addEventListener("keydown", function(event) {
+            if (event.key === "e" || event.key === "E") {
+                event.preventDefault();
+            }
+        });
 
+        document.getElementById("inp2").addEventListener("change", function() {
+            let v = parseInt(this.value);
+            if (v < 1) this.value = 1;
+        });
+        $("#inp2").on("input", function() {
+            if (/^0/.test(this.value)) {
+                this.value = this.value.replace(/^0/, "1")
+            }
+        });
+    </script>
     <script>
         document.getElementById("inp").addEventListener("change", function() {
             let v = parseInt(this.value);
