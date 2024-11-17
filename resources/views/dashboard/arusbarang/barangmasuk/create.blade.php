@@ -77,8 +77,10 @@
                             <!-- New Keterangan Input -->
                             <div class="col-md-12 position-relative">
                                 <label for="keterangan" class="form-label">Keterangan</label>
-                                <textarea id="keterangan" class="form-control" name="keterangan" placeholder="Isi Keterangan"></textarea>
+                                <textarea rows="4" style="height: 80px;" id="keterangan" class="form-control" name="keterangan"
+                                    placeholder="Isi Keterangan"></textarea>
                             </div>
+
                             <div class="col-md-2 position-relative">
                                 <label for="validationCustom01" class="form-label">Jumlah Beli<span
                                         class="text-danger">*</span></label>

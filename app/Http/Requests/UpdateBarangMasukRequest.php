@@ -26,6 +26,8 @@ class UpdateBarangMasukRequest extends FormRequest
             'nama_penerima' => 'required',
             'nama_supplier' => 'required',
             'nama_barang' => 'required',
+            'keterangan' => 'nullable',
+            'status' => 'required',
             'jumlah_beli' => 'required',
             'harga_beli_satuan' => 'required',
             'harga_beli_total' => 'required',
