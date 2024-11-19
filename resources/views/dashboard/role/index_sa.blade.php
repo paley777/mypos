@@ -29,6 +29,41 @@
                         </div><!--//app-card-body-->
                     </div><!--//inner-->
                 </div><!--//app-card-->
+                <!-- Stats Section -->
+                <div class="row g-4 mb-4">
+                    <div class="col-6 col-lg-3">
+                        <div class="app-card app-card-stat shadow-sm h-100">
+                            <div class="app-card-body p-3 p-lg-4 text-center">
+                                <h4 class="stats-type mb-1">Total Profit Hari Ini</h4>
+                                <div class="stats-figure text-primary fw-bold">@currency($total_profit)</div>
+                            </div>
+                        </div><!--//app-card-->
+                    </div><!--//col-->
+                    <div class="col-6 col-lg-3">
+                        <div class="app-card app-card-stat shadow-sm h-100">
+                            <div class="app-card-body p-3 p-lg-4 text-center">
+                                <h4 class="stats-type mb-1">Total Piutang</h4>
+                                <div class="stats-figure text-danger fw-bold">@currency($total_piutang)</div>
+                            </div>
+                        </div><!--//app-card-->
+                    </div><!--//col-->
+                    <div class="col-6 col-lg-3">
+                        <div class="app-card app-card-stat shadow-sm h-100">
+                            <div class="app-card-body p-3 p-lg-4 text-center">
+                                <h4 class="stats-type mb-1">Total Barang</h4>
+                                <div class="stats-figure text-success fw-bold">{{ $total_barang }}</div>
+                            </div>
+                        </div><!--//app-card-->
+                    </div><!--//col-->
+                    <div class="col-6 col-lg-3">
+                        <div class="app-card app-card-stat shadow-sm h-100">
+                            <div class="app-card-body p-3 p-lg-4 text-center">
+                                <h4 class="stats-type mb-1">Total Invoice Hari Ini</h4>
+                                <div class="stats-figure text-warning fw-bold">{{ $total_inv }}</div>
+                            </div>
+                        </div><!--//app-card-->
+                    </div><!--//col-->
+                </div><!--//row-->
                 <!-- Table and Chart Section -->
                 <div class="row g-4 mb-4">
                     <!-- Table -->
@@ -69,42 +104,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Stats Section -->
-                <div class="row g-4 mb-4">
-                    <div class="col-6 col-lg-3">
-                        <div class="app-card app-card-stat shadow-sm h-100">
-                            <div class="app-card-body p-3 p-lg-4 text-center">
-                                <h4 class="stats-type mb-1">Total Profit Hari Ini</h4>
-                                <div class="stats-figure text-primary fw-bold">@currency($total_profit)</div>
-                            </div>
-                        </div><!--//app-card-->
-                    </div><!--//col-->
-                    <div class="col-6 col-lg-3">
-                        <div class="app-card app-card-stat shadow-sm h-100">
-                            <div class="app-card-body p-3 p-lg-4 text-center">
-                                <h4 class="stats-type mb-1">Total Barang</h4>
-                                <div class="stats-figure text-success fw-bold">{{ $total_barang }}</div>
-                            </div>
-                        </div><!--//app-card-->
-                    </div><!--//col-->
-                    <div class="col-6 col-lg-3">
-                        <div class="app-card app-card-stat shadow-sm h-100">
-                            <div class="app-card-body p-3 p-lg-4 text-center">
-                                <h4 class="stats-type mb-1">Total Stok</h4>
-                                <div class="stats-figure text-warning fw-bold">{{ $total_stok }}</div>
-                            </div>
-                        </div><!--//app-card-->
-                    </div><!--//col-->
-                    <div class="col-6 col-lg-3">
-                        <div class="app-card app-card-stat shadow-sm h-100">
-                            <div class="app-card-body p-3 p-lg-4 text-center">
-                                <h4 class="stats-type mb-1">Total Invoice Hari Ini</h4>
-                                <div class="stats-figure text-danger fw-bold">{{ $total_inv }}</div>
-                            </div>
-                        </div><!--//app-card-->
-                    </div><!--//col-->
-                </div><!--//row-->
-
                 <!-- Feature Cards -->
                 <div class="row g-4 mb-4">
                     <div class="col-12 col-lg-4">
@@ -176,6 +175,74 @@
                             </div><!--//app-card-footer-->
                         </div><!--//app-card-->
                     </div><!--//col-->
+                    <!-- New Features -->
+                    <div class="col-12 col-lg-4">
+                        <div class="app-card app-card-basic d-flex flex-column align-items-start shadow-sm">
+                            <div class="app-card-header p-3 border-bottom-0">
+                                <div class="row align-items-center gx-3">
+                                    <div class="col-auto">
+                                        <div class="app-icon-holder">
+                                            <i class="bi bi-clipboard-data fs-3 text-info"></i>
+                                        </div><!--//icon-holder-->
+                                    </div><!--//col-->
+                                    <div class="col-auto">
+                                        <h4 class="app-card-title">Piutang</h4>
+                                    </div><!--//col-->
+                                </div><!--//row-->
+                            </div><!--//app-card-header-->
+                            <div class="app-card-body px-4">
+                                <p class="intro">Kelola data piutang pelanggan dengan mudah.</p>
+                            </div><!--//app-card-body-->
+                            <div class="app-card-footer p-4 mt-auto">
+                                <a class="btn btn-primary" href="/dashboard/piutang">Akses Fitur</a>
+                            </div><!--//app-card-footer-->
+                        </div><!--//app-card-->
+                    </div><!--//col-->
+                    <div class="col-12 col-lg-4">
+                        <div class="app-card app-card-basic d-flex flex-column align-items-start shadow-sm">
+                            <div class="app-card-header p-3 border-bottom-0">
+                                <div class="row align-items-center gx-3">
+                                    <div class="col-auto">
+                                        <div class="app-icon-holder">
+                                            <i class="bi bi-bar-chart-line fs-3 text-danger"></i>
+                                        </div><!--//icon-holder-->
+                                    </div><!--//col-->
+                                    <div class="col-auto">
+                                        <h4 class="app-card-title">Laporan Penjualan</h4>
+                                    </div><!--//col-->
+                                </div><!--//row-->
+                            </div><!--//app-card-header-->
+                            <div class="app-card-body px-4">
+                                <p class="intro">Akses laporan penjualan untuk melihat kinerja penjualan.</p>
+                            </div><!--//app-card-body-->
+                            <div class="app-card-footer p-4 mt-auto">
+                                <a class="btn btn-primary" href="/dashboard/report/penjualan">Akses Fitur</a>
+                            </div><!--//app-card-footer-->
+                        </div><!--//app-card-->
+                    </div><!--//col-->
+                    <div class="col-12 col-lg-4">
+                        <div class="app-card app-card-basic d-flex flex-column align-items-start shadow-sm">
+                            <div class="app-card-header p-3 border-bottom-0">
+                                <div class="row align-items-center gx-3">
+                                    <div class="col-auto">
+                                        <div class="app-icon-holder">
+                                            <i class="bi bi-box-seam fs-3 text-secondary"></i>
+                                        </div><!--//icon-holder-->
+                                    </div><!--//col-->
+                                    <div class="col-auto">
+                                        <h4 class="app-card-title">Stok Barang</h4>
+                                    </div><!--//col-->
+                                </div><!--//row-->
+                            </div><!--//app-card-header-->
+                            <div class="app-card-body px-4">
+                                <p class="intro">Kelola dan lihat informasi stok barang yang tersedia.</p>
+                            </div><!--//app-card-body-->
+                            <div class="app-card-footer p-4 mt-auto">
+                                <a class="btn btn-primary" href="/dashboard/stok-barang">Akses Fitur</a>
+                            </div><!--//app-card-footer-->
+                        </div><!--//app-card-->
+                    </div><!--//col-->
+
                 </div><!--//row-->
             </div><!--//container-xl-->
         </div><!--//app-content-->

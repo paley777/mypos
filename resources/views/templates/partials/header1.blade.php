@@ -202,7 +202,7 @@
                                             </g>
                                         </g>
                                     </g>
-                                </svg></a>
+                                </svg> {{ Auth::user()->nama }}</a>
                             <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
                                 <li><a class="dropdown-item" href="/dashboard/my-profile">Akun Saya</a></li>
                                 <li>

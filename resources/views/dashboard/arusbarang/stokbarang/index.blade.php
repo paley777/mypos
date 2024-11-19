@@ -2,10 +2,10 @@
 
 @section('container')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css">
     <div class="app-wrapper">
         <div class="app-content pt-3 p-md-3 p-lg-4">
             <div class="container-xl">
-
                 <div class="row g-3 mb-4 align-items-center justify-content-between">
                     <div class="col-auto">
                         <h1 class="app-page-title mb-0">Stok Barang</h1>
@@ -37,17 +37,18 @@
                     <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
                         <div class="app-card app-card-orders-table shadow-sm mb-5">
                             <div class="app-card-body">
-                                @if (Auth::user()->role == 'Super Administrator')
                                 <div class="table-responsive p-4">
-                                    <table id="example" class="table app-table-hover mb-0 text-left">
-                                        <thead>
+                                    <table id="example" class="table table-hover table-bordered mb-0">
+                                        <thead class="table-primary">
                                             <tr>
                                                 <th class="cell">No.</th>
                                                 <th class="cell">Nama Barang</th>
                                                 <th class="cell">Satuan</th>
                                                 <th class="cell">Stok</th>
                                                 <th class="cell">Harga Jual</th>
-                                                <th class="cell">Aksi</th>
+                                                @if (Auth::user()->role == 'Super Administrator')
+                                                    <th class="cell">Aksi</th>
+                                                @endif
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -58,68 +59,45 @@
                                                     <td>{{ $stokbarang->satuan }}</td>
                                                     <td>{{ $stokbarang->stok }}</td>
                                                     <td>@currency($stokbarang->harga_jual)</td>
-                                                    <td> <a href="/dashboard/stok-barang/{{ $stokbarang->id }}/edit"
-                                                            class="btn btn-sm btn-warning"><svg width="16px"
-                                                                height="16px" viewBox="0 0 24 24"
-                                                                xmlns="http://www.w3.org/2000/svg" fill="#000000">
-                                                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
-                                                                    stroke-linejoin="round"></g>
-                                                                <g id="SVGRepo_iconCarrier">
-                                                                    <title></title>
-                                                                    <g id="Complete">
-                                                                        <g id="edit">
-                                                                            <g>
-                                                                                <path
-                                                                                    d="M20,16v4a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V6A2,2,0,0,1,4,4H8"
-                                                                                    fill="none" stroke="#000000"
-                                                                                    stroke-linecap="round"
-                                                                                    stroke-linejoin="round"
-                                                                                    stroke-width="2"></path>
-                                                                                <polygon fill="none"
-                                                                                    points="12.5 15.8 22 6.2 17.8 2 8.3 11.5 8 16 12.5 15.8"
-                                                                                    stroke="#000000" stroke-linecap="round"
-                                                                                    stroke-linejoin="round"
-                                                                                    stroke-width="2"></polygon>
+                                                    @if (Auth::user()->role == 'Super Administrator')
+                                                        <td>
+                                                            <a href="/dashboard/stok-barang/{{ $stokbarang->id }}/edit"
+                                                                class="btn btn-sm btn-warning"><svg width="16px"
+                                                                    height="16px" viewBox="0 0 24 24"
+                                                                    xmlns="http://www.w3.org/2000/svg" fill="#000000">
+                                                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                                        stroke-linejoin="round"></g>
+                                                                    <g id="SVGRepo_iconCarrier">
+                                                                        <title></title>
+                                                                        <g id="Complete">
+                                                                            <g id="edit">
+                                                                                <g>
+                                                                                    <path
+                                                                                        d="M20,16v4a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V6A2,2,0,0,1,4,4H8"
+                                                                                        fill="none" stroke="#000000"
+                                                                                        stroke-linecap="round"
+                                                                                        stroke-linejoin="round"
+                                                                                        stroke-width="2"></path>
+                                                                                    <polygon fill="none"
+                                                                                        points="12.5 15.8 22 6.2 17.8 2 8.3 11.5 8 16 12.5 15.8"
+                                                                                        stroke="#000000"
+                                                                                        stroke-linecap="round"
+                                                                                        stroke-linejoin="round"
+                                                                                        stroke-width="2"></polygon>
+                                                                                </g>
                                                                             </g>
                                                                         </g>
                                                                     </g>
-                                                                </g>
-                                                            </svg> Ubah</a></td>
+                                                                </svg> Ubah
+                                                            </a>
+                                                        </td>
+                                                    @endif
                                                 </tr>
                                             @endforeach
                                         </tbody>
                                     </table>
                                 </div><!--//table-responsive-->
-                                @else
-                                <div class="table-responsive p-4">
-                                    <table id="example" class="table app-table-hover mb-0 text-left">
-                                        <thead>
-                                            <tr>
-                                                <th class="cell">No.</th>
-                                                <th class="cell">Nama Barang</th>
-                                                <th class="cell">Satuan</th>
-                                                <th class="cell">Stok</th>
-                                                <th class="cell">Harga Jual</th>
-                                             
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($stokbarangs as $key => $stokbarang)
-                                                <tr>
-                                                    <td>{{ $loop->iteration }}</td>
-                                                    <td>{{ $stokbarang->nama_barang }}</td>
-                                                    <td>{{ $stokbarang->satuan }}</td>
-                                                    <td>{{ $stokbarang->stok }}</td>
-                                                    <td>@currency($stokbarang->harga_jual)</td>
-                                                    
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div><!--//table-responsive-->
-                                @endif
-                              
                             </div><!--//app-card-body-->
                         </div><!--//app-card-->
                     </div><!--//tab-pane-->
@@ -129,9 +107,35 @@
     </div><!--//app-wrapper-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
+    <style>
+        /* Add spacing for search bar */
+        div.dataTables_wrapper div.dataTables_filter {
+            margin-bottom: 1rem;
+        }
+    </style>
     <script>
         $(document).ready(function() {
-            $('#example').DataTable();
+            $('#example').DataTable({
+                dom: 'lBfrtip', // Added "l" for length changing input
+                buttons: [
+                    {
+                        extend: 'excelHtml5',
+                        text: '<i class="bi bi-file-earmark-excel"></i> Export Excel',
+                        className: 'btn btn-sm btn-success'
+                    }
+                ],
+                lengthMenu: [10, 25, 50, 100], // Custom length options
+                language: {
+                    search: "Cari:",
+                    lengthMenu: "Tampilkan _MENU_ data per halaman",
+                    zeroRecords: "Tidak ada data ditemukan",
+                    info: "Menampilkan _START_ hingga _END_ dari _TOTAL_ data",
+                    infoEmpty: "Tidak ada data tersedia",
+                    infoFiltered: "(disaring dari _MAX_ total data)"
+                }
+            });
         });
     </script>
 @endsection

@@ -17,6 +17,7 @@ use App\Models\BarangKeluar;
 use App\Models\User;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Models\StokBarang;
+use App\Models\Piutang;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -52,7 +53,7 @@ class DashboardController extends Controller
                 'breadcrumb' => 'beranda',
                 'total_profit' => Transaction::whereDate('created_at', today())->sum('profit'),
                 'total_barang' => Barang::count(),
-                'total_stok' => StokBarang::sum('stok'),
+                'total_piutang' => Piutang::sum('sisa_bayar'),
                 'total_inv' => Transaction::whereDate('created_at', today())->count(),
                 'profits' => $profits,
             ]);
