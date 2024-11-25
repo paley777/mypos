@@ -1,8 +1,8 @@
 <a href="https://ibb.co/w79WMN9"><img src="https://i.ibb.co/w79WMN9/logo-app.png" alt="logo-app" border="0"></a>
 
-# MyPOS V2 | Point of Sales Integrated Systems
+# MyPOS Version 2.0 | Point of Sales Integrated Systems
 
-MyPOS V2 is a website-based integrated point of sales system using the Laravel Framework. This system has the features needed by a POS system, starting from management of goods flow, stock, cashier, invoices to reporting.
+MyPOS Version 2.0 is a website-based integrated point of sales system using the Laravel Framework. This system has the features needed by a POS system, starting from management of goods flow, stock, cashier, invoices to reporting.
 
 ## Integration
 Apart from using Laravel 10, this system also integrates the Bootstrap Framework as a front-end. This system uses SQL and Jquery databases.
@@ -14,17 +14,19 @@ Apart from using Laravel 10, this system also integrates the Bootstrap Framework
 - Cashier System
 - Invoices
 - Reporting
+- Returns Management
+- Receivables Management
   
 ## System Features
 
-- Laravel 8
 - Using Eloquent from Laravel
 - Templates for headers and footers
 - Full CRUD integration
 - Authentication from Laravel
-- Pagination
-- Search Data
 - Account Role: Super Admin, Admin, Cashier
+- Cashier System
+- Returns and Receivables management
+- Sales Summary
 
 ## Optimization
 
@@ -89,10 +91,13 @@ Start the server
 ```
 
 ## Screenshots
+![image](https://github.com/user-attachments/assets/054212d5-18bd-4b03-a2a1-5f529d515e24)
+![image](https://github.com/user-attachments/assets/b3b88198-9723-4cee-92c2-452a1c972f97)
+![image](https://github.com/user-attachments/assets/2e6b58a0-7458-46cc-a8cf-6624d6f37f44)
+![image](https://github.com/user-attachments/assets/72bff507-47ee-4825-91eb-086599563ca2)
 
-![image](https://github.com/paley777/mypos/assets/97278264/28f6eed1-2c6c-438f-8eeb-a647c29bc9fc)
-![image](https://github.com/paley777/mypos/assets/97278264/4fdc36c5-841c-47e9-ab61-96533c625045)
-![image](https://github.com/paley777/mypos/assets/97278264/4c318138-2fbd-46f9-87a8-da683e834624)
+## Contributions
+Thanks to @DemuraAIdev for contribution in Version 2.0
 
 ## Suggestion
 For suggestions and input on this system, please email valleryan1212@gmail.com
