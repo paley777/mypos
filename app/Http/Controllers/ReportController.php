@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * ReportController
+ *
+ * This controller handles the generation and display of various reports, including stock reports,
+ * transaction histories, and daily sales summaries. It provides filtered and sorted data views
+ * for analysis and decision-making.
+ */
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -13,7 +21,11 @@ use App\Models\Order;
 class ReportController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display the report for incoming goods (Barang Masuk).
+     *
+     * Shows a list of incoming goods records, optionally filtered by search.
+     *
+     * @return \Illuminate\View\View
      */
     public function barang_masuk()
     {
@@ -25,8 +37,13 @@ class ReportController extends Controller
                 ->get(),
         ]);
     }
+
     /**
-     * Display a listing of the resource.
+     * Display the report for outgoing goods (Barang Keluar).
+     *
+     * Shows a list of outgoing goods records, optionally filtered by search.
+     *
+     * @return \Illuminate\View\View
      */
     public function barang_keluar()
     {
@@ -38,8 +55,13 @@ class ReportController extends Controller
                 ->get(),
         ]);
     }
+
     /**
-     * Display a listing of the resource.
+     * Display the report for stock items.
+     *
+     * Shows a list of all stock items, optionally filtered by search.
+     *
+     * @return \Illuminate\View\View
      */
     public function stok_barang()
     {
@@ -51,8 +73,13 @@ class ReportController extends Controller
                 ->get(),
         ]);
     }
+
     /**
-     * Display a listing of the resource.
+     * Display the report for invoices.
+     *
+     * Shows a list of all transactions (invoices).
+     *
+     * @return \Illuminate\View\View
      */
     public function invoice()
     {
@@ -62,8 +89,13 @@ class ReportController extends Controller
             'transactions' => Transaction::get(),
         ]);
     }
+
     /**
-     * Display a listing of the resource.
+     * Display the report for orders.
+     *
+     * Shows a list of all orders associated with transactions.
+     *
+     * @return \Illuminate\View\View
      */
     public function order()
     {
@@ -74,12 +106,20 @@ class ReportController extends Controller
         ]);
     }
 
-
+    /**
+     * Display the daily sales report.
+     *
+     * Shows a summary of daily transactions, including debt (Piutang) and sales data.
+     * Adjusts payment values to exclude overpayment (kembalian) for non-debt transactions.
+     *
+     * @param \Illuminate\Http\Request $request
+     *    The HTTP request containing any additional filters or parameters.
+     *
+     * @return \Illuminate\View\View
+     */
     public function daily(Request $request)
     {
-        $transactions = Transaction::leftJoin('piutangs', 'transactions.kode_inv', '=', 'piutangs.kode_inv')
-            ->select('transactions.*', 'piutangs.sisa_bayar')
-            ->get();
+        $transactions = Transaction::leftJoin('piutangs', 'transactions.kode_inv', '=', 'piutangs.kode_inv')->select('transactions.*', 'piutangs.sisa_bayar')->get();
 
         foreach ($transactions as $transaction) {
             if ($transaction->status != 'HUTANG') {

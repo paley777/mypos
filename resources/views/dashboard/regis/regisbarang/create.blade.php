@@ -24,7 +24,7 @@
                         <div class="row g-3 align-items-center">
                             <div class="col-12 col-lg-auto text-center text-lg-start">
                                 <div class="app-icon-holder">
-                                    <!-- SVG icon code -->
+                                    <i class="bi bi-receipt" style="font-size: 1.5rem;"></i>
                                 </div><!--//app-icon-holder-->
                             </div><!--//col-->
                             <div class="col-12 col-lg-auto text-center text-lg-start">
@@ -40,42 +40,68 @@
                             </div><!--//col-->
                         </div><!--//row-->
                     </div><!--//app-card-header-->
-                    <div class="app-card-body p-4">
-                        <form class="row g-2" method="post" action="/dashboard/regis-barang">
+                    <div class="app-card-body p-4" style="background-color: #f9f9f9;">
+                        <form class="row g-3 px-4 py-2" method="post" action="/dashboard/regis-barang">
                             @csrf
-                            <div class="col-md-5 position-relative">
-                                <label for="validationCustom01" class="form-label ">Nama Barang<span
+                            <!-- Nama Barang -->
+                            <div class="col-md-6">
+                                <label for="nama_barang" class="form-label text-dark fw-bold">Nama Barang <span
                                         class="text-danger">*</span></label>
-                                <input type="text" id="validationCustom01" class="form-control" name="nama_barang"
-                                    placeholder="Isi Nama Barang" required>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light">
+                                        <i class="bi bi-box-seam"></i>
+                                    </span>
+                                    <input type="text" id="nama_barang" class="form-control" name="nama_barang"
+                                        placeholder="Contoh: Laptop, Buku" required>
+                                </div>
                             </div>
-                            <div class="col-md-3 position-relative">
-                                <label for="validationCustom02" class="form-label">Satuan<span
+
+                            <!-- Satuan -->
+                            <div class="col-md-6">
+                                <label for="satuan" class="form-label text-dark fw-bold">Satuan <span
                                         class="text-danger">*</span></label>
-                                <input type="text" id="validationCustom02" class="form-control" name="satuan"
-                                    placeholder="Isi Satuan" required>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light">
+                                        <i class="bi bi-tags"></i>
+                                    </span>
+                                    <input type="text" id="satuan" class="form-control" name="satuan"
+                                        placeholder="Contoh: Pcs, Kg" required>
+                                </div>
                             </div>
-                            <div class="col-md-3 position-relative">
-                                <label for="modal" class="form-label">Modal Per Satuan<span
+
+                            <!-- Modal Per Satuan -->
+                            <div class="col-md-6">
+                                <label for="modal" class="form-label text-dark fw-bold">Modal Per Satuan <span
                                         class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="modal" id="modal" value=""
-                                    data-type="currency" placeholder="Rp." required>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light">Rp</span>
+                                    <input type="text" id="modal" class="form-control" name="modal"
+                                        data-type="currency" placeholder="Misal 100,000" required>
+                                </div>
                             </div>
-                            <div class="col-md-2 position-relative">
-                                <label for="harga_jual" class="form-label">Harga Jual<span
+
+                            <!-- Harga Jual -->
+                            <div class="col-md-6">
+                                <label for="harga_jual" class="form-label text-dark fw-bold">Harga Jual <span
                                         class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="harga_jual" id="harga_jual" value=""
-                                    data-type="currency" placeholder="Rp." required>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light">Rp</span>
+                                    <input type="text" id="harga_jual" class="form-control" name="harga_jual"
+                                        data-type="currency" placeholder="Misal 120,000" required>
+                                </div>
                             </div>
-                            <p>
-                                (Wajib terisi untuk kolom dengan tanda "<span class="text-danger">*</span>").
-                            </p>
-                    </div><!--//app-card-body-->
-                    <div class="app-card-footer px-4 py-3">
-                        <button class="btn app-btn-primary" type="submit">
-                            <!-- Button icon -->
-                            Simpan Data
-                        </button>
+
+                            <!-- Informasi Wajib -->
+                            <div class="col-12 text-muted mt-2">
+                                <small>(Kolom bertanda <span class="text-danger">*</span> wajib diisi).</small>
+                            </div>
+
+                            <!-- Tombol Simpan -->
+                            <div class="col-12 text-center">
+                                <button class="btn btn-primary w-50 py-3 fw-bold text-white" type="submit">
+                                    <i class="bi bi-send me"></i> Simpan Data
+                                </button>
+                            </div>
                         </form>
                     </div><!--//app-card-footer-->
                 </div><!--//app-card-->

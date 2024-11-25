@@ -1,71 +1,110 @@
 @extends('templates.layouts.main')
 
 @section('container')
+    <style>
+        /* Warna teks untuk tombol */
+        .btn-primary {
+            color: white !important;
+        }
+
+        .btn-warning {
+            color: black !important;
+        }
+    </style>
     <div class="app-wrapper">
         <div class="app-content pt-3 p-md-3 p-lg-4">
             <div class="container-xl">
 
-                <h1 class="app-page-title">Beranda</h1>
+                <h1 class="app-page-title mb-4">Beranda</h1>
+
+                <!-- Welcome Card -->
                 <div class="app-card alert alert-dismissible shadow-sm mb-4 border-left-decoration" role="alert">
                     <div class="inner">
                         <div class="app-card-body p-3 p-lg-4">
                             <h3 class="mb-3">Selamat Datang, {{ auth()->user()->nama }}!</h3>
-                            <div class="row gx-5 gy-3">
-                                <div class="col-12 col-lg-12">
-                                    <div>MyPOS adalah Sistem Manajemen Point of Sales yang memiliki beragam fitur yang
-                                        memudahkan manajemen stok, arus barang, kasir hingga pelaporan. Klik menu fitur di
-                                        sidebar untuk memulai!</div>
-                                </div><!--//col-->
-                            </div><!--//row-->
+                            <p class="">MyPOS adalah Sistem Manajemen Point of Sales yang memiliki beragam fitur
+                                untuk manajemen stok, arus barang, kasir hingga pelaporan. Klik menu fitur di sidebar untuk
+                                memulai!</p>
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div><!--//app-card-body-->
-
                     </div><!--//inner-->
                 </div><!--//app-card-->
-
+                <!-- Stats Section -->
                 <div class="row g-4 mb-4">
                     <div class="col-6 col-lg-3">
                         <div class="app-card app-card-stat shadow-sm h-100">
-                            <div class="app-card-body p-3 p-lg-4">
+                            <div class="app-card-body p-3 p-lg-4 text-center">
                                 <h4 class="stats-type mb-1">Total Profit Hari Ini</h4>
-                                <div class="stats-figure">@currency($total_profit)</div>
-
-                            </div><!--//app-card-body-->
-                            <a class="app-card-link-mask" href="#"></a>
+                                <div class="stats-figure text-primary fw-bold">@currency($total_profit)</div>
+                            </div>
                         </div><!--//app-card-->
                     </div><!--//col-->
-
                     <div class="col-6 col-lg-3">
                         <div class="app-card app-card-stat shadow-sm h-100">
-                            <div class="app-card-body p-3 p-lg-4">
+                            <div class="app-card-body p-3 p-lg-4 text-center">
+                                <h4 class="stats-type mb-1">Total Piutang</h4>
+                                <div class="stats-figure text-danger fw-bold">@currency($total_piutang)</div>
+                            </div>
+                        </div><!--//app-card-->
+                    </div><!--//col-->
+                    <div class="col-6 col-lg-3">
+                        <div class="app-card app-card-stat shadow-sm h-100">
+                            <div class="app-card-body p-3 p-lg-4 text-center">
                                 <h4 class="stats-type mb-1">Total Barang</h4>
-                                <div class="stats-figure">{{ $total_barang }}</div>
-
-                            </div><!--//app-card-body-->
-                            <a class="app-card-link-mask" href="#"></a>
+                                <div class="stats-figure text-success fw-bold">{{ $total_barang }}</div>
+                            </div>
                         </div><!--//app-card-->
                     </div><!--//col-->
                     <div class="col-6 col-lg-3">
                         <div class="app-card app-card-stat shadow-sm h-100">
-                            <div class="app-card-body p-3 p-lg-4">
-                                <h4 class="stats-type mb-1">Total Stok</h4>
-                                <div class="stats-figure">{{ $total_stok }}</div>
-
-                            </div><!--//app-card-body-->
-                            <a class="app-card-link-mask" href="#"></a>
-                        </div><!--//app-card-->
-                    </div><!--//col-->
-                    <div class="col-6 col-lg-3">
-                        <div class="app-card app-card-stat shadow-sm h-100">
-                            <div class="app-card-body p-3 p-lg-4">
+                            <div class="app-card-body p-3 p-lg-4 text-center">
                                 <h4 class="stats-type mb-1">Total Invoice Hari Ini</h4>
-                                <div class="stats-figure">{{ $total_inv }}</div>
-                            </div><!--//app-card-body-->
-                            <a class="app-card-link-mask" href="#"></a>
+                                <div class="stats-figure text-warning fw-bold">{{ $total_inv }}</div>
+                            </div>
                         </div><!--//app-card-->
                     </div><!--//col-->
                 </div><!--//row-->
-
+                <!-- Table and Chart Section -->
+                <div class="row g-4 mb-4">
+                    <!-- Table -->
+                    <div class="col-md-6">
+                        <div class="card shadow-sm">
+                            <div class="card-header">
+                                <h5>Profit Terakhir 7 Hari</h5>
+                            </div>
+                            <div class="card-body">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Tanggal</th>
+                                            <th>Profit</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($profits as $profit)
+                                            <tr>
+                                                <td>{{ $profit['date'] }}</td>
+                                                <td>Rp. {{ $profit['total_profit'] }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Chart -->
+                    <div class="col-md-6">
+                        <div class="card shadow-sm">
+                            <div class="card-header">
+                                <h5>Grafik Profit</h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="profitChart" height="150"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Feature Cards -->
                 <div class="row g-4 mb-4">
                     <div class="col-12 col-lg-4">
                         <div class="app-card app-card-basic d-flex flex-column align-items-start shadow-sm">
@@ -73,15 +112,8 @@
                                 <div class="row align-items-center gx-3">
                                     <div class="col-auto">
                                         <div class="app-icon-holder">
-                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-receipt"
-                                                fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd"
-                                                    d="M1.92.506a.5.5 0 0 1 .434.14L3 1.293l.646-.647a.5.5 0 0 1 .708 0L5 1.293l.646-.647a.5.5 0 0 1 .708 0L7 1.293l.646-.647a.5.5 0 0 1 .708 0L9 1.293l.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .801.13l.5 1A.5.5 0 0 1 15 2v12a.5.5 0 0 1-.053.224l-.5 1a.5.5 0 0 1-.8.13L13 14.707l-.646.647a.5.5 0 0 1-.708 0L11 14.707l-.646.647a.5.5 0 0 1-.708 0L9 14.707l-.646.647a.5.5 0 0 1-.708 0L7 14.707l-.646.647a.5.5 0 0 1-.708 0L5 14.707l-.646.647a.5.5 0 0 1-.708 0L3 14.707l-.646.647a.5.5 0 0 1-.801-.13l-.5-1A.5.5 0 0 1 1 14V2a.5.5 0 0 1 .053-.224l.5-1a.5.5 0 0 1 .367-.27zm.217 1.338L2 2.118v11.764l.137.274.51-.51a.5.5 0 0 1 .707 0l.646.647.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.509.509.137-.274V2.118l-.137-.274-.51.51a.5.5 0 0 1-.707 0L12 1.707l-.646.647a.5.5 0 0 1-.708 0L10 1.707l-.646.647a.5.5 0 0 1-.708 0L8 1.707l-.646.647a.5.5 0 0 1-.708 0L6 1.707l-.646.647a.5.5 0 0 1-.708 0L4 1.707l-.646.647a.5.5 0 0 1-.708 0l-.509-.51z" />
-                                                <path fill-rule="evenodd"
-                                                    d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm8-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5z" />
-                                            </svg>
+                                            <i class="bi bi-box-arrow-in-down fs-3 text-primary"></i>
                                         </div><!--//icon-holder-->
-
                                     </div><!--//col-->
                                     <div class="col-auto">
                                         <h4 class="app-card-title">Barang Masuk</h4>
@@ -89,29 +121,22 @@
                                 </div><!--//row-->
                             </div><!--//app-card-header-->
                             <div class="app-card-body px-4">
-
-                                <div class="intro">Mengelola arus barang yang masuk ke dalam manajemen stok barang.</div>
+                                <p class="intro">Mengelola arus barang yang masuk ke dalam manajemen stok barang.</p>
                             </div><!--//app-card-body-->
                             <div class="app-card-footer p-4 mt-auto">
-                                <a class="btn app-btn-secondary" href="/dashboard/barang-masuk">Akses Fitur</a>
+                                <a class="btn btn-primary" href="/dashboard/barang-masuk">Akses Fitur</a>
                             </div><!--//app-card-footer-->
                         </div><!--//app-card-->
                     </div><!--//col-->
+
                     <div class="col-12 col-lg-4">
                         <div class="app-card app-card-basic d-flex flex-column align-items-start shadow-sm">
                             <div class="app-card-header p-3 border-bottom-0">
                                 <div class="row align-items-center gx-3">
                                     <div class="col-auto">
                                         <div class="app-icon-holder">
-                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-code-square"
-                                                fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd"
-                                                    d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
-                                                <path fill-rule="evenodd"
-                                                    d="M6.854 4.646a.5.5 0 0 1 0 .708L4.207 8l2.647 2.646a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 0 1 .708 0zm2.292 0a.5.5 0 0 0 0 .708L11.793 8l-2.647 2.646a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708 0z" />
-                                            </svg>
+                                            <i class="bi bi-cash-stack fs-3 text-success"></i>
                                         </div><!--//icon-holder-->
-
                                     </div><!--//col-->
                                     <div class="col-auto">
                                         <h4 class="app-card-title">Kasir</h4>
@@ -119,12 +144,57 @@
                                 </div><!--//row-->
                             </div><!--//app-card-header-->
                             <div class="app-card-body px-4">
-
-                                <div class="intro">Buat transaksi baru bagi pelanggan, membuat invoice dan histori arus
-                                    barang keluar.</div>
+                                <p class="intro">Buat transaksi baru bagi pelanggan, membuat invoice, dan mengelola histori
+                                    arus barang keluar.</p>
                             </div><!--//app-card-body-->
                             <div class="app-card-footer p-4 mt-auto">
-                                <a class="btn app-btn-secondary" href="/dashboard/cashier">Akses Fitur</a>
+                                <a class="btn btn-primary" href="/dashboard/cashier">Akses Fitur</a>
+                            </div><!--//app-card-footer-->
+                        </div><!--//app-card-->
+                    </div><!--//col-->
+
+                    <div class="col-12 col-lg-4">
+                        <div class="app-card app-card-basic d-flex flex-column align-items-start shadow-sm">
+                            <div class="app-card-header p-3 border-bottom-0">
+                                <div class="row align-items-center gx-3">
+                                    <div class="col-auto">
+                                        <div class="app-icon-holder">
+                                            <i class="bi bi-receipt fs-3 text-warning"></i>
+                                        </div><!--//icon-holder-->
+                                    </div><!--//col-->
+                                    <div class="col-auto">
+                                        <h4 class="app-card-title">Invoice</h4>
+                                    </div><!--//col-->
+                                </div><!--//row-->
+                            </div><!--//app-card-header-->
+                            <div class="app-card-body px-4">
+                                <p class="intro">Akses fitur invoice untuk transaksi pelanggan.</p>
+                            </div><!--//app-card-body-->
+                            <div class="app-card-footer p-4 mt-auto">
+                                <a class="btn btn-warning text-white" href="/dashboard/invoice">Akses Fitur</a>
+                            </div><!--//app-card-footer-->
+                        </div><!--//app-card-->
+                    </div><!--//col-->
+                    <!-- New Features -->
+                    <div class="col-12 col-lg-4">
+                        <div class="app-card app-card-basic d-flex flex-column align-items-start shadow-sm">
+                            <div class="app-card-header p-3 border-bottom-0">
+                                <div class="row align-items-center gx-3">
+                                    <div class="col-auto">
+                                        <div class="app-icon-holder">
+                                            <i class="bi bi-clipboard-data fs-3 text-info"></i>
+                                        </div><!--//icon-holder-->
+                                    </div><!--//col-->
+                                    <div class="col-auto">
+                                        <h4 class="app-card-title">Piutang</h4>
+                                    </div><!--//col-->
+                                </div><!--//row-->
+                            </div><!--//app-card-header-->
+                            <div class="app-card-body px-4">
+                                <p class="intro">Kelola data piutang pelanggan dengan mudah.</p>
+                            </div><!--//app-card-body-->
+                            <div class="app-card-footer p-4 mt-auto">
+                                <a class="btn btn-primary" href="/dashboard/piutang">Akses Fitur</a>
                             </div><!--//app-card-footer-->
                         </div><!--//app-card-->
                     </div><!--//col-->
@@ -134,45 +204,80 @@
                                 <div class="row align-items-center gx-3">
                                     <div class="col-auto">
                                         <div class="app-icon-holder">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="3em" height="3em"
-                                                fill="currentColor" viewBox="0 0 100 100" xml:space="preserve">
-                                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
-                                                    stroke-linejoin="round"></g>
-                                                <g id="SVGRepo_iconCarrier">
-                                                    <g>
-                                                        <g>
-                                                            <path
-                                                                d="M39,32h22c1.1,0,2-0.9,2-2v-4c0-3.3-2.7-6-6-6H43c-3.3,0-6,2.7-6,6v4C37,31.1,37.9,32,39,32z">
-                                                            </path>
-                                                        </g>
-                                                        <g>
-                                                            <path
-                                                                d="M72,25h-2c-0.6,0-1,0.4-1,1v4c0,4.4-3.6,8-8,8H39c-4.4,0-8-3.6-8-8v-4c0-0.6-0.4-1-1-1h-2c-3.3,0-6,2.7-6,6 v43c0,3.3,2.7,6,6,6h44c3.3,0,6-2.7,6-6V31C78,27.7,75.3,25,72,25z M43,66c0,1.1-0.9,2-2,2h-2c-1.1,0-2-0.9-2-2V56 c0-1.1,0.9-2,2-2h2c1.1,0,2,0.9,2,2V66z M53,66c0,1.1-0.9,2-2,2h-2c-1.1,0-2-0.9-2-2V47c0-1.1,0.9-2,2-2h2c1.1,0,2,0.9,2,2V66z M63,66c0,1.1-0.9,2-2,2h-2c-1.1,0-2-0.9-2-2V51c0-1.1,0.9-2,2-2h2c1.1,0,2,0.9,2,2V66z">
-                                                            </path>
-                                                        </g>
-                                                    </g>
-                                                </g>
-                                            </svg>
+                                            <i class="bi bi-bar-chart-line fs-3 text-danger"></i>
                                         </div><!--//icon-holder-->
-
                                     </div><!--//col-->
                                     <div class="col-auto">
-                                        <h4 class="app-card-title">Invoice</h4>
+                                        <h4 class="app-card-title">Laporan Penjualan</h4>
                                     </div><!--//col-->
                                 </div><!--//row-->
                             </div><!--//app-card-header-->
                             <div class="app-card-body px-4">
-
-                                <div class="intro">Akses fitur invoice transaksi.</div>
+                                <p class="intro">Akses laporan penjualan untuk melihat kinerja penjualan.</p>
                             </div><!--//app-card-body-->
                             <div class="app-card-footer p-4 mt-auto">
-                                <a class="btn app-btn-secondary" href="/dashboard/invoice">Akses Fitur</a>
+                                <a class="btn btn-primary" href="/dashboard/report/penjualan">Akses Fitur</a>
                             </div><!--//app-card-footer-->
                         </div><!--//app-card-->
                     </div><!--//col-->
+                    <div class="col-12 col-lg-4">
+                        <div class="app-card app-card-basic d-flex flex-column align-items-start shadow-sm">
+                            <div class="app-card-header p-3 border-bottom-0">
+                                <div class="row align-items-center gx-3">
+                                    <div class="col-auto">
+                                        <div class="app-icon-holder">
+                                            <i class="bi bi-box-seam fs-3 text-secondary"></i>
+                                        </div><!--//icon-holder-->
+                                    </div><!--//col-->
+                                    <div class="col-auto">
+                                        <h4 class="app-card-title">Stok Barang</h4>
+                                    </div><!--//col-->
+                                </div><!--//row-->
+                            </div><!--//app-card-header-->
+                            <div class="app-card-body px-4">
+                                <p class="intro">Kelola dan lihat informasi stok barang yang tersedia.</p>
+                            </div><!--//app-card-body-->
+                            <div class="app-card-footer p-4 mt-auto">
+                                <a class="btn btn-primary" href="/dashboard/stok-barang">Akses Fitur</a>
+                            </div><!--//app-card-footer-->
+                        </div><!--//app-card-->
+                    </div><!--//col-->
+
                 </div><!--//row-->
-            </div><!--//container-fluid-->
+            </div><!--//container-xl-->
         </div><!--//app-content-->
     </div><!--//app-wrapper-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const profitData = @json($profits);
+        const ctx = document.getElementById('profitChart').getContext('2d');
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: profitData.map(profit => profit.date),
+                datasets: [{
+                    label: 'Profit',
+                    data: profitData.map(profit => parseInt(profit.total_profit.replace(/\./g, ''))),
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderWidth: 2,
+                    tension: 0.4,
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return 'Rp. ' + value.toLocaleString('id-ID');
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
 @endsection

@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * DashboardController
+ *
+ * This controller manages the functionality and data presented in the dashboard for users based on their roles.
+ * It handles dynamic role-based views, logout functionality, profile management, and general informational pages.
+ */
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -10,24 +17,48 @@ use App\Models\BarangKeluar;
 use App\Models\User;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Models\StokBarang;
+use App\Models\Piutang;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
-    //Index
+    /**
+     * Display the dashboard homepage based on user roles.
+     *
+     * Shows different dashboards for Super Administrators, Administrators, and regular users (Cashiers).
+     * Each role-specific view contains data and statistics relevant to the user's role.
+     *
+     * @return \Illuminate\View\View
+     */
     public function index()
     {
+        $profits = Transaction::select(DB::raw('DATE(created_at) as date'), DB::raw('SUM(profit) as total_profit'))
+            ->groupBy('date')
+            ->orderBy('date', 'asc')
+            ->take(7) // Fetch last 7 days
+            ->get();
+
+        // Format data for the view
+        $profits = $profits->map(function ($profit) {
+            return [
+                'date' => \Carbon\Carbon::parse($profit->date)->translatedFormat('d F Y'),
+                'total_profit' => number_format($profit->total_profit, 0, ',', '.'),
+            ];
+        });
         if (Auth::user()->role == 'Super Administrator') {
             return view('dashboard.role.index_sa', [
                 'active' => 'beranda',
                 'breadcrumb' => 'beranda',
                 'total_profit' => Transaction::whereDate('created_at', today())->sum('profit'),
                 'total_barang' => Barang::count(),
-                'total_stok' => StokBarang::sum('stok'),
+                'total_piutang' => Piutang::sum('sisa_bayar'),
                 'total_inv' => Transaction::whereDate('created_at', today())->count(),
+                'profits' => $profits,
             ]);
         }
+
         if (Auth::user()->role == 'Administrator') {
             return view('dashboard.role.index_adm', [
                 'active' => 'beranda',
@@ -39,23 +70,26 @@ class DashboardController extends Controller
                 'total_stok' => StokBarang::sum('stok'),
                 'total_inv' => Transaction::count(),
             ]);
-        } else {
-            return view('dashboard.role.index_cash', [
-                'active' => 'beranda',
-                'breadcrumb' => 'beranda',
-                'total_profit' => Transaction::sum('profit'),
-                'total_penjualan' => Transaction::sum('total'),
-                'total_barang' => Barang::count(),
-                'total_stok' => StokBarang::sum('stok'),
-                'total_inv' => Transaction::whereDate('created_at', today())->count(),
-            ]);
         }
+
+        return view('dashboard.role.index_cash', [
+            'active' => 'beranda',
+            'breadcrumb' => 'beranda',
+            'total_profit' => Transaction::sum('profit'),
+            'total_penjualan' => Transaction::sum('total'),
+            'total_barang' => Barang::count(),
+            'total_stok' => StokBarang::sum('stok'),
+            'total_inv' => Transaction::whereDate('created_at', today())->count(),
+        ]);
     }
-    //logout
+
     /**
-     * Handle an logout attempt.
+     * Handle user logout.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * Invalidates the user session and regenerates the CSRF token for security purposes.
+     * Redirects the user to the homepage after successful logout.
+     *
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function logout(Request $request)
@@ -65,12 +99,13 @@ class DashboardController extends Controller
         $request->session()->regenerateToken();
         return redirect('/');
     }
-    //logout
+
     /**
-     * Handle an logout attempt.
+     * Display the user's profile page.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * Shows the profile of the currently authenticated user.
+     *
+     * @return \Illuminate\View\View
      */
     public function my_profile()
     {
@@ -79,11 +114,13 @@ class DashboardController extends Controller
             'breadcrumb' => 'profile',
         ]);
     }
+
     /**
-     * Handle an logout attempt.
+     * Display the profile editing form.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * Provides a form for the user to update their profile information.
+     *
+     * @return \Illuminate\View\View
      */
     public function my_profile_edit()
     {
@@ -93,6 +130,17 @@ class DashboardController extends Controller
         ]);
     }
 
+    /**
+     * Store updated profile information.
+     *
+     * Validates and saves the updated profile information. Updates the password if provided.
+     *
+     * @param \App\Http\Requests\UpdateProfileRequest $request
+     *    Validated request containing profile data.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     *    Redirects back to the profile page with a success message.
+     */
     public function my_profile_store(UpdateProfileRequest $request)
     {
         $validated = $request->validated();
@@ -101,11 +149,13 @@ class DashboardController extends Controller
 
         return redirect('/dashboard/my-profile')->with('success', 'Profil telah diubah!');
     }
+
     /**
-     * Handle an logout attempt.
+     * Display the "About" page.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * Provides general information about the application or organization.
+     *
+     * @return \Illuminate\View\View
      */
     public function about()
     {

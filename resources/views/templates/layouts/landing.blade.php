@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>MyPOS V2 | Portal</title>
-    <link rel="icon" href="{{ asset('storage\container\logo_app_white.png') }}" />
+    <title>MyPOS Version 2.0 | Login</title>
+    <link rel="icon" href="{{ asset('storage\container\icon.png') }}" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Manrope&amp;display=swap">
     <link rel="stylesheet" href="css/styles.min.css">
@@ -15,7 +15,7 @@
 </head>
 <style>
     body#LoginForm {
-        background: url("https://hdwallsource.com/img/2014/9/blur-26347-27038-hd-wallpapers.jpg") no-repeat center center fixed;
+        background: linear-gradient(135deg, #f0f9ff, #0c72ae);
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
@@ -37,7 +37,7 @@
     </style>
     <!-- Back to top button -->
     <button type="button" class="btn btn-light btn-floating btn-lg" id="btn-back-to-top">
-    
+
 
         <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
         <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

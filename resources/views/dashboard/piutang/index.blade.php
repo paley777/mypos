@@ -1,11 +1,16 @@
 @extends('templates.layouts.main')
 
 @section('container')
+    <style>
+        /* Add spacing for search bar */
+        div.dataTables_wrapper div.dataTables_filter {
+            margin-bottom: 1rem;
+        }
+    </style>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
     <div class="app-wrapper">
         <div class="app-content pt-3 p-md-3 p-lg-4">
             <div class="container-xl">
-
                 <div class="row g-3 mb-4 align-items-center justify-content-between">
                     <div class="col-auto">
                         <h1 class="app-page-title mb-0">Piutang</h1>
@@ -37,9 +42,9 @@
                     <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
                         <div class="app-card app-card-orders-table shadow-sm mb-5">
                             <div class="app-card-body">
-                                <div class="table-responsive p-4">
-                                    <table id="example" class="table app-table-hover mb-0 text-left">
-                                        <thead>
+                                <div class="table-responsive p-4" style="overflow-x: auto; white-space: nowrap;">
+                                    <table id="example" class="table table-hover table-bordered mb-0">
+                                        <thead class="table-primary">
                                             <tr>
                                                 <th class="cell">No.</th>
                                                 <th class="cell">Kode Invoice</th>
@@ -158,8 +163,6 @@
             </div>
         </div>
     </div>
-
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script>

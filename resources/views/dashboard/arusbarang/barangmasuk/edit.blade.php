@@ -29,13 +29,7 @@
                         <div class="row g-3 align-items-center">
                             <div class="col-12 col-lg-auto text-center text-lg-start">
                                 <div class="app-icon-holder">
-                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-receipt"
-                                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                            d="M1.92.506a.5.5 0 0 1 .434.14L3 1.293l.646-.647a.5.5 0 0 1 .708 0L5 1.293l.646-.647a.5.5 0 0 1 .708 0L7 1.293l.646-.647a.5.5 0 0 1 .708 0L9 1.293l.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .801.13l.5 1A.5.5 0 0 1 15 2v12a.5.5 0 0 1-.053.224l-.5 1a.5.5 0 0 1-.8.13L13 14.707l-.646.647a.5.5 0 0 1-.708 0L11 14.707l-.646.647a.5.5 0 0 1-.708 0L9 14.707l-.646.647a.5.5 0 0 1-.708 0L7 14.707l-.646.647a.5.5 0 0 1-.708 0L5 14.707l-.646.647a.5.5 0 0 1-.708 0L3 14.707l-.646.647a.5.5 0 0 1-.801-.13l-.5-1A.5.5 0 0 1 1 14V2a.5.5 0 0 1 .053-.224l.5-1a.5.5 0 0 1 .367-.27zm.217 1.338L2 2.118v11.764l.137.274.51-.51a.5.5 0 0 1 .707 0l.646.647.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.509.509.137-.274V2.118l-.137-.274-.51.51a.5.5 0 0 1-.707 0L12 1.707l-.646.647a.5.5 0 0 1-.708 0L10 1.707l-.646.647a.5.5 0 0 1-.708 0L8 1.707l-.646.647a.5.5 0 0 1-.708 0L6 1.707l-.646.647a.5.5 0 0 1-.708 0L4 1.707l-.646.647a.5.5 0 0 1-.708 0l-.509-.51z" />
-                                        <path fill-rule="evenodd"
-                                            d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm8-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5z" />
-                                    </svg>
+                                    <i class="bi bi-receipt" style="font-size: 1.5rem;"></i>
                                 </div><!--//app-icon-holder-->
                             </div><!--//col-->
                             <div class="col-12 col-lg-auto text-center text-lg-start">
@@ -51,19 +45,25 @@
                             </div><!--//col-->
                         </div><!--//row-->
                     </div><!--//app-card-header-->
-                    <div class="app-card-body p-4">
-                        <form class="row g-2" method="post" action="/dashboard/barang-masuk/{{ $barangmasuk->id }}">
+                    <div class="app-card-body p-4" style="background-color: #f9f9f9;">
+                        <form class="row g-3 px-4 py-2" method="post"
+                            action="/dashboard/barang-masuk/{{ $barangmasuk->id }}">
                             @method('put')
                             @csrf
                             <div class="col-md-4 position-relative">
-                                <label for="validationCustom01" class="form-label ">Nama Penerima<span
+                                <label for="validationCustom01" class="form-label text-dark fw-bold ">Nama Penerima<span
                                         class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="nama_penerima"
-                                    placeholder="Isi Nama Penerima" value="{{ $barangmasuk->nama_penerima }}" readonly
-                                    required>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light">
+                                        <i class="bi bi-person"></i>
+                                    </span>
+                                    <input type="text" class="form-control" name="nama_penerima"
+                                        placeholder="Isi Nama Penerima" value="{{ $barangmasuk->nama_penerima }}" readonly
+                                        required>
+                                </div>
                             </div>
                             <div class="col-md-4 position-relative">
-                                <label for="validationCustom01" class="form-label ">Nama Supplier<span
+                                <label for="validationCustom01" class="form-label text-dark fw-bold ">Nama Supplier<span
                                         class="text-danger">*</span></label>
                                 <select class="" name="nama_supplier" required>
                                     <option value="">Pilih Supplier</option>
@@ -76,7 +76,7 @@
                                 </select>
                             </div>
                             <div class="col-md-4 position-relative">
-                                <label for="validationCustom01" class="form-label ">Nama Barang<span
+                                <label for="validationCustom01" class="form-label text-dark fw-bold ">Nama Barang<span
                                         class="text-danger">*</span></label>
                                 <select class="" name="nama_barang" required>
                                     <option value="">Pilih Barang</option>
@@ -89,42 +89,60 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <!-- New Keterangan Input -->
-                            <div class="col-md-12 position-relative">
-                                <label for="keterangan" class="form-label">Keterangan</label>
-                                <textarea id="keterangan" style="height: 80px;" class="form-control" name="keterangan" placeholder="Isi Keterangan">{{ old('keterangan', $barangmasuk->keterangan) }}</textarea>
-                            </div>
-                            <div class="col-md-2 position-relative">
-                                <label for="validationCustom01" class="form-label">Jumlah Beli<span
+                            <div class="col-md-3 position-relative">
+                                <label for="validationCustom01" class="form-label text-dark fw-bold">Jumlah Beli<span
                                         class="text-danger">*</span></label>
-                                <input type="number" onkeypress="return event.charCode >= 48" id="inp2" min="1"
-                                    class="form-control" name="jumlah_beli" placeholder="Isi Jumlah Beli"
-                                    value="{{ old('jumlah_beli', $barangmasuk->jumlah_beli) }}" required>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light">
+                                        <i class="bi bi-boxes"></i>
+                                    </span>
+                                    <input type="number" onkeypress="return event.charCode >= 48" id="inp2"
+                                        min="1" class="form-control" name="jumlah_beli" placeholder="Isi Jumlah Beli"
+                                        value="{{ old('jumlah_beli', $barangmasuk->jumlah_beli) }}" required>
+                                </div>
                             </div>
                             <div class="col-md-3 position-relative">
-                                <label for="validationCustom01" class="form-label">Harga Beli Satuan<span
+                                <label for="validationCustom01" class="form-label text-dark fw-bold">Harga Beli Satuan<span
                                         class="text-danger">*</span></label>
-                                <input type="number" onkeypress="return event.charCode >= 48" id="inp" min="1"
-                                    class="form-control"
-                                    value="{{ old('harga_beli_satuan', $barangmasuk->harga_beli_satuan) }}"
-                                    name="harga_beli_satuan" placeholder="Isi Harga Beli Satuan" required>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light">
+                                        <i class="bi bi-box"></i>
+                                    </span>
+                                    <input type="text" data-type="currency" onkeypress="return event.charCode >= 48"
+                                        id="inp" min="1" class="form-control"
+                                        value="{{ old('harga_beli_satuan', $barangmasuk->harga_beli_satuan) }}"
+                                        name="harga_beli_satuan" placeholder="Isi Harga Beli Satuan" required>
+                                </div>
                             </div>
-                            <div class="col-md-4 position-relative justify-content-center">
-                                <label for="validationCustom01" class="form-label">Jumlah Beli x Harga Beli Satuan = Harga
-                                    Beli Total<span class="text-danger">*</span></label>
-                                <button class="btn app-btn-primary" type="button" onclick="hitungTotal()">Hitung
+                            <div class="col-md-2">
+                                <label for="validationCustom01" class="form-label text-dark fw-bold"></label>
+                                <br>
+                                <button class="btn app-btn-primary" type="button" onclick="hitungTotal()"><i
+                                        class="bi bi-pencil"></i> Hitung
                                     Total</button>
                             </div>
-                            <div class="col-md-3 position-relative">
-                                <label for="validationCustom01" class="form-label">Harga Beli Total<span
-                                        class="text-danger">*</span></label>
-                                <input type="number" onkeypress="return event.charCode >= 48" id="inp1"
-                                    min="1" class="form-control" name="harga_beli_total"
-                                    value="{{ old('harga_beli_total', $barangmasuk->harga_beli_total) }}"
-                                    placeholder="Isi Harga Beli Total" required>
-                            </div>
                             <div class="col-md-4 position-relative">
-                                <label for="status" class="form-label">Status<span class="text-danger">*</span></label>
+                                <label for="validationCustom01" class="form-label text-dark fw-bold">Harga Beli Total<span
+                                        class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light">
+                                        <i class="bi bi-cart"></i>
+                                    </span>
+                                    <input type="text" data-type="currency" onkeypress="return event.charCode >= 48"
+                                        id="inp1" min="1" class="form-control" name="harga_beli_total"
+                                        value="{{ old('harga_beli_total', $barangmasuk->harga_beli_total) }}"
+                                        placeholder="Isi Harga Beli Total" required>
+                                </div>
+                            </div>
+                            <!-- New Keterangan Input -->
+                            <div class="col-md-9 position-relative">
+                                <label for="keterangan" class="form-label text-dark fw-bold">Keterangan</label>
+                                <textarea id="keterangan" style="height: 80px;" class="form-control" name="keterangan"
+                                    placeholder="Isi Keterangan">{{ old('keterangan', $barangmasuk->keterangan) }}</textarea>
+                            </div>
+                            <div class="col-md-3 position-relative">
+                                <label for="status" class="form-label text-dark fw-bold">Status<span
+                                        class="text-danger">*</span></label>
                                 <select name="status" id="status" required>
                                     <option value="">Pilih Status</option>
                                     <option value="LUNAS" {{ $barangmasuk->status == 'LUNAS' ? 'selected' : '' }}>LUNAS
@@ -133,8 +151,6 @@
                                     </option>
                                 </select>
                             </div>
-
-
                             <p>
                                 (Wajib terisi untuk kolom dengan tanda "<span class="text-danger">*</span>").
                             </p>
@@ -159,12 +175,21 @@
             </div>
         </div>
     </div>
+
     <script>
-        $(document).ready(function() {
-            $('select').selectize({
-                sortField: 'text'
-            });
+        $('select').selectize({
+            sortField: 'text'
         });
+
+        document.getElementById("inp").addEventListener("change", function() {
+            let v = parseInt(this.value);
+            if (v < 1) this.value = 1;
+        });
+        $("#inp").on("input", function() {
+            if (/^0/.test(this.value)) {
+                this.value = this.value.replace(/^0/, "1")
+            }
+        })
     </script>
     <script>
         document.getElementById("inp2").addEventListener("keydown", function(event) {
@@ -182,17 +207,6 @@
                 this.value = this.value.replace(/^0/, "1")
             }
         });
-    </script>
-    <script>
-        document.getElementById("inp").addEventListener("change", function() {
-            let v = parseInt(this.value);
-            if (v < 1) this.value = 1;
-        });
-        $("#inp").on("input", function() {
-            if (/^0/.test(this.value)) {
-                this.value = this.value.replace(/^0/, "1")
-            }
-        })
     </script>
     <script>
         document.getElementById("inp1").addEventListener("change", function() {
@@ -219,14 +233,104 @@
     <script>
         function hitungTotal() {
             // Ambil nilai dari input angka 1 dan angka 2
-            var angka1 = parseFloat(document.getElementById("inp2").value);
-            var angka2 = parseFloat(document.getElementById("inp").value);
+            var angka1 = parseFloat(document.getElementById("inp2").value.replace(/,/g, ''));
+            var angka2 = parseFloat(document.getElementById("inp").value.replace(/,/g, ''));
 
             // Hitung totalnya
             var total = angka1 * angka2;
 
             // Tampilkan total di dalam elemen span dengan id "total"
             document.getElementById("inp1").value = total;
+            formatCurrency($("#inp1"));
+        }
+    </script>
+
+    <script>
+        // Jquery Dependency
+
+        $("input[data-type='currency']").on({
+            keyup: function() {
+                formatCurrency($(this));
+            },
+            blur: function() {
+                formatCurrency($(this), "blur");
+            }
+        });
+
+
+        function formatNumber(n) {
+            // format number 1000000 to 1,234,567
+            return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+        }
+
+
+        function formatCurrency(input, blur) {
+            // appends $ to value, validates decimal side
+            // and puts cursor back in right position.
+
+            // get input value
+            var input_val = input.val();
+
+            // don't validate empty input
+            if (input_val === "") {
+                return;
+            }
+
+            // original length
+            var original_len = input_val.length;
+
+            // initial caret position 
+            var caret_pos = input.prop("selectionStart");
+
+            // check for decimal
+            if (input_val.indexOf(".") >= 0) {
+
+                // get position of first decimal
+                // this prevents multiple decimals from
+                // being entered
+                var decimal_pos = input_val.indexOf(".");
+
+                // split number by decimal point
+                var left_side = input_val.substring(0, decimal_pos);
+                var right_side = input_val.substring(decimal_pos);
+
+                // add commas to left side of number
+                left_side = formatNumber(left_side);
+
+                // validate right side
+                right_side = formatNumber(right_side);
+
+                // On blur make sure 2 numbers after decimal
+                if (blur === "blur") {
+                    right_side += "";
+                }
+
+                // Limit decimal to only 2 digits
+                right_side = right_side.substring(0, 2);
+
+                // join number by .
+                input_val = +left_side + "." + right_side;
+
+            } else {
+                // no decimal entered
+                // add commas to number
+                // remove all non-digits
+                input_val = formatNumber(input_val);
+                input_val = input_val;
+
+                // final formatting
+                if (blur === "blur") {
+                    input_val += "";
+                }
+            }
+
+            // send updated string to input
+            input.val(input_val);
+
+            // put caret back in the right position
+            var updated_len = input_val.length;
+            caret_pos = updated_len - original_len + caret_pos;
+            input[0].setSelectionRange(caret_pos, caret_pos);
         }
     </script>
 @endsection

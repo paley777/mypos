@@ -1,6 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+/**
+ * TransactionController
+ * 
+ * This controller handles the management of transactions, including creating, updating, and remaking transactions.
+ * It ensures inventory, orders, and financial data are updated consistently during each transaction operation.
+ */
+
+ namespace App\Http\Controllers;
 
 use App\Models\Transaction;
 use App\Models\Order;
@@ -17,7 +24,11 @@ use Illuminate\Http\Request;
 class TransactionController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display the transaction dashboard.
+     * 
+     * Shows the cashier's interface for creating transactions.
+     * 
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -31,15 +42,15 @@ class TransactionController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
+     * Store a newly created transaction.
+     * 
+     * Processes a new transaction, updating orders, stock, and financial records.
+     * 
+     * @param \App\Http\Requests\StoreTransactionRequest $request
+     *    The validated request containing transaction details.
+     * 
+     * @return \Illuminate\Http\RedirectResponse
+     *    Redirects back with a success message.
      */
     public function store(StoreTransactionRequest $request)
     {
@@ -50,7 +61,7 @@ class TransactionController extends Controller
 
         $validated = $request->validated();
 
-        // Iterasi data barang yang dipesan
+        // Iterate through items in the transaction
         $nama_barang = $request->input('nama_barang');
         $harga_jual = $request->input('harga_jual');
         $qty = $request->input('qty');
@@ -59,8 +70,8 @@ class TransactionController extends Controller
         $subtotal = $request->input('subtotal');
 
         foreach ($nama_barang as $key => $nama_barang) {
-            $harga_jual[$key] = intval(str_replace([','], '', $harga_jual[$key])); // Convert harga_jual to integer
-            $subtotal[$key] = intval(str_replace([','], '', $subtotal[$key])); // Convert subtotal to integer
+            $harga_jual[$key] = intval(str_replace([','], '', $harga_jual[$key]));
+            $subtotal[$key] = intval(str_replace([','], '', $subtotal[$key]));
 
             Order::create([
                 'kode_inv' => $validated['kode_inv'],
@@ -71,14 +82,17 @@ class TransactionController extends Controller
                 'disc_rp' => $disc_rp[$key],
                 'subtotal' => $subtotal[$key],
             ]);
+
             $modal = Barang::where('nama_barang', $nama_barang)->first()->modal;
             $profit += $subtotal[$key] - $modal * $qty[$key];
 
-            $kurang = $qty[$key];
+            // Update stock
             $stokbarang = StokBarang::where('nama_barang', $nama_barang)->first();
             if ($stokbarang) {
-                $stokbarang->kurangStok($kurang);
+                $stokbarang->kurangStok($qty[$key]);
             }
+
+            // Record outgoing goods
             BarangKeluar::create([
                 'kode_inv' => $validated['kode_inv'],
                 'nama_barang' => $nama_barang,
@@ -86,6 +100,8 @@ class TransactionController extends Controller
                 'jumlah_keluar' => $qty[$key],
             ]);
         }
+
+        // Create the transaction
         Transaction::create([
             'kode_inv' => $validated['kode_inv'],
             'nama_petugas' => $validated['nama_petugas'],
@@ -99,6 +115,7 @@ class TransactionController extends Controller
             'profit' => $profit,
         ]);
 
+        // Handle debts (HUTANG)
         if ($validated['status'] == 'HUTANG') {
             Piutang::create([
                 'kode_inv' => $validated['kode_inv'],
@@ -109,11 +126,20 @@ class TransactionController extends Controller
             ]);
         }
 
-
-
         return redirect()->back()->with('success', 'Transaksi sukses, Silakan menuju fitur Invoice untuk mencetak!');
     }
 
+    /**
+     * Modify an existing transaction.
+     * 
+     * Deletes the current transaction record and creates a new one with the updated details.
+     * 
+     * @param \App\Http\Requests\StoreTransactionRequest $request
+     *    The validated request containing updated transaction details.
+     * 
+     * @return \Illuminate\Http\RedirectResponse
+     *    Redirects to the invoice dashboard with a success message.
+     */
     public function rombak(StoreTransactionRequest $request)
     {
         $profit = 0;
@@ -124,13 +150,13 @@ class TransactionController extends Controller
 
         $validated = $request->validated();
 
-        // Delete the existing entries
+        // Delete existing records
         Order::where('kode_inv', $kode_inv)->delete();
         BarangKeluar::where('kode_inv', $kode_inv)->delete();
         Piutang::where('kode_inv', $kode_inv)->delete();
         Transaction::where('kode_inv', $kode_inv)->delete();
 
-        // Iterasi data barang yang dipesan
+        // Process the new transaction details
         $nama_barang = $request->input('nama_barang');
         $harga_jual = $request->input('harga_jual');
         $qty = $request->input('qty');
@@ -139,10 +165,9 @@ class TransactionController extends Controller
         $subtotal = $request->input('subtotal');
 
         foreach ($nama_barang as $key => $nama_barang) {
-            $harga_jual[$key] = intval(str_replace([','], '', $harga_jual[$key])); // Convert harga_jual to integer
-            $subtotal[$key] = intval(str_replace([','], '', $subtotal[$key])); // Convert subtotal to integer
+            $harga_jual[$key] = intval(str_replace([','], '', $harga_jual[$key]));
+            $subtotal[$key] = intval(str_replace([','], '', $subtotal[$key]));
 
-            // Create new order entry with same kode_inv
             Order::create([
                 'kode_inv' => $kode_inv,
                 'nama_barang' => $nama_barang,
@@ -153,18 +178,14 @@ class TransactionController extends Controller
                 'subtotal' => $subtotal[$key],
             ]);
 
-            // Calculate profit
             $modal = Barang::where('nama_barang', $nama_barang)->first()->modal;
             $profit += $subtotal[$key] - $modal * $qty[$key];
 
-            // Update stock
-            $kurang = $qty[$key];
             $stokbarang = StokBarang::where('nama_barang', $nama_barang)->first();
             if ($stokbarang) {
-                $stokbarang->kurangStok($kurang);
+                $stokbarang->kurangStok($qty[$key]);
             }
 
-            // Create BarangKeluar entry
             BarangKeluar::create([
                 'kode_inv' => $kode_inv,
                 'nama_barang' => $nama_barang,
@@ -173,9 +194,6 @@ class TransactionController extends Controller
             ]);
         }
 
-
-
-        // Create Transaction entry with the same kode_inv
         Transaction::create([
             'kode_inv' => $kode_inv,
             'nama_petugas' => $validated['nama_petugas'],
@@ -189,9 +207,10 @@ class TransactionController extends Controller
             'profit' => $profit,
         ]);
 
-        // Handle Piutang if status is 'HUTANG'
+        // Handle debts (HUTANG)
         if ($validated['status'] == 'HUTANG') {
-            Piutang::where('kode_inv', $kode_inv)->update([
+            Piutang::create([
+                'kode_inv' => $kode_inv,
                 'nama_pelanggan' => $validated['nama_pelanggan'],
                 'sisa_bayar' => $kembalian,
                 'harga_asli' => $total,
@@ -202,6 +221,16 @@ class TransactionController extends Controller
         return redirect('/dashboard/invoice')->with('success', 'Invoice telah diperbarui!');
     }
 
+    /**
+     * Show the view to modify a transaction.
+     * 
+     * Displays the existing transaction details for editing.
+     * 
+     * @param int $transaction
+     *    The ID of the transaction to modify.
+     * 
+     * @return \Illuminate\View\View
+     */
     public function rombak_view($transaction)
     {
         $transaction = Transaction::where('id', $transaction)->first();
@@ -209,22 +238,22 @@ class TransactionController extends Controller
         $pelanggans = Pelanggan::get();
         $stokbarangs = StokBarang::get();
 
-
         return view('dashboard.invoice.rombak', [
             'kode_inv' => $transaction->kode_inv,
             'active' => 'kasir',
             'breadcrumb' => 'kasir',
             'transaction' => $transaction,
-
             'orders' => $orders,
             'pelanggans' => $pelanggans,
             'stokbarangs' => $stokbarangs,
         ]);
     }
 
-
     /**
-     * Update the specified resource in storage.
+     * Update the specified transaction.
+     * 
+     * @param \App\Http\Requests\UpdateTransactionRequest $request
+     * @param \App\Models\Transaction $transaction
      */
     public function update(UpdateTransactionRequest $request, Transaction $transaction)
     {
@@ -232,28 +261,26 @@ class TransactionController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified transaction.
      */
     public function show(Transaction $transaction)
     {
-        //
+        // Reserved for future use
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified transaction.
      */
     public function edit(Transaction $transaction)
     {
-        //
+        // Reserved for future use
     }
 
-
-
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified transaction from storage.
      */
     public function destroy(Transaction $transaction)
     {
-        //
+        // Reserved for future use
     }
 }
