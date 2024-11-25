@@ -19,7 +19,7 @@
         }
 
         .form-control {
-            border-radius: 30px;
+            border-radius: 30px !important;
             padding: 0.8rem 1.5rem;
             border: 1px solid #dee2e6;
             transition: border-color 0.3s;
@@ -59,6 +59,25 @@
         .input-group .form-control {
             padding-left: 2.5rem;
         }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        .container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .row {
+            flex: 1;
+        }
+
+        .botto-text {
+            margin-top: auto;
+        }
     </style>
     <div class="container mt-5">
         <div class="row d-flex justify-content-center">
@@ -94,6 +113,6 @@
                 </div>
             </div>
         </div>
-        <p class="botto-text text-center t">Copyright &copy; 2024 MyPOS Version 2.0. All Rights Reserved.</p>
+        <p class="botto-text text-center">Copyright &copy; 2024 MyPOS Version 2.0. All Rights Reserved.</p>
     </div>
 @endsection

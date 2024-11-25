@@ -46,7 +46,8 @@
                             <div class="app-card-body">
                                 @if (Auth::user()->role == 'Super Administrator')
                                     <div class="table-responsive p-4" style="overflow-x: auto; white-space: nowrap;">
-                                        <table id="example" class="table table-hover table-bordered mb-0">
+                                        <table id="example" class="table table-hover table-bordered mb-0"
+                                            style="table-layout: fixed;">
                                             <thead class="table-primary">
                                                 <tr>
                                                     <th class="cell">No.</th>
@@ -198,7 +199,63 @@
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('#example').DataTable();
+            $('#example').DataTable({
+                scrollX: true,
+                autoWidth: false,
+                columnDefs: [{
+                        width: '50px',
+                        targets: 0
+                    },
+                    {
+                        width: '150px',
+                        targets: 1
+                    },
+                    {
+                        width: '150px',
+                        targets: 2
+                    },
+                    {
+                        width: '150px',
+                        targets: 3
+                    },
+                    {
+                        width: '150px',
+                        targets: 4
+                    },
+                    {
+                        width: '50px',
+                        targets: 5
+                    },
+                    {
+                        width: '150px',
+                        targets: 6
+                    },
+                    {
+                        width: '150px',
+                        targets: 7
+                    },
+                    {
+                        width: '70px',
+                        targets: 8
+                    },
+                    {
+                        width: '70px',
+                        targets: 9
+                    },
+                    {
+                        width: '70px',
+                        targets: 10
+                    },
+                    {
+                        width: '150px',
+                        targets: 11
+                    },
+                    {
+                        width: '150px',
+                        targets: 12
+                    }
+                ]
+            });
         });
     </script>
 @endsection
