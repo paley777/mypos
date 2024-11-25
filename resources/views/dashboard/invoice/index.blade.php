@@ -2,6 +2,13 @@
 
 @section('container')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style>
+        /* Add spacing for search bar */
+        div.dataTables_wrapper div.dataTables_filter {
+            margin-bottom: 1rem;
+        }
+    </style>
     <div class="app-wrapper">
         <div class="app-content pt-3 p-md-3 p-lg-4">
             <div class="container-xl">
@@ -38,9 +45,9 @@
                         <div class="app-card app-card-orders-table shadow-sm mb-5">
                             <div class="app-card-body">
                                 @if (Auth::user()->role == 'Super Administrator')
-                                    <div class="table-responsive p-4">
-                                        <table id="example" class="table app-table-hover mb-0 text-left">
-                                            <thead>
+                                    <div class="table-responsive p-4" style="overflow-x: auto; white-space: nowrap;">
+                                        <table id="example" class="table table-hover table-bordered mb-0">
+                                            <thead class="table-primary">
                                                 <tr>
                                                     <th class="cell">No.</th>
                                                     <th class="cell">Kode Invoice</th>
@@ -74,34 +81,8 @@
                                                         <td>@currency($transaction->profit)</td>
                                                         <td> <a target="_blank"
                                                                 href="/dashboard/invoice/{{ $transaction->id }}/print"
-                                                                class="btn btn-sm btn-warning"><svg width="16px"
-                                                                    height="16px" viewBox="0 0 24 24"
-                                                                    xmlns="http://www.w3.org/2000/svg" fill="#000000">
-                                                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
-                                                                        stroke-linejoin="round"></g>
-                                                                    <g id="SVGRepo_iconCarrier">
-                                                                        <title></title>
-                                                                        <g id="Complete">
-                                                                            <g id="edit">
-                                                                                <g>
-                                                                                    <path
-                                                                                        d="M20,16v4a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V6A2,2,0,0,1,4,4H8"
-                                                                                        fill="none" stroke="#000000"
-                                                                                        stroke-linecap="round"
-                                                                                        stroke-linejoin="round"
-                                                                                        stroke-width="2"></path>
-                                                                                    <polygon fill="none"
-                                                                                        points="12.5 15.8 22 6.2 17.8 2 8.3 11.5 8 16 12.5 15.8"
-                                                                                        stroke="#000000"
-                                                                                        stroke-linecap="round"
-                                                                                        stroke-linejoin="round"
-                                                                                        stroke-width="2"></polygon>
-                                                                                </g>
-                                                                            </g>
-                                                                        </g>
-                                                                    </g>
-                                                                </svg> Cetak Invoice
+                                                                class="btn btn-sm btn-warning">
+                                                                <i class="bi bi-printer"></i> Cetak Invoice
                                                             </a>
                                                             @if (Auth::user()->role == 'Super Administrator')
                                                                 <a href="/dashboard/invoice/{{ $transaction->id }}/rombak"
@@ -146,8 +127,7 @@
                                                                         viewBox="0 0 1024 1024"
                                                                         xmlns="http://www.w3.org/2000/svg" fill="#000000">
                                                                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                                                        <g id="SVGRepo_tracerCarrier"
-                                                                            stroke-linecap="round"
+                                                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
                                                                             stroke-linejoin="round">
                                                                         </g>
                                                                         <g id="SVGRepo_iconCarrier">
@@ -165,9 +145,9 @@
                                         </table>
                                     </div><!--//table-responsive-->
                                 @else
-                                    <div class="table-responsive p-4">
-                                        <table id="example" class="table app-table-hover mb-0 text-left">
-                                            <thead>
+                                    <div class="table-responsive p-4" style="overflow-x: auto; white-space: nowrap;">
+                                        <table id="example" class="table table-hover table-bordered mb-0">
+                                            <thead class="table-primary">
                                                 <tr>
                                                     <th class="cell">No.</th>
                                                     <th class="cell">Kode Invoice</th>
@@ -198,34 +178,8 @@
                                                         <td>@currency($transaction->profit)</td>
                                                         <td> <a target="_blank"
                                                                 href="/dashboard/invoice/{{ $transaction->id }}/print"
-                                                                class="btn btn-sm btn-warning"><svg width="16px"
-                                                                    height="16px" viewBox="0 0 24 24"
-                                                                    xmlns="http://www.w3.org/2000/svg" fill="#000000">
-                                                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
-                                                                        stroke-linejoin="round"></g>
-                                                                    <g id="SVGRepo_iconCarrier">
-                                                                        <title></title>
-                                                                        <g id="Complete">
-                                                                            <g id="edit">
-                                                                                <g>
-                                                                                    <path
-                                                                                        d="M20,16v4a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V6A2,2,0,0,1,4,4H8"
-                                                                                        fill="none" stroke="#000000"
-                                                                                        stroke-linecap="round"
-                                                                                        stroke-linejoin="round"
-                                                                                        stroke-width="2"></path>
-                                                                                    <polygon fill="none"
-                                                                                        points="12.5 15.8 22 6.2 17.8 2 8.3 11.5 8 16 12.5 15.8"
-                                                                                        stroke="#000000"
-                                                                                        stroke-linecap="round"
-                                                                                        stroke-linejoin="round"
-                                                                                        stroke-width="2"></polygon>
-                                                                                </g>
-                                                                            </g>
-                                                                        </g>
-                                                                    </g>
-                                                                </svg> Cetak Invoice</a>
+                                                                class="btn btn-sm btn-warning">
+                                                                <i class="bi bi-printer"></i> Cetak Invoice</a>
 
                                                         </td>
                                                     </tr>
@@ -241,7 +195,6 @@
             </div><!--//container-fluid-->
         </div><!--//app-content-->
     </div><!--//app-wrappers-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script>
         $(document).ready(function() {

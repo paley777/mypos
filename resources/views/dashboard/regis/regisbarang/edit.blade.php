@@ -24,13 +24,7 @@
                         <div class="row g-3 align-items-center">
                             <div class="col-12 col-lg-auto text-center text-lg-start">
                                 <div class="app-icon-holder">
-                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-receipt"
-                                    fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd"
-                                        d="M1.92.506a.5.5 0 0 1 .434.14L3 1.293l.646-.647a.5.5 0 0 1 .708 0L5 1.293l.646-.647a.5.5 0 0 1 .708 0L7 1.293l.646-.647a.5.5 0 0 1 .708 0L9 1.293l.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .801.13l.5 1A.5.5 0 0 1 15 2v12a.5.5 0 0 1-.053.224l-.5 1a.5.5 0 0 1-.8.13L13 14.707l-.646.647a.5.5 0 0 1-.708 0L11 14.707l-.646.647a.5.5 0 0 1-.708 0L9 14.707l-.646.647a.5.5 0 0 1-.708 0L7 14.707l-.646.647a.5.5 0 0 1-.708 0L5 14.707l-.646.647a.5.5 0 0 1-.708 0L3 14.707l-.646.647a.5.5 0 0 1-.801-.13l-.5-1A.5.5 0 0 1 1 14V2a.5.5 0 0 1 .053-.224l.5-1a.5.5 0 0 1 .367-.27zm.217 1.338L2 2.118v11.764l.137.274.51-.51a.5.5 0 0 1 .707 0l.646.647.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.509.509.137-.274V2.118l-.137-.274-.51.51a.5.5 0 0 1-.707 0L12 1.707l-.646.647a.5.5 0 0 1-.708 0L10 1.707l-.646.647a.5.5 0 0 1-.708 0L8 1.707l-.646.647a.5.5 0 0 1-.708 0L6 1.707l-.646.647a.5.5 0 0 1-.708 0L4 1.707l-.646.647a.5.5 0 0 1-.708 0l-.509-.51z" />
-                                    <path fill-rule="evenodd"
-                                        d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm8-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5z" />
-                                </svg>
+                                    <i class="bi bi-receipt" style="font-size: 1.5rem;"></i>
                                 </div><!--//app-icon-holder-->
                             </div><!--//col-->
                             <div class="col-12 col-lg-auto text-center text-lg-start">
@@ -46,45 +40,72 @@
                             </div><!--//col-->
                         </div><!--//row-->
                     </div><!--//app-card-header-->
-                    <div class="app-card-body p-4">
-                        <form class="row g-2" method="post" action="/dashboard/regis-barang/{{ $barang->id }}">
+                    <div class="app-card-body p-4" style="background-color: #f9f9f9;">
+                        <form class="row g-3 px-4 py-2" method="post" action="/dashboard/regis-barang/{{ $barang->id }}">
                             @method('put')
                             @csrf
-                            <div class="col-md-5 position-relative">
-                                <label for="nama_barang" class="form-label ">Nama Barang<span
+                            <!-- Nama Barang -->
+                            <div class="col-md-6">
+                                <label for="nama_barang" class="form-label text-dark fw-bold">Nama Barang <span
                                         class="text-danger">*</span></label>
-                                <input type="text" id="nama_barang" class="form-control" name="nama_barang"
-                                    value="{{ old('nama_barang', $barang->nama_barang) }}" placeholder="Isi Nama Barang"
-                                    required>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light">
+                                        <i class="bi bi-box-seam"></i>
+                                    </span>
+                                    <input type="text" id="nama_barang" class="form-control" name="nama_barang"
+                                        value="{{ old('nama_barang', $barang->nama_barang) }}"
+                                        placeholder="Contoh: Laptop, Buku" required>
+                                </div>
                             </div>
-                            <div class="col-md-3 position-relative">
-                                <label for="satuan" class="form-label">Satuan<span class="text-danger">*</span></label>
-                                <input type="text" id="satuan" class="form-control" name="satuan"
-                                    value="{{ old('satuan', $barang->satuan) }}" placeholder="Isi Satuan" required>
-                            </div>
-                            <div class="col-md-3 position-relative">
-                                <label for="modal" class="form-label">Modal Per Satuan<span
+
+                            <!-- Satuan -->
+                            <div class="col-md-6">
+                                <label for="satuan" class="form-label text-dark fw-bold">Satuan <span
                                         class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="modal" id="modal"
-                                    value="{{ old('modal', $barang->modal) }}" data-type="currency" placeholder="Rp."
-                                    required>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light">
+                                        <i class="bi bi-tags"></i>
+                                    </span>
+                                    <input type of="text" id="satuan" class="form-control" name="satuan"
+                                        value="{{ old('satuan', $barang->satuan) }}" placeholder="Contoh: Pcs, Kg" required>
+                                </div>
                             </div>
-                            <div class="col-md-2 position-relative">
-                                <label for="harga_jual" class="form-label">Harga Jual<span
+
+                            <!-- Modal Per Satuan -->
+                            <div class="col-md-6">
+                                <label for="modal" class="form-label text-dark fw-bold">Modal Per Satuan <span
                                         class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="harga_jual" id="harga_jual"
-                                    value="{{ old('harga_jual', $barang->harga_jual) }}" data-type="currency"
-                                    placeholder="Rp." required>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light">Rp</span>
+                                    <input type="text" id="modal" class="form-control" name="modal"
+                                        value="{{ old('modal', $barang->modal) }}" data-type="currency"
+                                        placeholder="Misal 100,000" required>
+                                </div>
                             </div>
-                            <p>
-                                (Wajib terisi untuk kolom dengan tanda "<span class="text-danger">*</span>").
-                            </p>
-                    </div>
-                    <div class="app-card-footer px-4 py-3">
-                        <button class="btn app-btn-primary" type="submit">
-                            <!-- Button icon -->
-                            Ubah Data
-                        </button>
+
+                            <!-- Harga Jual -->
+                            <div class="col-md-6">
+                                <label for="harga_jual" class="form-label text-dark fw-bold">Harga Jual <span
+                                        class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light">Rp</span>
+                                    <input type="text" id="harga_jual" class="form-control" name="harga_jual"
+                                        value="{{ old('harga_jual', $barang->harga_jual) }}" data-type="currency"
+                                        placeholder="Misal 120,000" required>
+                                </div>
+                            </div>
+
+                            <!-- Informasi Wajib -->
+                            <div class="col-12 text-muted mt-2">
+                                <small>(Kolom bertanda <span class="text-danger">*</span> wajib diisi).</small>
+                            </div>
+
+                            <!-- Tombol Simpan -->
+                            <div class="col-12 text-center">
+                                <button class="btn btn-primary w-50 py-3 fw-bold text-white" type="submit">
+                                    <i class="bi bi-send me"></i> Simpan Data
+                                </button>
+                            </div>
                         </form>
                     </div><!--//app-card-footer-->
                 </div><!--//app-card-->
@@ -94,6 +115,29 @@
     <!-- Existing scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <!-- Additional scripts -->
+    <script>
+        // Function to parse currency formatted string to numeric value
+        function parseCurrency(value) {
+            // Remove any non-digit characters
+            return parseFloat(value.replace(/[^0-9.-]+/g, ""));
+        }
+
+        // Add event listener to 'harga_jual' input
+        document.getElementById('harga_jual').addEventListener('blur', function() {
+            var modalInput = document.getElementById('modal');
+            var hargaJualInput = document.getElementById('harga_jual');
+
+            var modalValue = parseCurrency(modalInput.value);
+            var hargaJualValue = parseCurrency(hargaJualInput.value);
+
+            if (hargaJualValue < modalValue) {
+                alert('Harga jual tidak boleh kurang dari harga modal!');
+                hargaJualInput.value = modalInput.value; // Set harga_jual equal to modal
+                hargaJualInput.focus();
+            }
+        });
+    </script>
+    <!-- Existing scripts -->
     <script>
         // Jquery Dependency
 
@@ -112,7 +156,7 @@
         }
 
         function formatCurrency(input, blur) {
-            // appends currency symbol, validates decimal side
+            // appends $ to value, validates decimal side
             // and puts cursor back in right position.
 
             // get input value
@@ -179,26 +223,5 @@
             caret_pos = updated_len - original_len + caret_pos;
             input[0].setSelectionRange(caret_pos, caret_pos);
         }
-
-        // Function to parse currency formatted string to numeric value
-        function parseCurrency(value) {
-            // Remove any non-digit characters
-            return parseFloat(value.replace(/[^0-9.-]+/g, ""));
-        }
-
-        // Add event listener to 'harga_jual' input
-        document.getElementById('harga_jual').addEventListener('blur', function() {
-            var modalInput = document.getElementById('modal');
-            var hargaJualInput = document.getElementById('harga_jual');
-
-            var modalValue = parseCurrency(modalInput.value);
-            var hargaJualValue = parseCurrency(hargaJualInput.value);
-
-            if (hargaJualValue < modalValue) {
-                alert('Harga jual tidak boleh kurang dari harga modal!');
-                hargaJualInput.value = modalInput.value; // Set harga_jual equal to modal
-                hargaJualInput.focus();
-            }
-        });
     </script>
 @endsection

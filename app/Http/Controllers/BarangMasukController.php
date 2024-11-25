@@ -135,6 +135,9 @@ class BarangMasukController extends Controller
      */
     public function update(UpdateBarangMasukRequest $request, BarangMasuk $barang_masuk)
     {
+        $hargabelisatuan = intval(str_replace([','], '', $request->harga_beli_satuan));
+        $hargabelitotal = intval(str_replace([','], '', $request->harga_beli_total));
+
         $validated = $request->validated();
         $barang = Barang::where('nama_barang', $validated['nama_barang'])->first();
 
@@ -144,8 +147,8 @@ class BarangMasukController extends Controller
             'nama_barang' => $validated['nama_barang'],
             'satuan' => $barang->satuan,
             'jumlah_beli' => $validated['jumlah_beli'],
-            'harga_beli_satuan' => $validated['harga_beli_satuan'],
-            'harga_beli_total' => $validated['harga_beli_total'],
+            'harga_beli_satuan' => $hargabelisatuan,
+            'harga_beli_total' => $hargabelitotal,
             'keterangan' => $validated['keterangan'],
             'status' => $validated['status'],
         ]);

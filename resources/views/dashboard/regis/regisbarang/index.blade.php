@@ -102,13 +102,11 @@
         $(document).ready(function() {
             $('#example').DataTable({
                 dom: 'lBfrtip', // Added "l" for length changing input
-                buttons: [
-                    {
-                        extend: 'excelHtml5',
-                        text: '<i class="bi bi-file-earmark-excel"></i> Export Excel',
-                        className: 'btn btn-sm btn-success'
-                    }
-                ],
+                buttons: [{
+                    extend: 'excelHtml5',
+                    text: '<i class="bi bi-file-earmark-excel"></i> Export Excel',
+                    className: 'btn btn-sm btn-success'
+                }],
                 lengthMenu: [10, 25, 50, 100], // Custom length options
                 language: {
                     search: "Cari:",
