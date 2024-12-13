@@ -36,22 +36,31 @@ class TransactionController extends Controller
         DB::beginTransaction();
 
         try {
-            // Generate kode_inv with transaction lock
-            $kode_inv = IdGenerator::generate(['table' => 'transactions', 'field' => 'kode_inv', 'length' => 10, 'prefix' => 'INV-']);
+            $attempts = 0; // Counter untuk menghitung berapa kali sistem mencoba
+            $kode_inv = '';
 
-            // Proceed with other logic
+            // Loop untuk mencoba hingga kode unik ditemukan
+            do {
+                $kode_inv = IdGenerator::generate(['table' => 'transactions', 'field' => 'kode_inv', 'length' => 10, 'prefix' => 'INV-']);
+                $attempts++; // Increment jumlah percobaan
+
+                // Cek apakah kode_inv sudah ada di database
+            } while (DB::table('transactions')->where('kode_inv', $kode_inv)->exists());
+
+            // Setelah menemukan kode yang unik, lanjutkan dengan logika lainnya
             return view('dashboard.kasir.index', [
                 'active' => 'kasir',
                 'breadcrumb' => 'kasir',
                 'pelanggans' => Pelanggan::get(),
                 'stokbarangs' => StokBarang::get(),
                 'kode_inv' => $kode_inv,
+                'attempts' => $attempts, // Kirimkan jumlah percobaan ke view
             ]);
 
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
-            // Handle the error (could be logging the exception, rethrowing it, etc.)
+            // Log atau tangani exception
             throw $e;
         }
     }

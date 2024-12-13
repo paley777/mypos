@@ -27,6 +27,12 @@
                                 </button>
                             </div>
                         @endif
+                        @if (isset($attempts))
+                            <div class="alert alert-info">
+                                <strong>Info:</strong> Sistem telah mencoba menghasilkan kode invoice sebanyak
+                                {{ $attempts }} kali.
+                            </div>
+                        @endif
 
                         <div class="col-auto">
                             <div class="page-utilities">
@@ -444,7 +450,7 @@
         <td><input type="text" class="form-control fw-bold" name="harga_jual[]" value="${data[3]}" readonly></td>
         <td><input type="number" class="form-control fw-bold qty" name="qty[]" value="${data[4]}" min="1"></td>
         <td><input type="number" class="form-control discount-percent fw-bold" name="disc_perc[]" value="${data[5]}" min="0" max="100"></td>
-        <td><input type="number" class="form-control discount-rp fw-bold" name="disc_rp[]" value="${data[6]}" min="0" step="500"></td>
+        <td><input type="number" class="form-control discount-rp fw-bold" name="disc_rp[]" value="${data[6]}" min="0" step="100"></td>
         <td><input type="text" class="form-control subtotal fw-bold text-primary fs-6" name="subtotal[]" value="${data[7]}" readonly></td>
         <td><button class="btn btn-sm btn-danger text-white hapus-baris"><i class="bi bi-trash"></i></button></td>
     </tr>`;
