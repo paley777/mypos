@@ -33,35 +33,33 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        DB::beginTransaction();
-
+        // Tidak perlu DB::beginTransaction di sini karena hanya proses GET/View
         try {
-            $attempts = 0; // Counter untuk menghitung berapa kali sistem mencoba
+            $attempts = 0;
             $kode_inv = '';
 
-            // Loop untuk mencoba hingga kode unik ditemukan
             do {
-                $kode_inv = IdGenerator::generate(['table' => 'transactions', 'field' => 'kode_inv', 'length' => 10, 'prefix' => 'INV-']);
-                $attempts++; // Increment jumlah percobaan
+                $attempts++;
 
-                // Cek apakah kode_inv sudah ada di database
-            } while (DB::table('transactions')->where('kode_inv', $kode_inv)->exists());
+                // Generate manual: INV- + Angka Random / Urutan
+                // Contoh: INV-000001, INV-000002, dst.
+                $latest = Transaction::latest('id')->first();
+                $number = $latest ? ((int) substr($latest->kode_inv, 4)) + $attempts : 1;
+                $kode_inv = 'INV-' . str_pad($number, 6, '0', STR_PAD_LEFT);
+            } while (Transaction::where('kode_inv', $kode_inv)->exists());
 
-            // Setelah menemukan kode yang unik, lanjutkan dengan logika lainnya
             return view('dashboard.kasir.index', [
                 'active' => 'kasir',
                 'breadcrumb' => 'kasir',
-                'pelanggans' => Pelanggan::get(),
-                'stokbarangs' => StokBarang::get(),
+                'pelanggans' => Pelanggan::all(),
+                'stokbarangs' => StokBarang::all(),
                 'kode_inv' => $kode_inv,
-                'attempts' => $attempts, // Kirimkan jumlah percobaan ke view
+                'attempts' => $attempts,
             ]);
-
-            DB::commit();
         } catch (\Exception $e) {
-            DB::rollBack();
-            // Log atau tangani exception
-            throw $e;
+            return redirect()
+                ->back()
+                ->with('error', 'Gagal generate invoice: ' . $e->getMessage());
         }
     }
 
@@ -76,68 +74,154 @@ class TransactionController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      *    Redirects back with a success message.
      */
+    // public function store(StoreTransactionRequest $request)
+    // {
+    //     DB::beginTransaction(); // Memulai transaksi database
+
+    //     try {
+    //         // Ambil kode_inv dari request (sudah di-generate di index)
+    //         $kode_inv = $request->input('kode_inv');
+
+    //         // Cek apakah kode_inv sudah ada di database
+    //         $existingTransaction = Transaction::where('kode_inv', $kode_inv)->first();
+    //         if ($existingTransaction) {
+    //             // Jika kode_inv sudah ada, lemparkan pengecualian
+    //             throw new \Exception('Kode invoice sudah ada, silakan coba lagi.');
+    //         }
+
+    //         // Jika kode_inv unik, lanjutkan dengan logika penyimpanan transaksi
+    //         $profit = 0;
+    //         $bayar = intval(str_replace([','], '', $request->bayar));
+    //         $total = intval(str_replace([','], '', $request->total));
+    //         $kembalian = intval(str_replace([','], '', $request->kembalian));
+
+    //         $validated = $request->validated();
+
+    //         // Iterasi setiap barang yang dibeli
+    //         $nama_barang = $request->input('nama_barang');
+    //         $harga_jual = $request->input('harga_jual');
+    //         $qty = $request->input('qty');
+    //         $disc_perc = $request->input('disc_perc');
+    //         $disc_rp = $request->input('disc_rp');
+    //         $subtotal = $request->input('subtotal');
+
+    //         foreach ($nama_barang as $key => $nama_barang) {
+    //             $harga_jual[$key] = intval(str_replace([','], '', $harga_jual[$key]));
+    //             $subtotal[$key] = intval(str_replace([','], '', $subtotal[$key]));
+
+    //             Order::create([
+    //                 'kode_inv' => $kode_inv,
+    //                 'nama_barang' => $nama_barang,
+    //                 'harga_jual' => $harga_jual[$key],
+    //                 'qty' => $qty[$key],
+    //                 'disc_perc' => $disc_perc[$key],
+    //                 'disc_rp' => $disc_rp[$key],
+    //                 'subtotal' => $subtotal[$key],
+    //             ]);
+
+    //             $modal = Barang::where('nama_barang', $nama_barang)->first()->modal;
+    //             $profit += $subtotal[$key] - $modal * $qty[$key];
+
+    //             // Update stok barang
+    //             $stokbarang = StokBarang::where('nama_barang', $nama_barang)->first();
+    //             if ($stokbarang) {
+    //                 $stokbarang->kurangStok($qty[$key]);
+    //             }
+
+    //             // Catat barang keluar
+    //             BarangKeluar::create([
+    //                 'kode_inv' => $kode_inv,
+    //                 'nama_barang' => $nama_barang,
+    //                 'satuan' => StokBarang::where('nama_barang', $nama_barang)->first()->satuan,
+    //                 'jumlah_keluar' => $qty[$key],
+    //             ]);
+    //         }
+    //         // Handle hutang (Piutang) jika status adalah HUTANG
+    //         if ($validated['status'] == 'HUTANG') {
+    //             Piutang::create([
+    //                 'kode_inv' => $kode_inv,
+    //                 'nama_pelanggan' => $validated['nama_pelanggan'],
+    //                 'sisa_bayar' => $kembalian,
+    //                 'harga_asli' => $total,
+    //                 'jatuh_tempo' => $validated['jatuh_tempo'],
+    //             ]);
+    //         }
+    //         // Create the transaction
+    //         Transaction::create([
+    //             'kode_inv' => $kode_inv,
+    //             'nama_petugas' => $validated['nama_petugas'],
+    //             'nama_pelanggan' => $validated['nama_pelanggan'],
+    //             'status' => $validated['status'],
+    //             'jatuh_tempo' => $validated['jatuh_tempo'],
+    //             'keterangan' => $validated['keterangan'],
+    //             'total' => $total,
+    //             'bayar' => $bayar,
+    //             'kembalian' => $kembalian,
+    //             'profit' => $profit,
+    //         ]);
+
+    //         DB::commit(); // Commit transaksi
+
+    //         return redirect()->back()->with('success', 'Transaksi sukses, Silakan menuju fitur Invoice untuk mencetak!');
+    //     } catch (\Exception $e) {
+    //         DB::rollBack(); // Rollback transaksi jika terjadi error
+    //         // Menangani error, bisa log error atau menampilkan pesan kepada pengguna
+    //         return redirect()->back()->with('error', $e->getMessage());
+    //     }
+    // }
+
     public function store(StoreTransactionRequest $request)
     {
-        DB::beginTransaction(); // Memulai transaksi database
-
-        try {
-            // Ambil kode_inv dari request (sudah di-generate di index)
-            $kode_inv = $request->input('kode_inv');
-
-            // Cek apakah kode_inv sudah ada di database
-            $existingTransaction = Transaction::where('kode_inv', $kode_inv)->first();
-            if ($existingTransaction) {
-                // Jika kode_inv sudah ada, lemparkan pengecualian
-                throw new \Exception('Kode invoice sudah ada, silakan coba lagi.');
-            }
-
-            // Jika kode_inv unik, lanjutkan dengan logika penyimpanan transaksi
-            $profit = 0;
-            $bayar = intval(str_replace([','], '', $request->bayar));
-            $total = intval(str_replace([','], '', $request->total));
-            $kembalian = intval(str_replace([','], '', $request->kembalian));
-
+        return DB::transaction(function () use ($request) {
             $validated = $request->validated();
 
-            // Iterasi setiap barang yang dibeli
-            $nama_barang = $request->input('nama_barang');
-            $harga_jual = $request->input('harga_jual');
-            $qty = $request->input('qty');
-            $disc_perc = $request->input('disc_perc');
-            $disc_rp = $request->input('disc_rp');
-            $subtotal = $request->input('subtotal');
+            $kode_inv = $request->input('kode_inv');
 
-            foreach ($nama_barang as $key => $nama_barang) {
-                $harga_jual[$key] = intval(str_replace([','], '', $harga_jual[$key]));
-                $subtotal[$key] = intval(str_replace([','], '', $subtotal[$key]));
+            if (Transaction::where('kode_inv', $kode_inv)->exists()) {
+                throw new \Exception('Kode invoice sudah ada, silakan muat ulang halaman.');
+            }
+
+            $profit = 0;
+            $bayar = intval(str_replace(',', '', $request->bayar));
+            $total = intval(str_replace(',', '', $request->total));
+            $kembalian = intval(str_replace(',', '', $request->kembalian));
+
+            $items = $request->input('nama_barang');
+            foreach ($items as $key => $nama_barang) {
+                $qty = $request->qty[$key];
+                $subtotal = intval(str_replace(',', '', $request->subtotal[$key]));
+
+                // Sekali query untuk ambil modal dan stok
+                $barang = Barang::where('nama_barang', $nama_barang)->first();
+                $stok = StokBarang::where('nama_barang', $nama_barang)->first();
+
+                if (!$barang || !$stok) {
+                    throw new \Exception("Barang $nama_barang tidak ditemukan.");
+                }
 
                 Order::create([
                     'kode_inv' => $kode_inv,
                     'nama_barang' => $nama_barang,
-                    'harga_jual' => $harga_jual[$key],
-                    'qty' => $qty[$key],
-                    'disc_perc' => $disc_perc[$key],
-                    'disc_rp' => $disc_rp[$key],
-                    'subtotal' => $subtotal[$key],
+                    'harga_jual' => intval(str_replace(',', '', $request->harga_jual[$key])),
+                    'qty' => $qty,
+                    'disc_perc' => $request->disc_perc[$key],
+                    'disc_rp' => $request->disc_rp[$key],
+                    'subtotal' => $subtotal,
                 ]);
 
-                $modal = Barang::where('nama_barang', $nama_barang)->first()->modal;
-                $profit += $subtotal[$key] - $modal * $qty[$key];
+                $profit += $subtotal - $barang->modal * $qty;
 
-                // Update stok barang
-                $stokbarang = StokBarang::where('nama_barang', $nama_barang)->first();
-                if ($stokbarang) {
-                    $stokbarang->kurangStok($qty[$key]);
-                }
+                // Update stok
+                $stok->kurangStok($qty);
 
-                // Catat barang keluar
                 BarangKeluar::create([
                     'kode_inv' => $kode_inv,
                     'nama_barang' => $nama_barang,
-                    'satuan' => StokBarang::where('nama_barang', $nama_barang)->first()->satuan,
-                    'jumlah_keluar' => $qty[$key],
+                    'satuan' => $stok->satuan,
+                    'jumlah_keluar' => $qty,
                 ]);
             }
+
             // Handle hutang (Piutang) jika status adalah HUTANG
             if ($validated['status'] == 'HUTANG') {
                 Piutang::create([
@@ -162,14 +246,10 @@ class TransactionController extends Controller
                 'profit' => $profit,
             ]);
 
-            DB::commit(); // Commit transaksi
+            // DB::commit(); // Commit transaksi
 
             return redirect()->back()->with('success', 'Transaksi sukses, Silakan menuju fitur Invoice untuk mencetak!');
-        } catch (\Exception $e) {
-            DB::rollBack(); // Rollback transaksi jika terjadi error
-            // Menangani error, bisa log error atau menampilkan pesan kepada pengguna
-            return redirect()->back()->with('error', $e->getMessage());
-        }
+        });
     }
 
     /**
